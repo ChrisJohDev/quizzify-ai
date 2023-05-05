@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function About() {
   return (
     <div className={`container max-w-screen-lg mx-auto flex flex-col ${styles.aboutPage}`}>
-      <h1 className={`text-center ${styles.headline}`}>Quizzify-AI the Story</h1>
+      <h1 className={`text-center ${styles.headline}`}>Quizzify-AI the Story - Testing</h1>
       <p className={styles.paragraph}>
         In 2017, a group of students at a small university had an idea for a new
         way to take quizzes. They envisioned a system that could understand the
