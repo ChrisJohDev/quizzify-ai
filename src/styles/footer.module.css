@@ -1,0 +1,12 @@
+footer {
+  padding-top: 2rem;
+}
+footer p {
+  display: inline-block;
+  margin-left: 1rem;
+  color:darkblue;
+}
+
+footer img {
+  display: inline-block;
+}

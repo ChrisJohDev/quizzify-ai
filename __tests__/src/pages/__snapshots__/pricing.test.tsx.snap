@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pricing - snapshot test renders correctly 1`] = `
+<div>
+  <div
+    class="container flex flex-col mx-auto pricingPage"
+  >
+    <h1
+      class="text-center"
+    >
+      Pricing Page
+    </h1>
+    <div
+      class="mx-auto tableWrapper"
+    >
+      <table>
+        <thead>
+          <tr>
+            <th>
+              Plan
+            </th>
+            <th>
+              Price
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              Basic
+            </td>
+            <td>
+              $10/month
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Pro
+            </td>
+            <td>
+              25$/month
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+`;

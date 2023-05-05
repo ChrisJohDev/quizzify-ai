@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Contact - snapshot test renders correctly 1`] = `
+<div>
+  <div
+    class="container flex flex-col mx-auto contactPage"
+  >
+    <h1
+      class="text-center"
+    >
+      Contact Us
+    </h1>
+    <div
+      class="col-md-6 offset-md-3 flex flex-col info"
+    >
+      <div
+        class="mx-auto tableWrapper"
+      >
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                Telephone:
+              </td>
+              <td>
+                +46 - (0)31 123 45 67
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Email:
+              </td>
+              <td>
+                support@quizzify-ai.com
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <form
+        class="mx-auto"
+      >
+        <label
+          for="issue"
+        >
+          What is your issue?
+        </label>
+        <select
+          id="issue"
+          name="issue"
+        >
+          <option
+            value="bug"
+          >
+            Bug
+          </option>
+          <option
+            value="feature"
+          >
+            Feature Request
+          </option>
+          <option
+            value="other"
+          >
+            Other
+          </option>
+        </select>
+        <label
+          for="input-element"
+        >
+          Label Text:
+        </label>
+        <input
+          id="input-element"
+          name="input-name"
+          type="text"
+        />
+        <label
+          for="input-element1"
+        >
+          Label Text:
+        </label>
+        <textarea
+          id="input-element1"
+          name="input-name1"
+        />
+         
+        <br />
+        <input
+          type="submit"
+          value="Submit"
+        />
+      </form>
+    </div>
+  </div>
+</div>
+`;

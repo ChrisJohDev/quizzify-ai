@@ -1,0 +1,15 @@
+.home_h1{
+  font-size: 6rem;
+  color:blue;
+  font-family: Roboto;
+}
+
+.home_p{
+  font-size: 1.5rem;
+  font-family: Roboto;
+  background: radial-gradient( lightblue 40%, blue);
+  padding: 1rem;
+  border: 5px groove blue;
+  border-radius: 50%;
+  color: black;
+}

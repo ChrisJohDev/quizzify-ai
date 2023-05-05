@@ -1,0 +1,25 @@
+.pricingPage {
+  color: navy;
+}
+
+.pricingPage h1 {
+  font-size: 3rem;
+  color: blue;
+  font-family: Roboto;
+  margin-bottom: 2rem;
+}
+
+.tableWrapper {
+  border: 3px inset blue;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.pricingPage table{
+  background-color: aliceblue;
+  padding: 1rem;
+}
+
+.pricingPage td {
+  padding: 1rem;
+}

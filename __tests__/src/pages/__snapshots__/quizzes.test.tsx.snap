@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Quizzes - snapshot test renders correctly 1`] = `
+<div>
+  <div
+    class="container mx-auto flex flex-col flex-fill quizPage"
+  >
+    <h1
+      class="text-center"
+    >
+      Create your quiz
+    </h1>
+    <div
+      class="col-md-6 offset-md-3 flex flex-col info"
+    >
+      <form
+        action="/result"
+        class="mx-auto"
+      >
+        <label
+          for="issue"
+        >
+          Number of questions:
+        </label>
+        <select
+          id="issue"
+          name="amount"
+        >
+          <option
+            value="10"
+          >
+            10
+          </option>
+          <option
+            value="15"
+          >
+            15
+          </option>
+          <option
+            value="20"
+          >
+            20
+          </option>
+          <option
+            value="25"
+          >
+            25
+          </option>
+        </select>
+        <label
+          for="input-element"
+        >
+          Subject:
+        </label>
+        <input
+          id="input-element"
+          name="subject"
+          placeholder="Leave blank for general knowledge"
+          type="text"
+        />
+        <br />
+        <a
+          href="/queryResponse"
+        >
+          <input
+            type="submit"
+            value="Submit"
+          />
+        </a>
+      </form>
+    </div>
+  </div>
+</div>
+`;

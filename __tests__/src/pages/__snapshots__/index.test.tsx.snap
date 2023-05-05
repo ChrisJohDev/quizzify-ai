@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Index - snapshot test renders correctly 1`] = `
+<div>
+  <div
+    class="container max-w-screen-lg md:mx-auto flex flex-col home-page"
+  >
+    <img
+      alt="Q-AI Logo"
+      class="mx-auto mt-8 mb-8"
+      data-nimg="1"
+      decoding="async"
+      fetchpriority="high"
+      height="30"
+      src="/quizzify-name.svg"
+      style="color: transparent;"
+      width="500"
+    />
+    <p
+      class="text-center text-lg home_p"
+    >
+      Quizzify-AI the number one stop for custom quizzes!
+    </p>
+    <img
+      alt="Q-AI Logo"
+      class="mainLogo mx-auto mt-8"
+      data-nimg="1"
+      decoding="async"
+      fetchpriority="high"
+      height="50"
+      src="/_next/image?url=%2FQAI-Logo.png&w=1080&q=75"
+      srcset="/_next/image?url=%2FQAI-Logo.png&w=640&q=75 1x, /_next/image?url=%2FQAI-Logo.png&w=1080&q=75 2x"
+      style="color: transparent;"
+      width="500"
+    />
+  </div>
+</div>
+`;
