@@ -1,4 +1,12 @@
-const QueryResponse = ({ data }) => {
+import { FC } from "react";
+
+interface Props {
+  data: {
+    name: string;
+  }
+}
+
+const QueryResponse: FC<Props>  = ({ data }) => {
   return (
     <>
       <h1>Query Response</h1>
@@ -6,6 +14,8 @@ const QueryResponse = ({ data }) => {
     </>
   );
 };
+
+
 
 const getServerSideProps = async () => {
   const res = await fetch("http://localhost:3000/api/hello");
