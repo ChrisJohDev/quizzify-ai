@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 const Menu = () => {
   return (
-    <nav className="bg-transparent border-gray-200 dark:bg-transparent">
+    <nav className="bg-transparent border-gray-200 dark:bg-transparent test">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <div  className="flex items-center" >
         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white ml-8"><Logo width={60} height={60} src={''} alt={''} /></span>
