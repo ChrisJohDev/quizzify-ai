@@ -1,5 +1,5 @@
 import {render, screen }from '@testing-library/react';
-import QueryResponse from '@/pages/queryResponse';
+import QueryResponse from '@/pages/quizResponse';
 import '@testing-library/jest-dom'
 
 describe('QueryResponse - snapshot test', () => {
