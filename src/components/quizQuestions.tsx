@@ -1,7 +1,10 @@
 import QuestionItem from './quizQuestionsItem';
-import { QueryResponse, Props } from '@/pages/quizResponse';
+import { QueryResponse } from '@/util/types';
 import styles from '@/styles/quizQuestions.module.css';
 
+interface Props  {
+  queryResponse: QueryResponse
+}
 
 const Questions = ({ queryResponse }: Props) => {
 

@@ -1,5 +1,5 @@
 import { Configuration, OpenAIApi } from "openai";
-import { QueryData, QueryResponse } from '@/pages/quizResponse';
+import { QueryData, QueryResponse } from '@/util/types';
 import { create } from "domain";
 
 const configuration = new Configuration({
@@ -43,8 +43,10 @@ Answers:
 `;
 
 const createQueryString = (query: QueryData) => {
+  const noQuestions = (!query?.amount || query.amount === -1) ? 5 : query.amount;
+  const subject = (!query?.subject || query.subject === '') ? 'General knowledge' : query.subject;
 
-  return `Create a quiz with ${query.amount} questions separated by '--' on the subject of ${query.subject} with 3 alternative answers. Provide right answers after all questions under the headline of Answers:.`;
+  return `Create a quiz with ${noQuestions} questions separated by '--' on the subject of ${subject} with 3 alternative answers. Provide right answers after all questions under the headline of Answers:.`;
 
   // return `Create a quiz with ${query.amount} questions separated by '--' on the subject of ${query.subject}. Provide answers after all questions under the headline of Answers:.`;
 }
