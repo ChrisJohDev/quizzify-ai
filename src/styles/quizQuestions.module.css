@@ -1,0 +1,30 @@
+.qAndA {
+  box-shadow: 0 0 12px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  background-color: rgba(0, 0, 250, 0.4);
+}
+
+.qAndA h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.qAndA div + div {
+  margin-top: 1rem;
+}
+
+.questions > h2 {
+  margin-bottom: 1rem;
+}
+
+.answers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.answers > h2{
+  margin-top: 1.5rem;
+}
