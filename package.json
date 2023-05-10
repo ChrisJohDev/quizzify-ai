@@ -36,6 +36,7 @@
     "body-parser": "^1.20.2",
     "eslint": "^8.39.0",
     "eslint-config-next": "^13.4.0",
+    "eslint-plugin-testing-library": "^5.10.3",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0"
   }
