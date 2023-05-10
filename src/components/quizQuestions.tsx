@@ -1,5 +1,6 @@
-import QuestionItem from './questionItem';
+import QuestionItem from './quizQuestionsItem';
 import { QueryResponse, Props } from '@/pages/quizResponse';
+import styles from '@/styles/quizQuestions.module.css';
 
 
 const Questions = ({ queryResponse }: Props) => {
@@ -7,14 +8,14 @@ const Questions = ({ queryResponse }: Props) => {
   const data = queryResponse;
   console.log('\n*** [Questions] in-data:', data);
   return (
-    <div className="qAndA">
-      <div className="questions">
+    <div className={`qAndA ${styles.qAndA}`}>
+      <div className={`${styles.questions}`}>
         <h2>Questions</h2>
         {data.questions.map((result: string, index: number) => (
           <QuestionItem key={index} question={result} />
         ))}
       </div>
-      <div className="answers">
+      <div className={`${styles.answers}`}>
         <h2>Answers</h2>
         <pre>{data.answers}</pre>
       </div>
