@@ -4,7 +4,7 @@ import { create } from "domain";
 
 
 // For testing purposes only. Set to false to use OpenAI API.
-const MOCK_RESPONSE = false;
+const MOCK_RESPONSE = true;
 const mockResponse = `1. When did the American Civil War take place?
 --
 2. Who was the first president of the United States?
@@ -123,7 +123,8 @@ const getQueryResponse = async (query: QueryData): Promise<QueryResponse> => {
 
   if (!MOCK_RESPONSE) {
     const requestBody = {
-      model: 'gpt-3.5-turbo',
+      // model: 'gpt-3.5-turbo',
+      model:'gpt-4',
       messages: [{ role: 'user', content: queryString }],
       temperature: 0.7,
     };
@@ -137,6 +138,7 @@ const getQueryResponse = async (query: QueryData): Promise<QueryResponse> => {
     });
 
     const responseJson = await response.json();
+    console.log('\n*** [getQueryResponse] \nresponse:', response,'\nqueryString:', queryString);
 
     responseData = decodeResponse(responseJson.choices[0].message.content); 
     
