@@ -1,14 +1,28 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import * as querystring from "querystring";
+import getQueryResponse, {getQueryResponseMockup} from "@/backend/getQueryResponse";
 import { QueryData } from '@/util/types';
 
-// interface QuizRequest extends NextApiRequest {
-//   body: {
-//     FormData: {
-//       subject: string,
-//       amount: number,
-//     }
-//   }
-// };
+
+async function getRequestBody(req: any) {
+  return new Promise((resolve, reject) => {
+    let data = '';
+    req.on('data', (chunk: any) => {
+      data += chunk;
+    });
+    req.on('end', () => {
+      try {
+        const body = querystring.parse(data);
+        resolve(body);
+      } catch (error) {
+        reject(error);
+      }
+    });
+    req.on('error', (error: any) => {
+      reject(error);
+    });
+  });
+}
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   console.log('\n*** [createQuiz-handler] -');
@@ -19,16 +33,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   console.log('\n*** [createQuiz-handler] body:', body);
-  // const data = await openai.ChatCompletion.create({
-  //   model: "davinci",
-  //   messages: [
-  //     {role: "system", content:"Create a pub query with 10 questions and answers."},
-  //     {role: "user", content: query},
-  //     {role: "assistant", content: "Thanks for your query. Here are the answers to your questions:"}
-  //   ]
-  // })
-  // return res.redirect(307, `/quizResponse?subject=${body.subject}&amount=${body.amount}`).toString();
-  res.status(200).json({message: 'success'});
+  console.log('\n*** [createQuiz-handler] data:', data);
+ 
+  res.status(200).json({data});
 }
 
 export default handler;
