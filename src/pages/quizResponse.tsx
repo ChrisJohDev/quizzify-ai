@@ -3,37 +3,37 @@ import { NextRequest, NextResponse } from "next/server";
 import { type } from "os";
 import { GetServerSideProps } from "next";
 import * as querystring from "querystring";
-import getQueryResponse from "@/backend/getQueryResponse";
+import getQueryResponse, {getQueryResponseMockup} from "@/backend/getQueryResponse";
 import Questions from "@/components/quizQuestions";
 import styles from '@/styles/quizResponse.module.css'
+import { QueryData, QueryResponse } from "@/util/types";
 
 const queryData = {
   subject: '',
   amount: -1
 }
 
-export type QueryData = {
-  // props: {
-    subject: string | any,
-    amount: number | any
-  // }
-}
-
-export type QueryResponse = {
-  questions: Array<string>,
-  answers: string,
-}
-
-export interface Props {
-  queryResponse: QueryResponse
+interface Props {
+  queryResponse: QueryResponse,
+  subject: string
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
   const req = context.req;
   const body: any = await getRequestBody(req);
   console.log('\n*** [getServerSideProps] body:', body);
-  const {subject, amount} = body;
+  const { subject, amount } = body;
   console.log('\n*** [getServerSideProps] subject, amount:', subject, amount);
+
+  if(!subject && !amount) {
+    const queryResponseMockup = await getQueryResponseMockup();
+    return {
+      props: {
+        queryResponse: queryResponseMockup,
+        subject: 'Page was refreshed'
+      }
+    }
+  }
   const queryData: QueryData = { subject: subject ? subject : '', amount: amount ? amount : -1 };
 
   console.log('\n*** [getServerSideProps] queryData:', queryData);
@@ -44,7 +44,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
   return {
     props: {
-      queryResponse
+      queryResponse,
+      subject: subject ? subject : 'General knowledge'
     }
   };
 };
@@ -69,15 +70,21 @@ async function getRequestBody(req: any) {
   });
 }
 
-const QuizResponse = ({queryResponse}: Props) => {
+const QuizResponse = ({ queryResponse, subject }: Props) => {
   console.log('\n*** [QueryResponse] queryData:', queryResponse);
 
   return (
     <main className={`${styles.wrapper}`}>
-      <h1>Query Response</h1>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Questions queryResponse = { queryResponse } />
-      </Suspense>
+      <section>
+        <h1>Query Response</h1>
+        <p>Your quiz on the subject of <strong>{subject}</strong> is ready:</p>
+      </section>
+      <section>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Questions queryResponse={queryResponse} />
+        </Suspense>
+      </section>
+
     </main>
   );
 };

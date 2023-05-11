@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`QueryResponse - snapshot test renders correctly 1`] = `
+<div>
+  <main
+    class="wrapper"
+  >
+    <section>
+      <h1>
+        Query Response
+      </h1>
+      <p>
+        Your quiz on the subject of 
+        <strong />
+         is ready:
+      </p>
+    </section>
+    <section>
+      <div
+        class="qAndA qAndA"
+      >
+        <div
+          class="questions"
+        >
+          <h2>
+            Questions
+          </h2>
+        </div>
+        <div
+          class="answers"
+        >
+          <h2>
+            Answers
+          </h2>
+          <pre />
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+`;

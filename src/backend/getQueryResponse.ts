@@ -1,13 +1,10 @@
 import { Configuration, OpenAIApi } from "openai";
-import { QueryData, QueryResponse } from '@/pages/quizResponse';
+import { QueryData, QueryResponse } from '@/util/types';
 import { create } from "domain";
 
-const configuration = new Configuration({
-  organization: "org-dMNPBvDst81fpwfcz8Fhj1b2",
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
-const MOCK_RESPONSE = true;
+// For testing purposes only. Set to false to use OpenAI API.
+const MOCK_RESPONSE = false;
 const mockResponse = `1. When did the American Civil War take place?
 --
 2. Who was the first president of the United States?
@@ -42,13 +39,47 @@ Answers:
 10. Hannibal
 `;
 
+/** @type {*} */
+const configuration = new Configuration({
+  // cspell: disable-next-line
+  organization: "org-dMNPBvDst81fpwfcz8Fhj1b2",
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+/**
+ * Creates the query string to be sent to OpenAI API.
+ *
+ * @param {QueryData} query - The query data.
+ * @return {*} - The query string.
+ */
 const createQueryString = (query: QueryData) => {
+  const noQuestions = (!query?.amount || query.amount === -1) ? 5 : query.amount;
+  const subject = (!query?.subject || query.subject === '') ? 'General knowledge' : query.subject;
 
-  return `Create a quiz with ${query.amount} questions separated by '--' on the subject of ${query.subject} with 3 alternative answers. Provide right answers after all questions under the headline of Answers:.`;
-
-  // return `Create a quiz with ${query.amount} questions separated by '--' on the subject of ${query.subject}. Provide answers after all questions under the headline of Answers:.`;
+  return `Create a quiz with ${query.amount} questions separated by '--' on the subject of ${query.subject}. Provide answers after all questions under the headline of Answers:.`;
 }
 
+/**
+ * Creates the query string to be sent to OpenAI API. This is for multiple choice questions.
+ *
+ * @param {QueryData} query - The query data.
+ * @param {number} alternatives - The number of alternatives.
+ * @return {*} - The query string.
+ */
+const createMultipleChoiceQueryString = (query: QueryData, alternatives?: number) => {
+  const noQuestions = (!query?.amount || query.amount === -1) ? 5 : query.amount;
+  const subject = (!query?.subject || query.subject === '') ? 'General knowledge' : query.subject;
+  const choices = (!alternatives || alternatives < 3 || alternatives > 5) ? 3 : alternatives;
+
+  return `Create a quiz with ${noQuestions} questions separated by '--' on the subject of ${subject} with ${choices} alternative answers. Provide right answers after all questions under the headline of Answers:.`;
+}
+
+/**
+ * Decodes the response from OpenAI API.
+ *
+ * @param {string} response - The response from OpenAI API.
+ * @return {*}  {QueryResponse} - The decoded response.
+ */
 const decodeResponse = (response: string): QueryResponse => {
   const qAndA = response.split('Answers:');
   const questions = qAndA[0].split('--');
@@ -57,8 +88,28 @@ const decodeResponse = (response: string): QueryResponse => {
   return {questions, answers};
 
 }
+/**
+ * Gets the Mockup response. No calls to OpenAI API.
+ *
+ * @return {*}  {Promise<QueryResponse>} - The Mockup response.
+ */
+const getQueryResponseMockup = async (): Promise<QueryResponse> => {
+  let responseData: QueryResponse = {
+    questions: [],
+    answers: ""
+  };
 
+  responseData = decodeResponse(mockResponse);
 
+  return responseData;
+}
+
+/**
+ * Gets the response from OpenAI API.
+ *
+ * @param {QueryData} query - The query data.
+ * @return {*}  {Promise<QueryResponse>} - The response from OpenAI API.
+ */
 const getQueryResponse = async (query: QueryData): Promise<QueryResponse> => {
   // const openai = new OpenAIApi(configuration);
   // const response = await openai.listEngines();
@@ -97,3 +148,4 @@ const getQueryResponse = async (query: QueryData): Promise<QueryResponse> => {
 }
 
 export default getQueryResponse;
+export { getQueryResponseMockup };

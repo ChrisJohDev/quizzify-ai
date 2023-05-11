@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { QueryData } from '../quizResponse';
+import { QueryData } from '@/util/types';
 
 // interface QuizRequest extends NextApiRequest {
 //   body: {

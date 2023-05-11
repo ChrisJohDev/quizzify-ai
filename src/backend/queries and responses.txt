@@ -166,3 +166,83 @@ Answers:
 8) a
 9) c
 10) a or b (depending on the certificate provider)
+
+---
+Date: May 11 - 2023
+Query:
+Create a quiz with 10 questions separated by '--' on the subject of General knowledge with 3 alternative answers. Provide right answers after all questions under the headline of Answers:.
+
+OpenAI response:
+ questions: [
+    '1) Which planet is known as the "red planet"? \n' +
+      'a) Venus \n' +
+      'b) Mars \n' +
+      'c) Jupiter \n' +
+      '\n',
+    '\n' +
+      '2) What is the capital city of Australia? \n' +
+      'a) Sydney \n' +
+      'b) Melbourne \n' +
+      'c) Canberra \n' +
+      '\n',
+    '\n' +
+      '3) Who painted the famous artwork "The Mona Lisa"? \n' +
+      'a) Michelangelo \n' +
+      'b) Leonardo da Vinci \n' +
+      'c) Pablo Picasso \n' +
+      '\n',
+    '\n' +
+      '4) What is the tallest mammal in the world? \n' +
+      'a) Giraffe \n' +
+      'b) Elephant \n' +
+      'c) Hippopotamus \n' +
+      '\n',
+    '\n' +
+      '5) In which country is the Taj Mahal located? \n' +
+      'a) India \n' +
+      'b) China \n' +
+      'c) Japan \n' +
+      '\n',
+    '\n' +
+      '6) Who wrote the Harry Potter book series? \n' +
+      'a) J.K. Rowling \n' +
+      'b) Stephen King \n' +
+      'c) George R.R. Martin \n' +
+      '\n',
+    '\n' +
+      '7) Which country is the largest producer of coffee in the world? \n' +
+      'a) Brazil \n' +
+      'b) Colombia \n' +
+      'c) Ethiopia \n' +
+      '\n',
+    '\n' +
+      '8) What is the largest ocean in the world? \n' +
+      'a) Indian Ocean \n' +
+      'b) Atlantic Ocean \n' +
+      'c) Pacific Ocean \n' +
+      '\n',
+    '\n' +
+      '9) Who was the first person to step on the moon? \n' +
+      'a) Buzz Aldrin \n' +
+      'b) Neil Armstrong \n' +
+      'c) Michael Collins \n' +
+      '\n',
+    '\n' +
+      '10) How many elements are there in the periodic table? \n' +
+      'a) 118 \n' +
+      'b) 120 \n' +
+      'c) 116 \n' +
+      '\n',
+    '\n\n'
+  ],
+  answers: '\n' +
+    '1) b) Mars \n' +
+    '2) c) Canberra \n' +
+    '3) b) Leonardo da Vinci \n' +
+    '4) a) Giraffe \n' +
+    '5) a) India \n' +
+    '6) a) J.K. Rowling \n' +
+    '7) a) Brazil \n' +
+    '8) c) Pacific Ocean \n' +
+    '9) b) Neil Armstrong \n' +
+    '10) a) 118'
