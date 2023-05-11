@@ -4,6 +4,11 @@ const QuizForm = () => {
   const [loading, setLoading] = useState(false);
   const isDevelopment = process.env.NODE_ENV === 'development';
 
+  /**
+   * Handles the form submission event.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} ev - The form submission event.
+   */
   const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     
