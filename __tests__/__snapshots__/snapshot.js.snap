@@ -7,7 +7,7 @@ exports[`renders homepage unchanged 1`] = `
   >
     <img
       alt="Q-AI Logo"
-      class="mx-auto mt-8 mb-8"
+      class="mx-auto mt-8 mb-8 img"
       data-nimg="1"
       decoding="async"
       fetchpriority="high"

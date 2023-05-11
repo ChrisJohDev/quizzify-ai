@@ -1,41 +1,38 @@
 import {useState} from 'react';
-import {useRouter} from 'next/router';
 
 const QuizForm = () => {
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
-  const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
-    ev.preventDefault();
+//   const [loading, setLoading] = useState(false);
+//   const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
+//     ev.preventDefault();
     
-    setLoading(true);
-    const data = new FormData(ev.currentTarget);
-    console.log('\n*** [handleSubmit] data:', data);
-    const subject = data.get('subject');
-    const amount = data.get('amount');
-    const json = JSON.stringify({subject, amount});
-    const endpoint ='/quizResponse';
-    const options = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: json
-    };
+//     setLoading(true);
+//     const data = new FormData(ev.currentTarget);
+//     console.log('\n*** [handleSubmit] data:', data);
+//     const subject = data.get('subject');
+//     const amount = data.get('amount');
+//     const json = JSON.stringify({subject, amount});
+//     const endpoint ='/quizResponse';
+//     const options = {
+//       method: 'GET',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: json
+//     };
 
-    console.log('\n*** [handleSubmit] endpoint:', endpoint);
-    try{
-      const response = await fetch(endpoint, options)
-      if(!response.ok){
-        throw new Error(response.statusText);
-      }
-      console.log('\n*** [handleSubmit] response:', response);
-      // router.push('/quizResponse');
-    } catch(err){
-      console.error(err);
-    } finally {
-      // setLoading(false);
-    }
-  };
+//     console.log('\n*** [handleSubmit] endpoint:', endpoint);
+//     try{
+//       const response = await fetch(endpoint, options)
+//       if(!response.ok){
+//         throw new Error(response.statusText);
+//       }
+//       console.log('\n*** [handleSubmit] response:', response);
+//     } catch(err){
+//       console.error(err);
+//     } finally {
+//       // setLoading(false);
+//     }
+//   };
 
   return (
     // <form className="mx-auto" onSubmit={handleSubmit}>
