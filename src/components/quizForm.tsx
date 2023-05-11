@@ -1,5 +1,10 @@
 import {useState} from 'react';
 
+/**
+ * The form for creating a quiz.
+ *
+ * @return {*} {JSX.Element} - The form for creating a quiz.
+ */
 const QuizForm = () => {
   const [loading, setLoading] = useState(false);
   const isDevelopment = process.env.NODE_ENV === 'development';
