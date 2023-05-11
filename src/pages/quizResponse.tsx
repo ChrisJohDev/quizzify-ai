@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { type } from "os";
 import { GetServerSideProps } from "next";
 import * as querystring from "querystring";
-import getQueryResponse from "@/backend/getQueryResponse";
+import getQueryResponse, {getQueryResponseMockup} from "@/backend/getQueryResponse";
 import Questions from "@/components/quizQuestions";
 import styles from '@/styles/quizResponse.module.css'
 import { QueryData, QueryResponse } from "@/util/types";
@@ -24,6 +24,16 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
   console.log('\n*** [getServerSideProps] body:', body);
   const { subject, amount } = body;
   console.log('\n*** [getServerSideProps] subject, amount:', subject, amount);
+
+  if(!subject && !amount) {
+    const queryResponseMockup = await getQueryResponseMockup();
+    return {
+      props: {
+        queryResponse: queryResponseMockup,
+        subject: 'Page was refreshed'
+      }
+    }
+  }
   const queryData: QueryData = { subject: subject ? subject : '', amount: amount ? amount : -1 };
 
   console.log('\n*** [getServerSideProps] queryData:', queryData);
