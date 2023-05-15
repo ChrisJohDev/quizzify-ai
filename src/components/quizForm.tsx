@@ -1,11 +1,19 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
+import { Question } from '@/util/types';
+
+type setQuizFunction = (newValue: Question[]) => void;
+
+interface QuizFormProps {
+  setQuiz: setQuizFunction;
+}
 
 /**
  * The form for creating a quiz.
  *
+ * @param {setQuizFunction} setQuiz - The function for setting the quiz.
  * @return {*} {JSX.Element} - The form for creating a quiz.
  */
-const QuizForm = () => {
+const QuizForm: React.FC<QuizFormProps> = ( { setQuiz } ) => {
   const [loading, setLoading] = useState(false);
   const isDevelopment = process.env.NODE_ENV === 'development';
 
@@ -32,7 +40,7 @@ const QuizForm = () => {
       body: json
     };
 
-    isDevelopment && console.log('\n*** [handleSubmit] endpoint:', endpoint);
+    isDevelopment && console.log('\n*** [handleSubmit] \nendpoint:', endpoint,'\njson:', json);
     try{
       const response = await fetch(endpoint, options)
       if(!response.ok){
@@ -41,7 +49,8 @@ const QuizForm = () => {
       isDevelopment && console.log('\n*** [handleSubmit] response:', response);
       const json = await response.json();
       isDevelopment && console.log('\n*** [handleSubmit] json:', json);
-      const data = json.data;
+      setQuiz(json.response.questions);
+      const data = json.response;
       isDevelopment && console.log('\n*** [handleSubmit] data:', data);
     } catch(err){
       isDevelopment && console.error('\n*** [handleSubmit] error:', err);
