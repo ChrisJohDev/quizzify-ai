@@ -18,7 +18,7 @@ const configuration = new Configuration({
 });
 
 const isDevelopment = process.env.NODE_ENV === 'development';
-const MOCK_RESPONSE = true;
+const MOCK_RESPONSE = false;
 
 async function getRequestBody(req: NextApiRequest): Promise<QueryData> {
   return new Promise((resolve, reject) => {
@@ -61,30 +61,35 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(200).json({response: decodedResponse});
   }
 
-  // try{
-  //   const requestBody = {
-  //     model: 'gpt-3.5-turbo',
-  //     // model:'gpt-4',
-  //     messages: [{ role: 'user', content: queryString }],
-  //     temperature: 0.7,
-  //   };
-  //   const response = await fetch('https://api.openai.com/v1/chat/completions', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-  //     },
-  //     body: JSON.stringify(requestBody),
-  //   });
+  try{
+    const requestBody = {
+      model: 'gpt-3.5-turbo',
+      // model:'gpt-4',
+      messages: [{ role: 'user', content: queryString }],
+      temperature: 0.7,
+    };
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      },
+      body: JSON.stringify(requestBody),
+    });
 
-  //   const responseJson = await response.json();
+    console.log('\n*** [createQuiz-handler] \nresponse:', response);
 
-  //   console.log('\n*** [createQuiz-handler] \nrequestBody:', requestBody,'\nresponseJson:', responseJson);
+    const responseJson = await response.json();
+    console.log('\n*** [createQuiz-handler] \nresponseJson:', responseJson.choices[0].message.content);
+
+    const decodedResponse = decodeResponseData(responseJson.choices[0].message.content);
+
+    console.log('\n*** [createQuiz-handler] \nrequestBody:', requestBody,'\nresponseJson:', responseJson);
     
-  //   res.status(200).json({responseJson});
-  // } catch (err) {
-  //   console.error('\n*** [createQuiz-handler] err:', err);
-  // }
+    res.status(200).json({response: decodedResponse});
+  } catch (err) {
+    console.error('\n*** [createQuiz-handler] err:', err);
+  }
  
   
 }

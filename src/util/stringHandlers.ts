@@ -37,11 +37,12 @@ const createMultipleChoiceQueryString = (query: MultiChoiceQueryData) => {
  * @return {*}  {QueryResponse} - The decoded response.
  */
 const decodeResponseData = (response: string) => {
+  console.log('\n*** [decodeResponseData] \nresponse:', response);
   const qAndA = response.split('Q:');
 
   const questions: Questions = [];
 
-  // console.log('\n*** [decodeResponseData] \nqAndA:', qAndA);
+  console.log('\n*** [decodeResponseData] \nqAndA:', qAndA);
 
   qAndA.forEach((question, index) => {
     if(question.trim().length > 0) {
