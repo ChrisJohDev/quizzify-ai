@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Question } from '@/util/types';
+import { Questions } from '@/util/types';
 import styles from '@/styles/quizForm.module.css';
 import Logo from "@/components/logo"
 import createPdf from "@/util/pdf";
 
-type setQuizFunction = (newValue: Question[]) => void;
+type setQuizFunction = (newValue: Questions) => void;
 type setSubjectFunction = (newValue: string) => void;
 
 interface QuizFormProps {
