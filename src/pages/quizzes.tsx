@@ -23,7 +23,7 @@ const Quizzes: React.FC = () => {
             </div>
           </>
           : <>
-            <h1 className="text-center">Your quiz</h1>
+            <h1 className="text-center">Your quiz on the subject of </h1>
             <QuizQuestions quiz={quiz} />
           </>
       }
