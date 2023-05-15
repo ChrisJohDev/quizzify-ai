@@ -40,7 +40,7 @@ const decodeResponseData = (response: string) => {
   console.log('\n*** [decodeResponseData] \nresponse:', response);
   const qAndA = response.split('Q:');
 
-  const questions: Questions = [];
+  const questions: Questions = {questions: [], subject: ''};
 
   console.log('\n*** [decodeResponseData] \nqAndA:', qAndA);
 
@@ -48,7 +48,7 @@ const decodeResponseData = (response: string) => {
     if(question.trim().length > 0) {
       const tmp = question.split('A:');
       // if (index < 3) console.log('\n*** [decodeResponseData] \ntmp:', tmp, '\ntmp[0]:', tmp[0], '\ntmp[1]:', tmp[1]);
-      questions.push({question: tmp[0].trim(), answer: tmp[1].trim()});
+      questions.questions.push({question: tmp[0].trim(), answer: tmp[1].trim()});
     }
   });
   
