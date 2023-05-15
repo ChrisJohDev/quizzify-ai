@@ -6,21 +6,21 @@ import createPdf from '@/util/pdf';
 
 interface QuizQuestionsProps {
   subject: string,
-  quiz: Question[]
+  quiz: Questions
 };
 
 const QuizQuestions: React.FC<QuizQuestionsProps> = ({ quiz, subject }) => {
   // console.log('\n*** [quizQuestions.tsx]  quiz: ', quiz);
 
   const handleCreatePdf = () => {
-    createPdf(quiz, 'quiz', subject);
+    createPdf(quiz.questions, 'quiz', subject);
   }
 
   return (
     <div className={styles.wrapper}>
       <input type="button" onClick={handleCreatePdf} value="Create PDF" />
       {
-        quiz.map((question, index) => {
+        quiz.questions.map((question, index) => {
           const qNumber: number = index + 1;
           return (
               <div key={index} className={styles.quizQuestion}>
