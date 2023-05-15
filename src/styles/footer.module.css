@@ -1,12 +1,14 @@
-footer {
+.footer {
   padding-top: 2rem;
+  font-size: 14px;
 }
-footer p {
+
+.footer p {
   display: inline-block;
   margin-left: 1rem;
   color:darkblue;
 }
 
-footer img {
+.footer img {
   display: inline-block;
 }

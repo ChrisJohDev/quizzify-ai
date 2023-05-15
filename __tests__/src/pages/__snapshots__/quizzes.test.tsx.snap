@@ -14,8 +14,9 @@ exports[`Quizzes - snapshot test renders correctly 1`] = `
       class="col-md-6 offset-md-3 flex flex-col info"
     >
       <form
-        action="/result"
+        action="/quizResponse"
         class="mx-auto"
+        method="POST"
       >
         <label
           for="issue"
@@ -59,14 +60,10 @@ exports[`Quizzes - snapshot test renders correctly 1`] = `
           type="text"
         />
         <br />
-        <a
-          href="/queryResponse"
-        >
-          <input
-            type="submit"
-            value="Submit"
-          />
-        </a>
+        <input
+          type="submit"
+          value="Submit"
+        />
       </form>
     </div>
   </div>

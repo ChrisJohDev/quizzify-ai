@@ -1,0 +1,248 @@
+Date: May 9 - 2023
+Query:
+${query.amount} = 10
+${query.subject} = Music
+{ role: 'user', content: `Create a Pub quiz with ${query.amount} questions and answers on the subject of ${query.subject}` }
+Query String:
+Create a Pub quiz with 10 questions and answers on the subject of Music
+
+Response:
+role: assistant
+content: 1. What was the name of the first album released by The Beatles in 1963?
+Answer: Please Please Me
+2. Who won the Eurovision Song Contest in 2019 with the song "Arcade"?
+Answer: Duncan Laurence
+3. Which English rock band released the album "Dark Side of the Moon" in 1973?
+Answer: Pink Floyd
+4. Who sang the hit song "Uptown Funk" in 2014?
+Answer: Mark Ronson ft. Bruno Mars
+5. What is the name of the lead singer of the band Coldplay?
+Answer: Chris Martin
+6. Who won the Grammy Award for Album of the Year in 2020 with "When We All Fall Asleep, Where Do We Go?"?
+Answer: Billie Eilish
+7. What was the name of the first rap song to reach number one on the US Billboard Hot 100 chart?
+Answer: "Rapper's Delight" by The Sugarhill Gang
+8. Who released the album "Thriller" in 1982, which is the best-selling album of all time?
+Answer: Michael Jackson
+9. What is the name of the American singer-songwriter who released the hit song "Shallow" in 2018 for the movie "A Star is Born"?
+Answer: Lady Gaga
+10. What is the name of the Canadian singer who released the hit song "Hello" in 2015?
+Answer: Adele
+
+---
+Query:
+Create a quiz with 10 questions on the subject of Music. Provide answers after all questions under the headline of Answers:. Format: separate each question with --
+
+OpenAI Response:
+role: assistant
+content: 1. What is a query in database management?
+2. What is the purpose of a query?
+3. What is a SQL query?
+4. What are the basic components of a SQL query?
+5. What is a subquery?
+6. What is the difference between a query and a report?
+7. What is a parameter query?
+8. What is a crosstab query?
+9. What is a union query?
+10. What is a join query?
+
+--
+
+1. A query is a request for information from a database.
+2. The purpose of a query is to retrieve specific data from a database that meets certain criteria.
+3. A SQL query is a request for information from a database using the Structured Query Language (SQL).
+4. The basic components of a SQL query include SELECT, FROM, WHERE, GROUP BY, HAVING, and ORDER BY clauses.
+5. A subquery is a query within a query that is used to retrieve data from one or more tables.
+6. A query retrieves data from a database, while a report presents that data in a formatted manner for analysis.
+7. A parameter query is a query that prompts the user for input in order to retrieve specific data from a database.
+8. A crosstab query is a query that returns data in a tabular format with rows and columns that summarize information from a database.
+9. A union query is a query that combines the results of two or more SELECT statements into a single result set.
+10. A join query is a query that combines data from two or more tables in a database based on a common field.
+
+---
+Query:
+Create a quiz with 10 questions separated by '--' on the subject of History. Provide answers after all questions under the headline of Answers:.
+
+OpernAI Response:
+role: assistant
+content: 1. When did the American Civil War take place?
+--
+2. Who was the first president of the United States?
+--
+3. What was the name of the first civilization to emerge in Mesopotamia?
+--
+4. Who was the leader of Nazi Germany during World War II?
+--
+5. What was the name of the first man to walk on the moon?
+--
+6. Who was the first female Prime Minister of the United Kingdom?
+--
+7. In what year did the United States declare its independence from Great Britain?  
+--
+8. Who was the leader of the Soviet Union during the Cuban Missile Crisis?
+--
+9. What was the name of the ancient Egyptian writing system?
+--
+10. Who was the Roman general who famously crossed the Alps with his army in 218 BC?
+--
+
+Answers:
+1. 1861-1865
+2. George Washington
+3. Sumerians
+4. Adolf Hitler
+5. Neil Armstrong
+6. Margaret Thatcher
+7. 1776
+8. Nikita Khrushchev
+9. Hieroglyphics
+10. Hannibal
+
+---
+Query:
+Create a quiz with 10 questions separated by '--' on the subject of SSL Certificate with 3 alternative answers. Provide right answers after all questions under the headline of Answers:.
+
+OpenAI Response:
+role: assistant
+content: 1) What does SSL stand for?
+a) Secure Socket Layer
+b) Simple Secure Layer
+c) Secure Socket Language
+--
+2) What is the purpose of SSL Certificates?
+a) To encrypt data transmitted between a web server and a client's browser
+b) To provide a secure connection between two web servers
+c) To authenticate a user's identity on a website
+--
+3) Which protocol does SSL use to encrypt data?
+a) TCP
+b) HTTP
+c) TLS
+--
+4) Which type of SSL Certificate offers the highest level of validation?
+a) Domain Validated
+b) Organization Validated
+c) Extended Validation
+--
+5) Which web browser displays a green padlock icon next to the URL for websites with an Extended Validation SSL Certificate?
+a) Google Chrome
+b) Mozilla Firefox
+c) Internet Explorer
+--
+6) Can SSL Certificates be used for email encryption?
+a) Yes
+b) No
+c) Only if the email client supports it
+--
+7) Which organization is responsible for issuing SSL Certificates?
+a) Internet Corporation for Assigned Names and Numbers (ICANN)
+b) Certificate Authority (CA)
+c) World Wide Web Consortium (W3C)
+--
+8) Which type of SSL Certificate is suitable for small businesses and personal websites?
+a) Domain Validated
+b) Organization Validated
+c) Extended Validation
+--
+9) Which SSL Certificate type is recommended for websites that require customers to enter sensitive information such as credit card details?
+a) Domain Validated
+b) Organization Validated
+c) Extended Validation
+--
+10) How long is the typical validity period for an SSL Certificate?
+a) 1 year
+b) 2 years
+c) 3 years
+--
+
+Answers:
+1) a
+2) a
+3) c
+4) c
+5) a
+6) a
+7) b
+8) a
+9) c
+10) a or b (depending on the certificate provider)
+
+---
+Date: May 11 - 2023
+Query:
+Create a quiz with 10 questions separated by '--' on the subject of General knowledge with 3 alternative answers. Provide right answers after all questions under the headline of Answers:.
+
+OpenAI response:
+ questions: [
+    '1) Which planet is known as the "red planet"? \n' +
+      'a) Venus \n' +
+      'b) Mars \n' +
+      'c) Jupiter \n' +
+      '\n',
+    '\n' +
+      '2) What is the capital city of Australia? \n' +
+      'a) Sydney \n' +
+      'b) Melbourne \n' +
+      'c) Canberra \n' +
+      '\n',
+    '\n' +
+      '3) Who painted the famous artwork "The Mona Lisa"? \n' +
+      'a) Michelangelo \n' +
+      'b) Leonardo da Vinci \n' +
+      'c) Pablo Picasso \n' +
+      '\n',
+    '\n' +
+      '4) What is the tallest mammal in the world? \n' +
+      'a) Giraffe \n' +
+      'b) Elephant \n' +
+      'c) Hippopotamus \n' +
+      '\n',
+    '\n' +
+      '5) In which country is the Taj Mahal located? \n' +
+      'a) India \n' +
+      'b) China \n' +
+      'c) Japan \n' +
+      '\n',
+    '\n' +
+      '6) Who wrote the Harry Potter book series? \n' +
+      'a) J.K. Rowling \n' +
+      'b) Stephen King \n' +
+      'c) George R.R. Martin \n' +
+      '\n',
+    '\n' +
+      '7) Which country is the largest producer of coffee in the world? \n' +
+      'a) Brazil \n' +
+      'b) Colombia \n' +
+      'c) Ethiopia \n' +
+      '\n',
+    '\n' +
+      '8) What is the largest ocean in the world? \n' +
+      'a) Indian Ocean \n' +
+      'b) Atlantic Ocean \n' +
+      'c) Pacific Ocean \n' +
+      '\n',
+    '\n' +
+      '9) Who was the first person to step on the moon? \n' +
+      'a) Buzz Aldrin \n' +
+      'b) Neil Armstrong \n' +
+      'c) Michael Collins \n' +
+      '\n',
+    '\n' +
+      '10) How many elements are there in the periodic table? \n' +
+      'a) 118 \n' +
+      'b) 120 \n' +
+      'c) 116 \n' +
+      '\n',
+    '\n\n'
+  ],
+  answers: '\n' +
+    '1) b) Mars \n' +
+    '2) c) Canberra \n' +
+    '3) b) Leonardo da Vinci \n' +
+    '4) a) Giraffe \n' +
+    '5) a) India \n' +
+    '6) a) J.K. Rowling \n' +
+    '7) a) Brazil \n' +
+    '8) c) Pacific Ocean \n' +
+    '9) b) Neil Armstrong \n' +
+    '10) a) 118'

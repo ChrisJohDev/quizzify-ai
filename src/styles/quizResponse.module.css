@@ -1,0 +1,25 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    margin-bottom: 2rem;
+}
+
+.wrapper h1{
+    font-size: 3rem;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper section:first-child {
+    text-align: center;
+}
+
+.wrapper section + section {
+    margin-top: 2rem;
+}
+
+.wrapper section:last-child {
+    color: black;
+}
