@@ -19,7 +19,10 @@ export type Question = {
   answer: string,
 }
 
-export type Questions = Array<Question>;
+export type Questions = {
+  subject: string,
+  questions: Array<Question>
+};
 
 export type MultiChoiceQuestion = {
   question: string,

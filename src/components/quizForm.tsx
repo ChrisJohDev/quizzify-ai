@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { Question } from '@/util/types';
 import styles from '@/styles/quizForm.module.css';
 import Logo from "@/components/logo"
+import createPdf from "@/util/pdf";
 
 type setQuizFunction = (newValue: Question[]) => void;
+type setSubjectFunction = (newValue: string) => void;
 
 interface QuizFormProps {
   setQuiz: setQuizFunction;
+  setSubject: setSubjectFunction;
+  subject: string;
 }
 
 /**
@@ -15,9 +19,10 @@ interface QuizFormProps {
  * @param {setQuizFunction} setQuiz - The function for setting the quiz.
  * @return {*} {JSX.Element} - The form for creating a quiz.
  */
-const QuizForm: React.FC<QuizFormProps> = ({ setQuiz }) => {
+const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, subject }) => {
   const [loading, setLoading] = useState(false);
   const isDevelopment = process.env.NODE_ENV === 'development';
+  
 
   /**
    * Handles the form submission event.
@@ -29,7 +34,7 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz }) => {
 
     setLoading(true);
     const data = new FormData(ev.currentTarget);
-    console.log('\n*** [handleSubmit] data:', data);
+    // console.log('\n*** [handleSubmit] data:', data);
     const subject = data.get('subject');
     const amount = data.get('amount');
     const json = JSON.stringify({ subject, amount });
@@ -41,6 +46,7 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz }) => {
       },
       body: json
     };
+    setSubject(subject as string);
 
     isDevelopment && console.log('\n*** [handleSubmit] \nendpoint:', endpoint, '\njson:', json);
     try {
@@ -67,7 +73,7 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz }) => {
         loading
           ?
           <>
-            <p>Loading...</p>
+            <p>Loading your quiz about {subject}...</p>
             <div className={`spinner-border text-primary ${styles.loader}`} role="status"><Logo width={60} src={''} alt={''} /></div >
           </>
           :
