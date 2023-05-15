@@ -1,29 +1,31 @@
-import QuestionItem from './quizQuestionsItem';
-import { QueryResponse } from '@/util/types';
+import React, { useState } from 'react';
+import { Question } from '@/util/types';
+import QuizQuestionsItem from './quizQuestionsItem';
 import styles from '@/styles/quizQuestions.module.css';
 
-interface Props  {
-  queryResponse: QueryResponse
+interface QuizQuestionsProps {
+  quiz: Question[];
 }
 
-const Questions = ({ queryResponse }: Props) => {
+const QuizQuestions: React.FC<QuizQuestionsProps> = ({ quiz }) => {
+  console.log('\n*** [quizQuestions.tsx]  quiz: ', quiz);
 
-  const data = queryResponse;
-  console.log('\n*** [Questions] in-data:', data);
   return (
-    <div className={`qAndA ${styles.qAndA}`}>
-      <div className={`${styles.questions}`}>
-        <h2>Questions</h2>
-        {data.questions.map((result: string, index: number) => (
-          <QuestionItem key={index} question={result} />
-        ))}
-      </div>
-      <div className={`${styles.answers}`}>
-        <h2>Answers</h2>
-        <pre>{data.answers}</pre>
-      </div>
+    <div className={styles.wrapper}>
+      {
+        quiz.map((question, index) => {
+          const qNumber: number = index + 1;
+          return (
+            <div key={index} className={styles.quizQuestion}>
+              {index !== 0 && <hr />}
+              <h2>Question {qNumber}</h2>
+              <QuizQuestionsItem question={question} />
+            </div>
+          );
+        })
+      }
     </div>
-  );
-};
+  )
+}
 
-export default Questions;
+export default QuizQuestions; 

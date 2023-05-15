@@ -1,12 +1,18 @@
+import React from "react";
+import { Question } from "@/util/types";
 
 
-const QuestionItem = (props: any) => {
-  const { question } = props;
+interface QuizQuestionsItemProps {
+  question: Question;
+}
+
+const QuizQuestionsItem: React.FC<QuizQuestionsItemProps> = ({question}) => {
   return (
-    <div className="question-item">
-      <div className="question">{question}</div>
+    <div className="quiz-questions-item">
+      <h3>{question.question}</h3>
+      <p>Answer: {question.answer}</p>
     </div>
-  );
-};
+  )
+}
 
-export default QuestionItem;
+export default QuizQuestionsItem;
