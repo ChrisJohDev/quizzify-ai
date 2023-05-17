@@ -11,7 +11,7 @@ const SignUp = () => {
     const pword = data.get('pword');
     const confirm_pword = data.get('confirm_pword');
 
-    console.log('\n*** [handleSubmit] username:', username, '\n*** [handleSubmit] fname:', fname, '\n*** [handleSubmit] lname:', lname, '\n*** [handleSubmit] email:', email, '\n*** [handleSubmit] pword:', pword, '\n*** [handleSubmit] confirm_pword:', confirm_pword);
+    console.log('\n*** [handleSubmit] username:', username, '\n*** [handleSubmit] firstName:', firstName, '\n*** [handleSubmit] lastName:', lastName, '\n*** [handleSubmit] email:', email, '\n*** [handleSubmit] pword:', pword, '\n*** [handleSubmit] confirm_pword:', confirm_pword);
 
     const json = JSON.stringify({ username, firstName, lastName, email, pword, confirm_pword });
     const endpoint = '/api/register';
