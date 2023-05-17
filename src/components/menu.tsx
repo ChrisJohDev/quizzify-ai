@@ -40,7 +40,7 @@ const Menu = () => {
             </li>
             <li>
               <div className="md:ml-6 text-[#d6ecff]">
-                <Link href="/api/auth/signin" rel="prefetch">Login</Link>
+                <Link href="#" rel="prefetch">Login</Link>
               </div>
             </li>
           </ul>
