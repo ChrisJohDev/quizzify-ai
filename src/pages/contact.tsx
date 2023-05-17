@@ -11,12 +11,12 @@ export default function Contact() {
           <table>
             <tbody>
               <tr>
-                <td>Telephone:</td>
-                <td>+46 - (0)31 123 45 67</td>
+                <td>Inquiries:</td>
+                <td>info@quizzify-ai.org</td>
               </tr>
               <tr>
-                <td>Email:</td>
-                <td>support@quizzify-ai.com</td>
+                <td>Support:</td>
+                <td>support@quizzify-ai.org</td>
               </tr>
             </tbody>
           </table>
