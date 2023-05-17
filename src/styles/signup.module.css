@@ -1,0 +1,89 @@
+.wrapper {
+  color: black;
+  padding: 2rem;
+  border-radius: 2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: rgba(245, 245, 245, 0.1);
+}
+
+.wrapper h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.wrapper label {
+  width: 90%;
+}
+
+.wrapper input[type=text], .wrapper input[type=password], .wrapper input[type=email] {
+  width: 100%;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  box-sizing: border-box;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.3rem;
+}
+
+.nameSection {
+  margin-bottom: 1rem;
+  display: flex;
+}
+
+.nameSection input[type=text]{
+  width: 90%;
+}
+
+.dataSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.buttonSection{
+  display: flex;
+  justify-content:space-between;
+  margin-top: 1rem;
+}
+
+.buttonSection input[type=submit] {
+  background-color: #3684c3;
+  border: outset rgb(6, 150, 199) 4px;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 0.5rem;;
+}
+
+.buttonSection input[type=submit]:hover {
+  background-color: #257abf;
+  /* border-color: rgb(13, 119, 154); */
+  color: rgb(188, 246, 255);
+}
+
+.buttonSection input[type=reset] {
+  background-color: #c33636;
+  border: outset rgb(199, 6, 6) 4px;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 0.5rem;;
+}
+
+.buttonSection input[type=reset]:hover {
+  background-color: #bf2525;
+  /* border-color: rgb(13, 119, 154); */
+  color: rgb(255, 188, 188);
+}

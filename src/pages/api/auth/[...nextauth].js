@@ -1,24 +1,25 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
-import CredentialProvider from "next-auth/providers/credentials";
+import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 
 export const authOptions = {
   // Configure one or more authentication providers
   providers: [
-    CredentialProvider({
+    CredentialsProvider({
       name: "Credentials",
       credentials: {
         username: {
-          label: "Email",
-          type: "email",
-          placeholder: "johndoe@example.com",
+          label: "Username",
+          type: "text",
+          placeholder: "john",
         },
         password: { label: "Password", type: "password" },
       },
       authorize: async (credentials) => {
         // database lookup
+        // const db = await openDB();
         if (
           credentials.username === "admin" &&
           credentials.password === "admin"
@@ -49,6 +50,7 @@ export const authOptions = {
   ],
   callbacks: {
     jwt: async (token, user) => {
+      // first time jwt callback is run, user object is available
       if (user) {
         token.id = user.id;
       }
@@ -56,7 +58,7 @@ export const authOptions = {
     },
     session: async (session, token) => {
       if(token) {
-        session.user.id = token.id;
+        session.id = token.id;
       }
       return session;
     },
