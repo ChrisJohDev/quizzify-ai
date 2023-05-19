@@ -9,6 +9,12 @@ import mongoose from 'mongoose'
 
 const url = process.env.ATLAS_AUTH_CONNECTION || 'mongodb://localhost:27017'
 
+let cached = global.mongoose;
+
+if(!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
 /**
  * Connect to the database.
  *
@@ -17,25 +23,57 @@ const url = process.env.ATLAS_AUTH_CONNECTION || 'mongodb://localhost:27017'
  */
 export const connectDB = async () => {
   try {
-    const { connection } = mongoose
-    connection.on('connected', () => { console.log('Connected to MongoDB') })
-    connection.on('error', (err) => { console.error(`DB connection error: ${err}`) })
-    connection.on('disconnected', () => { console.log('Disconnected from MongoDB') })
+    if (cached.conn) {
+      return cached.conn;
+    }
 
-    // Close the connection when the application is terminated
-    process.on('SIGINT', () => {
-      connection.close(() => {
-        console.log('Disconnected from MongoDB')
-        process.exit(0)
-      })
-    })
+    if (!cached.promise) {
+      const opts = {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        bufferCommands: false,
+      };
 
-    // console.log('\n *** [db.js] connectDB url:', url)
+      // cached.promise = mongoose.connect(url, opts).then((mongoose) => {
+      //   return mongoose;
+      // });
 
-    // Connect to the database
-    return await mongoose.connect(url)
+      cached.promise = mongoose.connect(url, opts).then((mongoose) => {
+        // console.log("\n *** [connectDB] Mongoose instance:", mongoose);  // <- Added line
+        return mongoose;
+      }).catch(err => {  // <- Added line
+        console.error("\n *** [connectDB] Error during mongoose.connect:", err);  // <- Added line
+        throw err;  // <- Added line
+      });
+    }
+
+    cached.conn = await cached.promise;
+    // console.log("\n *** [connectDB] Cached connection:", cached.conn);  // <- Added line
+
+    if (!cached.conn) {
+      throw new Error("\n *** [connectDB] Failed to establish Mongoose connection");  // <- Added line
+    }
+    
+    mongoose.connection.on('connected', () => { console.log('Connected to MongoDB') });
+    mongoose.connection.on('error', (err) => { console.error(`DB connection error: ${err}`) });
+    mongoose.connection.on('disconnected', () => { console.log('Disconnected from MongoDB') });
+
+    return cached.conn;
+
+    // // Close the connection when the application is terminated
+    // process.on('SIGINT', () => {
+    //   connection.close(() => {
+    //     console.log('Disconnected from MongoDB')
+    //     process.exit(0)
+    //   });
+    // });
+
+    // // console.log('\n *** [db.js] connectDB url:', url)
+
+    // // Connect to the database
+    // return await mongoose.connect(url);
   } catch (err) {
-    console.error(err)
-    throw new Error('Failed to connect to the database')
+    console.error(err);
+    throw new Error('\n *** [connectDB] Failed to connect to the database');
   }
 }

@@ -87,3 +87,15 @@
   /* border-color: rgb(13, 119, 154); */
   color: rgb(255, 188, 188);
 }
+
+.message {
+  text-align: center;
+  margin: 1rem 0;
+  background-color: #f6ffb6;
+  padding: 0.5rem;
+}
+
+.message h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}

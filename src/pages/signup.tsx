@@ -1,6 +1,14 @@
 import styles from '@/styles/signup.module.css'
+import {useState}from 'react';
+
+type Message = {
+  head: string;
+  body: string;
+}
 
 const SignUp = () => {
+  const [message, setMessage] = useState<Message>({head: '', body: ''});
+
   const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     const data = new FormData(ev.currentTarget);
@@ -14,7 +22,7 @@ const SignUp = () => {
     console.log('\n*** [handleSubmit] username:', username, '\n*** [handleSubmit] firstName:', firstName, '\n*** [handleSubmit] lastName:', lastName, '\n*** [handleSubmit] email:', email, '\n*** [handleSubmit] pword:', pword, '\n*** [handleSubmit] confirm_pword:', confirm_pword);
 
     const json = JSON.stringify({ username, firstName, lastName, email, pword, confirm_pword });
-    const endpoint = '/api/register';
+    const endpoint = '/api/auth/register';
     const options = {
       method: 'POST',
       headers: {
@@ -24,19 +32,30 @@ const SignUp = () => {
     };
 
     try {
-      const response = await fetch(endpoint, options)
+      const response = await fetch(endpoint, options);
+      // fetch(endpoint, options);
       if (!response.ok) {
         throw new Error(response.statusText);
       }
-      const json = await response.json();
-      const data = json.response;
+      const data = await response.json();
+      if(data){
+        setMessage({head:'Your registration was successful', body: 'An email with a verification link has been sent to the email address you supplied. Please, click on the link to verify your email address.'});
+        // window.location.href = data.redirect;
+      }
     } catch (err) {
+      setMessage({head:'Your registration failed', body: 'Please, check your entries and try again.'});
       console.error('\n*** [handleSubmit] error:', err);
+    } finally {
+      document.querySelector("#message")?.classList.remove("hidden");
     }
   }
   return (
     <div className={`${styles.wrapper} class="container max-w-screen-lg mx-auto flex flex-col`}>
       <h1>Registration Form</h1>
+      <div id="message" className={`hidden ${styles.message}`}>
+        <h3>{message.head}</h3>
+        <p>{message.body}</p>
+      </div>
       <form onSubmit={handleSubmit} className="mx=auto">
         <div className={`${styles.nameSection}`}>
           <div className={`${styles.formGroup}`}>

@@ -23,9 +23,11 @@ const userSchema = new mongoose.Schema({
   guid: {
     required: true,
     type: String,
+    unique: true
   },
   username: {
-    required: false,
+    required: true,
+    unique: false,
     type: String,
     validate: {
       /**
@@ -91,6 +93,23 @@ const userSchema = new mongoose.Schema({
     type: String,
     minLength: 10,
     maxLength: 256
+  },
+  isVerified: {
+    required: true,
+    type: Boolean,
+    default: false
+  },
+  verificationToken: {
+    required: true,
+    type: String
+  },
+  verificationTokenExpires: {
+    required: true,
+    type: Number
+  },
+  resetPasswordToken: {
+    required: false,
+    type: String
   }
 }, {
   timestamps: true,
@@ -109,7 +128,7 @@ const userSchema = new mongoose.Schema({
   }
 })
 
-export default mongoose.model('User', userSchema)
+export default mongoose.models.User || mongoose.model('User', userSchema);
 
 /**
  * A virtual property is a property that is not persisted to the database, but can be computed
