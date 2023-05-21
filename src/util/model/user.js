@@ -128,7 +128,7 @@ const userSchema = new mongoose.Schema({
   }
 })
 
-export default mongoose.models.User || mongoose.model('User', userSchema);
+export default mongoose.model('User', userSchema);
 
 /**
  * A virtual property is a property that is not persisted to the database, but can be computed
