@@ -20,25 +20,25 @@ const configuration = new Configuration({
 const isDevelopment = process.env.NODE_ENV === 'development';
 const MOCK_RESPONSE = false;
 
-async function getRequestBody(req: NextApiRequest): Promise<QueryData> {
-  return new Promise((resolve, reject) => {
-    let data = '';
-    req.on('data', (chunk: any) => {
-      data += chunk;
-    });
-    req.on('end', () => {
-      try {
-        const body = querystring.parse(data);
-        resolve({subject: body.subject, amount: body.amount});
-      } catch (error) {
-        reject(error);
-      }
-    });
-    req.on('error', (error: any) => {
-      reject(error);
-    });
-  });
-}
+// async function getRequestBody(req: NextApiRequest): Promise<QueryData> {
+//   return new Promise((resolve, reject) => {
+//     let data = '';
+//     req.on('data', (chunk: any) => {
+//       data += chunk;
+//     });
+//     req.on('end', () => {
+//       try {
+//         const body = querystring.parse(data);
+//         resolve({subject: body.subject, amount: body.amount});
+//       } catch (error) {
+//         reject(error);
+//       }
+//     });
+//     req.on('error', (error: any) => {
+//       reject(error);
+//     });
+//   });
+// }
 
 
 

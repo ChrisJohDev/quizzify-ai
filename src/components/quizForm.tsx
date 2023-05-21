@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Questions } from '@/util/types';
 import styles from '@/styles/quizForm.module.css';
-import Logo from "@/components/logo"
-import createPdf from "@/util/pdf";
+import Logo from "@/components/logo";
 
 type setQuizFunction = (newValue: Questions) => void;
 type setSubjectFunction = (newValue: string) => void;
