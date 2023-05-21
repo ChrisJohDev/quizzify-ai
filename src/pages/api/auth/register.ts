@@ -56,7 +56,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const connection = await connectDB();
     const UserLocal = mongoose.model('User');
 
-    // isDevelopment && console.log('\n *** [register-handler] UserLocal:', UserLocal);
+    isDevelopment && console.log('\n *** [register-handler] UserLocal:', UserLocal);
 
     // const emailExists = await User.findOne({ email });
     // const usernameExists = await User.findOne({ username });
