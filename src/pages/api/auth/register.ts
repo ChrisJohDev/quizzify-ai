@@ -56,10 +56,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const connection = await connectDB();
     const UserLocal = mongoose.model('User');
 
-    isDevelopment && console.log('\n *** [register-handler] UserLocal:', UserLocal);
+    // isDevelopment && console.log('\n *** [register-handler] UserLocal:', UserLocal);
 
-    const emailExists = await User.findOne({ email });
-    const usernameExists = await User.findOne({ username });
+    // const emailExists = await User.findOne({ email });
+    // const usernameExists = await User.findOne({ username });
 
     // const userExists = false;
 
@@ -92,16 +92,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       verificationTokenExpires
     });
 
-    // isDevelopment && console.log('\n*** [register-handler] \nuser:', user);
+    isDevelopment && console.log('\n*** [register-handler] \nuser:', user);
 
     const result = await user.save();
 
     if (result) {
+      console.log('\n*** [register-handler] \nresult:', result);
       const text = 'Account created. Please check your email for verification link. If you do not receive an email, please check your spam folder. The link will expire in 24 hours.';
       const path = PATH;
       sendVerificationEmail(email, guid, verificationToken, origin, path);
       res.status(201).json({ redirect: '/api/auth/signin', text });
-      // console.log('\n*** [register-handler] \nresult:', result);
     } else {
       throw new Error('User not created! Rejected by database.')
     }
