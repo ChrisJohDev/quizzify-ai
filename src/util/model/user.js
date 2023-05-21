@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema({
     },
     minLength: 3,
     maxLength: 256,
-    unique: true
+    unique: false
   },
   firstName: {
     required: true,
@@ -79,7 +79,7 @@ const userSchema = new mongoose.Schema({
        */
       message: props => `${props.valueOf} is not a valid email!`
     },
-    unique: true
+    unique: false
   },
   salt: {
     required: true,
