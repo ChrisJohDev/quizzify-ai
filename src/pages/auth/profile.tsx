@@ -1,27 +1,19 @@
-import React, { ChangeEvent, useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { useSession } from 'next-auth/react';
 import { IUser } from '@/util/types';
 import styles from '@/styles/profile.module.css';
-import { set } from 'mongoose';
-
-const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
-  event.preventDefault();
-  console.log('submitHandler');
-};
 
 const Profile: React.FC = () => {
   const { data: session } = useSession<boolean>();
   const user: IUser | undefined = session?.user as IUser;
   console.log('\n*** [profile] user:', user);
-  const [firstName, setFirstName] = useState<string>(user?.firstName);
-  const [lastName, setLastName] = useState<string>(user?.lastName);
-  const [email, setEmail] = useState<string>(user?.email);
+  const [firstName, setFirstName] = useState<string | undefined>(user?.firstName);
+  const [lastName, setLastName] = useState<string | undefined>(user?.lastName);
+  const [email, setEmail] = useState<string | undefined>(user?.email);
   const [firstNameOriginal,] = useState<string>(user?.password);
   const [lastNameOriginal,] = useState<string>(user?.password);
   const [emailOriginal,] = useState<string>(user?.password);
   const [updateResponse, setUpdateResponse] = useState<string>('');
-
-
 
   const resetHandler = (): void => {
     setFirstName(firstNameOriginal);
@@ -35,6 +27,7 @@ const Profile: React.FC = () => {
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const resUser: IUser = {
+      id: user?.id as string,
       firstName: firstName,
       lastName: lastName,
       email: email,

@@ -31,12 +31,13 @@ export type MultiChoiceQuestion = {
 }
 
 export interface IUser {
-  id?: string,
+  id: string,
   username?: string,
   email?: string,
   guid: string,
   firstName?: string,
   lastName?: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any,
 }
 
