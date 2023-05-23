@@ -1,15 +1,15 @@
 import React from 'react';
-import { useSession } from 'next-auth/react';
+// import { useSession } from 'next-auth/react';
 import Head from 'next/head';
-import fs from 'fs';
-import path from 'path';
 import Logo from '@/components/logo';
 import LogoName from '@/components/logoName';
 import styles from '@/styles/home.module.css'
 
 const Home: React.FC = () => {
-  const {data: session } = useSession();
-  console.log('\n*** [Home] session:', session);
+  // const {data: session, status } = useSession();
+
+  // console.log('\n*** [Home] session:', session, '\n*** [Home] status:', status);
+  // console.log('\n*** [Home] name:', session?.token?.token?.name);
   return (
     <>
       <Head>

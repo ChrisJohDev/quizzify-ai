@@ -1,11 +1,14 @@
+import React from "react";
 import Menu from "./menu";
 import Footer from "./footer";
 
-const Layout = ({ children }:{children: React.ReactNode}) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex-grow flex flex-col">
       <Menu />
-      {children}
+      <main>
+        {children}
+      </main>
       <Footer />
     </div>
   );

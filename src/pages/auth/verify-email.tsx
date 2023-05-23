@@ -1,9 +1,9 @@
 import { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult } from 'next/types';
-import { connectDB } from '@/util/db/db';
-import User from '@/util/model/user';
 import { ParsedUrlQuery } from 'querystring';
 import Link from 'next/link';
 import { useEffect } from 'react';
+import { userSchema } from '@/util/model/user';
+import mongoose from 'mongoose';
 
 const isDevelopment = true;
 
@@ -18,13 +18,14 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   const { token, id } = context.query;
   isDevelopment && console.log('\n*** [verify-email-getServerSideProps] token:', token, '\n*** [verify-email-getServerSideProps] id:', id);
   try {
-    await connectDB();
-    const user = await User.findOne({ verificationToken: token });
+    const UserLocal = mongoose.models.User || mongoose.model('User', userSchema);
+    const user = await UserLocal.findOne({ verificationToken: token });
     isDevelopment && console.log('\n*** [verify-email-getServerSideProps] user:', user);
     if (user && user.guid === id) {
       isDevelopment && console.log('\n*** [verify-email-getServerSideProps] user:', user.guid, '\n*** [verify-email-getServerSideProps] id:', id);
       user.verified = true;
-      const response = await User.findOneAndUpdate({ verificationToken: token }, { isVerified: true });
+      user.verificationToken = '';
+      const response = await UserLocal.findOneAndUpdate({ guid: user.guid}, { isVerified: true, verificationToken: '' }, {new: true});
       isDevelopment && console.log('\n*** [verify-email-getServerSideProps] response.isVerified:', response.isVerified);
       if (response.isVerified) {
         return { props: { ok: true } };

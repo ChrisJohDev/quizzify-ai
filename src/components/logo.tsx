@@ -7,7 +7,7 @@ type LogoProps = ImageProps & {
   height?: number;
 }
 
-const Logo: React.FC<LogoProps> = ({className, width, height,  ...res}) => {
+const Logo: React.FC<LogoProps> = ({className, width, height}) => {
   return <Image src="/QAI-Logo.png" className={`${className}`} alt="Q-AI Logo" width={`${width || 50}`} height={`${height || 50}`} priority />
 }
 

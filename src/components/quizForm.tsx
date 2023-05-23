@@ -3,7 +3,9 @@ import { Questions } from '@/util/types';
 import styles from '@/styles/quizForm.module.css';
 import Logo from "@/components/logo";
 
+// eslint-disable-next-line no-unused-vars
 type setQuizFunction = (newValue: Questions) => void;
+// eslint-disable-next-line no-unused-vars
 type setSubjectFunction = (newValue: string) => void;
 
 interface QuizFormProps {
