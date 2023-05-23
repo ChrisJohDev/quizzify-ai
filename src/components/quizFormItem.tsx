@@ -1,6 +1,8 @@
+interface QuizFormItemProps {
+  question: string;
+}
 
-
-const QuizFormItem = (props: any) => {
+const QuizFormItem = (props: QuizFormItemProps) => {
   const { question } = props;
   return (
     <div className="question-item">

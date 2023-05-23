@@ -1,14 +1,9 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import Head from 'next/head'
-import Link from 'next/link'
+import React from 'react';
 import styles from '@/styles/quizzes.module.css'
 import QuizForm from '@/components/quizForm'
 import { useState } from 'react'
 import { Questions } from '@/util/types';
 import QuizQuestions from '@/components/quizQuestions';
-
-const inter = Inter({ subsets: ['latin'] })
 
 const Quizzes: React.FC = () => {
   const [quiz, setQuiz] = useState<Questions>({questions:[], subject:''});

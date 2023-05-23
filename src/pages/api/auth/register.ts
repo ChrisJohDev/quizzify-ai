@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
-import { connectDB } from '@/util/db/db';
-import User from '@/util/model/user';
+// import { connectDB } from '@/util/db/db';
+import { userSchema } from '@/util/model/user';
 import mongoose from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
 import sgMail from '@sendgrid/mail';
@@ -10,7 +10,7 @@ import sgMail from '@sendgrid/mail';
 const isDevelopment = true;
 
 // Sending verification email through Sendgrid API
-const PATH = '/verify-email';
+const PATH = '/auth/verify-email';
 
 const sendVerificationEmail = async (email: string, guid: string, verificationToken: string, origin: string, path: string) => {
   isDevelopment && console.log('\n*** [register-sendVerificationEmail] - email:', email, 'guid:', guid);
@@ -32,8 +32,7 @@ const sendVerificationEmail = async (email: string, guid: string, verificationTo
   console.log('\n*** [register-sendVerificationEmail] - msg:', msg);
   sgMail
     .send(msg)
-    .then((data) => {
-      // isDevelopment && console.log('\n *** [register-sendVerificationEmail] Email sent \ndata:', data);
+    .then(() => {
       return { ok: true };
     })
     .catch((error) => {
@@ -42,6 +41,8 @@ const sendVerificationEmail = async (email: string, guid: string, verificationTo
     // If we get here something went wrong.
     return { ok: false };
 }
+
+
 
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -53,8 +54,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // isDevelopment && console.log('\n*** [register-handler] \nusername:', username, '\nfirstName:', firstName, '\nlastName:', lastName, '\nemail:', email, '\npword:', pword, '\nconfirm_pword:', confirm_pword);
 
   try {
-    const connection = await connectDB();
-    const UserLocal = mongoose.model('User');
+    if(pword !== confirm_pword){
+      throw new Error('Passwords do not match.');
+    }
+    const UserLocal = mongoose.models.User || mongoose.model('User', userSchema);
 
     isDevelopment && console.log('\n *** [register-handler] UserLocal:', UserLocal);
 
@@ -101,12 +104,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const text = 'Account created. Please check your email for verification link. If you do not receive an email, please check your spam folder. The link will expire in 24 hours.';
       const path = PATH;
       sendVerificationEmail(email, guid, verificationToken, origin, path);
-      res.status(201).json({ redirect: '/api/auth/signin', text });
+      res.status(201).json({ redirect: '/', text });
     } else {
       throw new Error('User not created! Rejected by database.')
     }
-  } catch (err: any) {
-    console.error(err.message);
+  } catch (err: unknown) {
+    if(err instanceof Error){
+      console.error(err.message);
+    } else {
+      console.error(String(err));
+    }    
     res.status(500).send('Server Error');
   } finally {
     console.log('\n*** [register-handler] - finally');

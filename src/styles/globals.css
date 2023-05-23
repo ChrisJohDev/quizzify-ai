@@ -52,10 +52,19 @@ code {
 footer {
   color: navy;
 }
-/* #__next {
+
+main {
   display: flex;
   flex-direction: column;
-  height:100vh;
-  text-align: left;
+  align-items: center;
+  justify-content: flex-start;
   background: transparent;
-} */
+  padding: 2rem 0;
+}
+
+h1{
+  font-size: 3rem;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}

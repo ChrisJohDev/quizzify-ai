@@ -4,14 +4,17 @@
     "fname",
     "jspdf",
     "lname",
+    "nextauth",
     "openai",
     "pword",
     "quizzify",
     "SENDGRID",
     "signin",
+    "signout",
     "signup",
     "tailwindcss",
     "uuidv",
+    "Vasco",
     "xheight",
     "xwidth"
   ]

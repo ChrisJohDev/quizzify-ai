@@ -1,7 +1,3 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import Head from 'next/head'
-const inter = Inter({ subsets: ['latin'] })
 import styles from '@/styles/pricing.module.css'
 
 export default function Pricing() {

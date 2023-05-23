@@ -1,8 +1,4 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import Head from 'next/head'
 import styles from '@/styles/about.module.css'
-const inter = Inter({ subsets: ['latin'] })
 
 export default function About() {
   return (
@@ -30,7 +26,7 @@ export default function About() {
         markets and expand their offerings, creating new features and improving
         their algorithms to make the system even more accurate and reliable.
         Before long, Quizzify-AI had become a major player in the artificial
-        intelligence quizz market.
+        intelligence quiz market.
       </p>
       <p className={styles.paragraph}>
         Today, Quizzify-AI is used by millions of people around the world. Its
@@ -51,7 +47,7 @@ export default function About() {
       <p className={styles.paragraph}>
         In conclusion, Quizzify-AI is a testament to the power of innovation and
         hard work. What started as a small student project has become a major
-        player in the artificial intelligence quizz market, changing the way
+        player in the artificial intelligence quiz market, changing the way
         people take quizzes and learn about the world around them. As the
         platform continues to grow and evolve, there is no doubt that it will
         continue to make a lasting impact on the world of artificial

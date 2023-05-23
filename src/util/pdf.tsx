@@ -16,13 +16,7 @@ const createPdf = (json: Question[], fileName: string, subject: string) => {
 
   const file = fileName === '' ? 'quiz.pdf' : fileName + '.pdf';
   const doc = new jsPDF();
-  // splitTextToSize takes your string and turns it in to an array of strings,
-  // each of which can be displayed within the specified maxLineWidth.
-  const textLines = doc
-    .setFont("helvetica")
-    .setFontSize(fontSize);
-    // .splitTextToSize(text, maxLineWidth);
-
+  
   const headline = doc.setFont('serif', 'bold').setFontSize(fontSize * 2).splitTextToSize(`Your quiz on the subject of ${subject}`, maxLineWidth);
   doc.text(headline, 105, oneLineHeight, { align: 'center' });
   let lineAdjust= 3;
@@ -37,13 +31,13 @@ const createPdf = (json: Question[], fileName: string, subject: string) => {
       text[1] = '.   ' + text[1];
     }
     // console.log('\n*** [createPdf] text:', text, '\ni:', i, '\nlineAdjust:', lineAdjust);
-  };
+  }
   doc.setFont('helvetica', 'normal').setFontSize(fontSize * 0.6).text([`A quiz by Quizzify-AI`, 'www.quizzify-ai.com'], 105, oneLineHeight * (questions.length + lineAdjust + 3), { align: 'center' });
   doc.addPage();
   doc.setFont('helvetica', 'normal').setFontSize(fontSize).text(`Answers: on ${subject}`, 30, (oneLineHeight))
   for (let i = 0; i < answers.length; i++) {
     doc.text(`${i + 1}) ` + answers[i], 30, 2 * oneLineHeight + (i * 10));
-  };
+  }
   doc.setFont('helvetica', 'normal').setFontSize(fontSize * 0.6).text([`A quiz by Quizzify-AI`, 'www.quizzify-ai.com'], 105, oneLineHeight * (questions.length + lineAdjust + 3), { align: 'center' });
   doc.save(file);
 }

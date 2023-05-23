@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Question, Questions } from '@/util/types';
+import React from 'react';
+import { Questions } from '@/util/types';
 import QuizQuestionsItem from './quizQuestionsItem';
 import styles from '@/styles/quizQuestions.module.css';
 import createPdf from '@/util/pdf';
@@ -7,7 +7,7 @@ import createPdf from '@/util/pdf';
 interface QuizQuestionsProps {
   subject: string,
   quiz: Questions
-};
+}
 
 const QuizQuestions: React.FC<QuizQuestionsProps> = ({ quiz, subject }) => {
   // console.log('\n*** [quizQuestions.tsx]  quiz: ', quiz);
