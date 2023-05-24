@@ -10,7 +10,7 @@ const Quizzes: React.FC = () => {
   const [subject, setSubject]= useState<string>('');
 
   return (
-    <div className={`container mx-auto flex flex-col flex-fill items-center ${styles.quizPage}`}>
+    <div className={`container mx-auto flex flex-col flex-fill items-center items-center ${styles.quizPage}`}>
       {
         quiz.questions.length < 1
           ? <>
