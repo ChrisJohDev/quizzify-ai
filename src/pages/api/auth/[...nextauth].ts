@@ -28,9 +28,13 @@ const authOptions: NextAuthOptions = {
       async authorize (credentials): Promise<IUser | null> {
         // console.log("\n*** [auth] credentials:", credentials);
         try {
+          console.log("\n*** [...nextauth][auth] credentials:", credentials);
+          console.log("\n*** [...nextauth][auth] mongoose.models.User:", mongoose.models.User);
           const UserLocal: Model<Document & IUser> =
             mongoose.models.User || mongoose.model("User", userSchema);
+          console.log("\n*** [...nextauth][auth] UserLocal:", String(UserLocal));
           const email = credentials?.email;
+          console.log("\n*** [...nextauth][auth] email:", email);
           const user = await UserLocal.findOne({ email }).select("+hashedPassword");
           
           console.log("\n*** [...nextauth][auth] user:", user);
