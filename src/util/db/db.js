@@ -7,11 +7,15 @@
 
 import mongoose from 'mongoose'
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 const url = process.env.ATLAS_AUTH_CONNECTION || 'mongodb://localhost:27017'
 const connection = {};
 
 async function connectDB() {
+  isDevelopment &&  console.log('\n *** [db.js] connectDB url:', url, '\nNODE_ENV:', process.env.NODE_ENV, '\nATLAS_AUTH_CONNECTION:', process.env.ATLAS_AUTH_CONNECTION);
   if (connection.isConnected) {
+    console.log('\n*** [db.js] Using existing database connection');
     // Use existing database connection
     return;
   }
