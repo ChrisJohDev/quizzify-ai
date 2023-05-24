@@ -38,7 +38,7 @@ const Profile: React.FC = () => {
     };
 
     try {
-      const res = await fetch('/api/auth/updateUser', {
+      const res = await fetch('/api/auth/update-user', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
