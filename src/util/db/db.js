@@ -11,7 +11,9 @@ const url = process.env.ATLAS_AUTH_CONNECTION || 'mongodb://localhost:27017'
 const connection = {};
 
 async function connectDB() {
+  console.log('\n *** [db.js] connectDB url:', url);
   if (connection.isConnected) {
+    console.log('\n*** [db.js] Using existing database connection');
     // Use existing database connection
     return;
   }

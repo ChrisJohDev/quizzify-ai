@@ -33,6 +33,7 @@ const authOptions: NextAuthOptions = {
           const email = credentials?.email;
           const user = await UserLocal.findOne({ email }).select("+hashedPassword");
           
+          console.log("\n*** [...nextauth][auth] user:", user);
 
           if (!user) {
             throw new Error("User not found");
@@ -59,12 +60,17 @@ const authOptions: NextAuthOptions = {
             role: user.role || 'user'
           };
           
-          console.log("\n*** [auth] pubUser:", pubUser);
+          console.log("\n*** [...nextauth][auth] pubUser:", pubUser);
 
           return pubUser;
 
-        } catch (error) {
-          console.log(error);
+        } catch (err: unknown) {
+          if(err instanceof Error){
+            console.error('\n*** [...nextauth][auth] err:', err.message);
+          } else {
+            console.error('\n*** [...nextauth][auth] err:', String(err))
+          }
+          
         }
         return null;
       },
@@ -86,8 +92,8 @@ const authOptions: NextAuthOptions = {
       return session;
     },
     async redirect({ url, baseUrl }) {
-      console.log("\n*** [auth] signOut url:", url);
-      console.log("\n*** [auth] signOut baseUrl:", baseUrl);
+      console.log("\n*** [...nextauth][callbacks-redirect] url:", url);
+      console.log("\n*** [...nextauth][callbacks-redirect] baseUrl:", baseUrl);
       return Promise.resolve('/');
     },
   },
