@@ -1,5 +1,5 @@
 import Logo from "./logo";
-import styles from '@/styles/Loading.module.css';
+import styles from '@/styles/loading.module.css';
 
 interface LoadingProps {
   text: string;
