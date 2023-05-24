@@ -10,6 +10,7 @@ import connectDB from "@/util/db/db";
 
 const authOptions: NextAuthOptions = {
   pages: {
+    signIn: "/auth/signin",
     error: "/auth/error",
     verifyRequest: "/auth/verify-request",
   },
@@ -103,7 +104,16 @@ const authOptions: NextAuthOptions = {
       console.log("\n*** [...nextauth][callbacks-redirect] baseUrl:", baseUrl);
       return Promise.resolve('/');
     },
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log("\n*** [...nextauth][callbacks-signin] user:", user);
+      console.log("\n*** [...nextauth][callbacks-signin] account:", account);
+      console.log("\n*** [...nextauth][callbacks-signin] profile:", profile);
+      console.log("\n*** [...nextauth][callbacks-signin] email:", email);
+      console.log("\n*** [...nextauth][callbacks-signin] credentials:", credentials);
+      return true;
+    }
   },
 };
 
 export default NextAuth(authOptions);
+export { authOptions };
