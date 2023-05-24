@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Questions } from '@/util/types';
-import styles from '@/styles/quizForm.module.css';
-import Logo from "@/components/logo";
+
+import Loading from './loading';
 
 // eslint-disable-next-line no-unused-vars
 type setQuizFunction = (newValue: Questions) => void;
@@ -73,10 +73,7 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, subject }) => 
       {
         loading
           ?
-          <>
-            <p>Loading your quiz about {subject}...</p>
-            <div className={`spinner-border text-primary ${styles.loader}`} role="status"><Logo width={60} src={''} alt={''} /></div >
-          </>
+            <Loading text={`Loading your quiz about ${subject}...`} />
           :
           <form className="mx-auto" onSubmit={handleSubmit}>
             {/* // <form className="mx-auto" action="/quizResponse" method="POST"> */}
