@@ -6,6 +6,7 @@ import {userSchema } from "@/util/model/user";
 import bcrypt from "bcrypt";
 import { IUser } from "@/util/types";
 import {Model, Document} from "mongoose";
+import connectDB from "@/util/db/db";
 
 const authOptions: NextAuthOptions = {
   pages: {
@@ -28,6 +29,8 @@ const authOptions: NextAuthOptions = {
       async authorize (credentials): Promise<IUser | null> {
         // console.log("\n*** [auth] credentials:", credentials);
         try {
+          console.log("\n*** [...nextauth][auth] authorize -");
+          await connectDB();
           console.log("\n*** [...nextauth][auth] credentials:", credentials);
           console.log("\n*** [...nextauth][auth] mongoose.models.User:", mongoose.models.User);
           const UserLocal: Model<Document & IUser> =
