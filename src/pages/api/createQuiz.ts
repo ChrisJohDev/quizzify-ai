@@ -1,44 +1,40 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Configuration, OpenAIApi } from "openai";
-import * as querystring from "querystring";
-import { QueryData, Questions } from '@/util/types';
-import { create } from "domain";
 import { createQueryString, decodeResponseData } from "@/util/stringHandlers";
-import { mockResponseApiData, mockResponseApiData2 } from "@/util/mockData";
+import { mockResponseApiData2 } from "@/util/mockData";
 
 // export const config = {
 //   runtime: 'edge'
 // }
 
 /** @type {*} */
-const configuration = new Configuration({
-  // cspell: disable-next-line
-  organization: "org-dMNPBvDst81fpwfcz8Fhj1b2",
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// const configuration = new Configuration({
+//   // cspell: disable-next-line
+//   organization: "org-dMNPBvDst81fpwfcz8Fhj1b2",
+//   apiKey: process.env.OPENAI_API_KEY,
+// });
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 const MOCK_RESPONSE = false;
 
-async function getRequestBody(req: NextApiRequest): Promise<QueryData> {
-  return new Promise((resolve, reject) => {
-    let data = '';
-    req.on('data', (chunk: any) => {
-      data += chunk;
-    });
-    req.on('end', () => {
-      try {
-        const body = querystring.parse(data);
-        resolve({subject: body.subject, amount: body.amount});
-      } catch (error) {
-        reject(error);
-      }
-    });
-    req.on('error', (error: any) => {
-      reject(error);
-    });
-  });
-}
+// async function getRequestBody(req: NextApiRequest): Promise<QueryData> {
+//   return new Promise((resolve, reject) => {
+//     let data = '';
+//     req.on('data', (chunk: any) => {
+//       data += chunk;
+//     });
+//     req.on('end', () => {
+//       try {
+//         const body = querystring.parse(data);
+//         resolve({subject: body.subject, amount: body.amount});
+//       } catch (error) {
+//         reject(error);
+//       }
+//     });
+//     req.on('error', (error: any) => {
+//       reject(error);
+//     });
+//   });
+// }
 
 
 

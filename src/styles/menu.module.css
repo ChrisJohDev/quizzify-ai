@@ -1,0 +1,27 @@
+
+.dropdownMenu {
+  position: absolute;
+  min-width: 90px;
+}
+
+
+.dropdownMenu:hover {
+  display: block;
+}
+
+.dropdownMenu li {
+  position: relative;
+}
+.dropdownMenu .dropdown-submenu {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: -7px;
+}
+.dropdownMenu .dropdown-submenu-left {
+  right: 100%;
+  left: auto;
+}
+.dropdownMenu > li:hover > .dropdown-submenu {
+  display: block;
+}

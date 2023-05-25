@@ -1,26 +1,33 @@
-import React, { useState } from 'react';
-import { Question } from '@/util/types';
+import React from 'react';
+import { Questions } from '@/util/types';
 import QuizQuestionsItem from './quizQuestionsItem';
 import styles from '@/styles/quizQuestions.module.css';
+import createPdf from '@/util/pdf';
 
 interface QuizQuestionsProps {
-  quiz: Question[];
+  subject: string,
+  quiz: Questions
 }
 
-const QuizQuestions: React.FC<QuizQuestionsProps> = ({ quiz }) => {
-  console.log('\n*** [quizQuestions.tsx]  quiz: ', quiz);
+const QuizQuestions: React.FC<QuizQuestionsProps> = ({ quiz, subject }) => {
+  // console.log('\n*** [quizQuestions.tsx]  quiz: ', quiz);
+
+  const handleCreatePdf = () => {
+    createPdf(quiz.questions, 'quiz', subject);
+  }
 
   return (
     <div className={styles.wrapper}>
+      <input type="button" onClick={handleCreatePdf} value="Create PDF" />
       {
-        quiz.map((question, index) => {
+        quiz.questions.map((question, index) => {
           const qNumber: number = index + 1;
           return (
-            <div key={index} className={styles.quizQuestion}>
-              {index !== 0 && <hr />}
-              <h2>Question {qNumber}</h2>
-              <QuizQuestionsItem question={question} />
-            </div>
+              <div key={index} className={styles.quizQuestion}>
+                {index !== 0 && <hr />}
+                <h2>Question {qNumber}</h2>
+                <QuizQuestionsItem question={question} />
+              </div>
           );
         })
       }

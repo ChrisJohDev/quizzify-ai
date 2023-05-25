@@ -1,0 +1,64 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wrapper form{
+  margin-top: 2rem;
+}
+
+.wrapper form div {
+  display: grid;
+  grid-template-columns: 
+  1fr 1fr,
+  1fr 1fr;
+}
+
+.wrapper form div:last-child{
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrapper div+div{
+  margin-top: 1rem;
+}
+
+.wrapper input{
+  padding: 0.2rem 0.5rem;
+}
+
+.wrapper button {
+  padding: 0.2rem 0.5rem;
+  border: 1px solid #000;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+.wrapper button[type="submit"] {
+  background-color: #029c0f;
+  color: #fff;
+}
+
+.wrapper button[type="submit"]:hover {
+  background-color: #02870d;
+}
+.wrapper button[type="reset"] {
+  background-color: #c90000;
+  color: #fff;
+}
+
+.wrapper button[type="reset"]:hover {
+  background-color: #a80000;
+}
+
+.profileMessage {
+  flex:1;
+  min-height: 1.5rem;
+}
+
+.profileMessage p{
+  min-height: 2rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.2rem;
+}
