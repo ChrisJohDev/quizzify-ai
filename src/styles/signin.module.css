@@ -75,3 +75,30 @@
 .wrapper a {
   text-decoration: underline;
 }
+
+.signinError {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #161b22;
+  color: #a80000;
+  border-color: rgba(0,0,0,.1);
+  border-radius: 0.5rem;
+  border-width: 1.6px;
+  border-style: outset;
+  margin: 0 0 .75rem;
+  padding: .75rem 1rem;
+}
+
+.signinError h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.signinError p {
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
+  color: #ccc;
+}
