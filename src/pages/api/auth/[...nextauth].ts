@@ -1,6 +1,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
 import mongoose from "mongoose";
 import {userSchema } from "@/util/model/user";
 import bcrypt from "bcrypt";
@@ -10,6 +11,7 @@ import connectDB from "@/util/db/db";
 
 const authOptions: NextAuthOptions = {
   pages: {
+    signIn: "/auth/signin",
     error: "/auth/error",
     verifyRequest: "/auth/verify-request",
   },
@@ -27,7 +29,7 @@ const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize (credentials): Promise<IUser | null> {
-        // console.log("\n*** [auth] credentials:", credentials);
+        console.log("\n*** [auth] credentials:", credentials);
         try {
           console.log("\n*** [...nextauth][auth] authorize -");
           await connectDB();
@@ -51,7 +53,7 @@ const authOptions: NextAuthOptions = {
             credentials!.password,
             user.hashedPassword
           );
-          // console.log("\n*** [auth] match:", match, "\nuser:", user);
+          console.log("\n*** [auth] match:", match, "\nuser:", user);
           if (!match) {
             throw new Error("Invalid credentials");
           }
@@ -86,6 +88,10 @@ const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_ID || "",
       clientSecret: process.env.GOOGLE_SECRET || ""
     }),
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_ID || "",
+      clientSecret: process.env.FACEBOOK_SECRET || ""
+    })
   ],
   callbacks: {
     jwt: async ({ token, user }) => {
@@ -103,7 +109,16 @@ const authOptions: NextAuthOptions = {
       console.log("\n*** [...nextauth][callbacks-redirect] baseUrl:", baseUrl);
       return Promise.resolve('/');
     },
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log("\n*** [...nextauth][callbacks-signin] user:", user);
+      console.log("\n*** [...nextauth][callbacks-signin] account:", account);
+      console.log("\n*** [...nextauth][callbacks-signin] profile:", profile);
+      console.log("\n*** [...nextauth][callbacks-signin] email:", email);
+      console.log("\n*** [...nextauth][callbacks-signin] credentials:", credentials);
+      return true;
+    }
   },
 };
 
 export default NextAuth(authOptions);
+export { authOptions };

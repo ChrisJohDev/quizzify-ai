@@ -5,6 +5,7 @@ import { userSchema } from '@/util/model/user';
 import mongoose from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
 import sgMail from '@sendgrid/mail';
+import connectDB from '@/util/db/db';
 
 // Change to false for production build.
 const isDevelopment = true;
@@ -13,12 +14,12 @@ const isDevelopment = true;
 const PATH = '/auth/verify-email';
 
 const sendVerificationEmail = async (email: string, guid: string, verificationToken: string, origin: string, path: string) => {
-  isDevelopment && console.log('\n*** [register-sendVerificationEmail] - email:', email, 'guid:', guid);
+  isDevelopment && console.log('\n*** [register-sendVerificationEmail] - email:', email, 'guid:', guid, 'verificationToken:', verificationToken, 'origin:', origin, 'path:', path);
 
-  const apiKey = process.env.SENDGRID_API_KEY || '';
+  // const apiKey = process.env.SENDGRID_API_KEY || '';
   const fromEmail = process.env.SENDGRID_FROM_EMAIL || '';
   // console.log('\n*** [register-sendVerificationEmail] - \napiKey:', apiKey, '\nfromEmail:', fromEmail);
-  sgMail.setApiKey(apiKey);
+  sgMail.setApiKey(String(process.env.SENDGRID_API_KEY));
 
   const verificationURL = `${origin}${path}?token=${verificationToken}&id=${guid}`;
   const msg = {
@@ -28,18 +29,29 @@ const sendVerificationEmail = async (email: string, guid: string, verificationTo
     text: `You need to verify your email address to complete registration. Please click on the following link, or paste this into your browser to complete the process:\n\n${verificationURL}\n\nThis link will expire in 24 hours.\n`,
     html: `<p>You need to verify your email address to complete registration. Please click on the following link, or paste this into your browser to complete the process:</p><div><button><a href="${verificationURL}">Verify Email</a></button></div><p>This link will expire in 24 hours.</p>`
   }
-  
+
   console.log('\n*** [register-sendVerificationEmail] - msg:', msg);
-  sgMail
-    .send(msg)
-    .then(() => {
-      return { ok: true };
-    })
-    .catch((error) => {
-      console.error('\n*** [register-sendVerificationEmail] error:', error);
-    });
-    // If we get here something went wrong.
-    return { ok: false };
+  // sgMail
+  //   .send(msg)
+  //   .then(() => {
+  //     return { ok: true };
+  //   })
+  //   .catch((error) => {
+  //     console.error('\n*** [register-sendVerificationEmail] error:', error);
+  //   });
+
+  // (async () => {
+  try {
+    const mailResponse = await sgMail.send(msg);
+    console.log('\n*** [register-sendgrid] mailResponse:', mailResponse);
+    return Promise.resolve({ ok: true });
+  } catch (err) {
+    console.error('\n*** [register-sendgrid] err:', err);
+  }
+  console.log('\n*** [register-sendgrid] - after try/catch which shouldn\'t be possible if we don\'t encounter an error.');
+  // })();
+  // If we get here something went wrong.
+  return Promise.resolve({ ok: false });
 }
 
 
@@ -47,14 +59,16 @@ const sendVerificationEmail = async (email: string, guid: string, verificationTo
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   console.log('\n*** [register-handler] -');
-  
-  const { username, firstName, lastName, email, pword, confirm_pword } = req.body;
-  const origin  = req.headers.origin ? req.headers.origin : 'http://localhost:3000';
-
-  // isDevelopment && console.log('\n*** [register-handler] \nusername:', username, '\nfirstName:', firstName, '\nlastName:', lastName, '\nemail:', email, '\npword:', pword, '\nconfirm_pword:', confirm_pword);
 
   try {
-    if(pword !== confirm_pword){
+    await connectDB();
+    const { username, firstName, lastName, email, pword, confirm_pword } = req.body;
+    const origin = req.headers.origin ? req.headers.origin : 'http://localhost:3000';
+
+    // isDevelopment && console.log('\n*** [register-handler] \nusername:', username, '\nfirstName:', firstName, '\nlastName:', lastName, '\nemail:', email, '\npword:', pword, '\nconfirm_pword:', confirm_pword);
+
+
+    if (pword !== confirm_pword) {
       throw new Error('Passwords do not match.');
     }
     const UserLocal = mongoose.models.User || mongoose.model('User', userSchema);
@@ -103,20 +117,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       console.log('\n*** [register-handler] \nresult:', result);
       const text = 'Account created. Please check your email for verification link. If you do not receive an email, please check your spam folder. The link will expire in 24 hours.';
       const path = PATH;
-      sendVerificationEmail(email, guid, verificationToken, origin, path);
+      const sgResponse = await sendVerificationEmail(email, guid, verificationToken, origin, path);
+      console.log('\n*** [register-handler] \nsgResponse:', sgResponse);
       res.status(201).json({ redirect: '/', text });
     } else {
       throw new Error('User not created! Rejected by database.')
     }
   } catch (err: unknown) {
-    if(err instanceof Error){
+    if (err instanceof Error) {
       console.error(err.message);
     } else {
       console.error(String(err));
-    }    
+    }
     res.status(500).send('Server Error');
-  } finally {
-    console.log('\n*** [register-handler] - finally');
   }
 }
 
