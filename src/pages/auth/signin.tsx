@@ -1,10 +1,11 @@
 import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import { getProviders, signIn } from "next-auth/react"
+import { getCsrfToken, getProviders, signIn } from "next-auth/react"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "../api/auth/[...nextauth]";
 import styles from '@/styles/signin.module.css'
+import Link from 'next/link'
 
-export default function SignIn({ providers }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function SignIn({ providers, csrfToken }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   console.log('\n*** [signin] providers:', providers);
   console.log('\n*** [signin] signIn:', signIn)
   return (
@@ -15,6 +16,7 @@ export default function SignIn({ providers }: InferGetServerSidePropsType<typeof
           {provider.id === 'credentials'
             ? <div>
               <form method="post" action="/api/auth/callback/credentials">
+              <input name='csrfToken' type='hidden' defaultValue={csrfToken}/>
                 <div>
                   <label>
                   Email:<br />
@@ -42,12 +44,16 @@ export default function SignIn({ providers }: InferGetServerSidePropsType<typeof
           }
         </div>
       ))}
+      <div>
+        <p>Don&rsquo;t have an account? Sign up <Link href="/auth/signup">here</Link>!</p>
+      </div>
     </div>
   )
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getServerSession(context.req, context.res, authOptions);
+  const csrfToken = await getCsrfToken(context);
 
   // If the user is already logged in, redirect.
   // Note: Make sure not to redirect to the same page
@@ -59,6 +65,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const providers = await getProviders();
 
   return {
-    props: { providers: providers ?? [] },
+    props: { providers: providers ?? [], csrfToken },
   }
 }

@@ -66,3 +66,12 @@
   border-width: 1.6px;
   border-style: outset;
 }
+
+.wrapper > div:last-child {
+  border-top:rgba(45, 45, 45, 0.8) 1px solid;
+  margin-top: 2rem;
+  padding-top: 0.5rem;
+}
+.wrapper a {
+  text-decoration: underline;
+}

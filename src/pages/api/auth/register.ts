@@ -28,7 +28,7 @@ const sendVerificationEmail = async (email: string, guid: string, verificationTo
     text: `You need to verify your email address to complete registration. Please click on the following link, or paste this into your browser to complete the process:\n\n${verificationURL}\n\nThis link will expire in 24 hours.\n`,
     html: `<p>You need to verify your email address to complete registration. Please click on the following link, or paste this into your browser to complete the process:</p><div><button><a href="${verificationURL}">Verify Email</a></button></div><p>This link will expire in 24 hours.</p>`
   }
-  
+
   console.log('\n*** [register-sendVerificationEmail] - msg:', msg);
   sgMail
     .send(msg)
@@ -38,8 +38,8 @@ const sendVerificationEmail = async (email: string, guid: string, verificationTo
     .catch((error) => {
       console.error('\n*** [register-sendVerificationEmail] error:', error);
     });
-    // If we get here something went wrong.
-    return { ok: false };
+  // If we get here something went wrong.
+  return { ok: false };
 }
 
 
@@ -47,14 +47,15 @@ const sendVerificationEmail = async (email: string, guid: string, verificationTo
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   console.log('\n*** [register-handler] -');
-  
-  const { username, firstName, lastName, email, pword, confirm_pword } = req.body;
-  const origin  = req.headers.origin ? req.headers.origin : 'http://localhost:3000';
-
-  // isDevelopment && console.log('\n*** [register-handler] \nusername:', username, '\nfirstName:', firstName, '\nlastName:', lastName, '\nemail:', email, '\npword:', pword, '\nconfirm_pword:', confirm_pword);
 
   try {
-    if(pword !== confirm_pword){
+    const { username, firstName, lastName, email, pword, confirm_pword } = req.body;
+    const origin = req.headers.origin ? req.headers.origin : 'http://localhost:3000';
+
+    // isDevelopment && console.log('\n*** [register-handler] \nusername:', username, '\nfirstName:', firstName, '\nlastName:', lastName, '\nemail:', email, '\npword:', pword, '\nconfirm_pword:', confirm_pword);
+
+
+    if (pword !== confirm_pword) {
       throw new Error('Passwords do not match.');
     }
     const UserLocal = mongoose.models.User || mongoose.model('User', userSchema);
@@ -109,11 +110,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       throw new Error('User not created! Rejected by database.')
     }
   } catch (err: unknown) {
-    if(err instanceof Error){
+    if (err instanceof Error) {
       console.error(err.message);
     } else {
       console.error(String(err));
-    }    
+    }
     res.status(500).send('Server Error');
   } finally {
     console.log('\n*** [register-handler] - finally');
