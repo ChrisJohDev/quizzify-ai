@@ -5,6 +5,7 @@ import { userSchema } from '@/util/model/user';
 import mongoose from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
 import sgMail from '@sendgrid/mail';
+import connectDB from '@/util/db/db';
 
 // Change to false for production build.
 const isDevelopment = true;
@@ -59,6 +60,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   console.log('\n*** [register-handler] -');
 
   try {
+    await connectDB();
     const { username, firstName, lastName, email, pword, confirm_pword } = req.body;
     const origin = req.headers.origin ? req.headers.origin : 'http://localhost:3000';
 
