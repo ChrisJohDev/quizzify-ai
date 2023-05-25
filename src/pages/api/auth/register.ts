@@ -13,12 +13,12 @@ const isDevelopment = true;
 const PATH = '/auth/verify-email';
 
 const sendVerificationEmail = async (email: string, guid: string, verificationToken: string, origin: string, path: string) => {
-  isDevelopment && console.log('\n*** [register-sendVerificationEmail] - email:', email, 'guid:', guid);
+  isDevelopment && console.log('\n*** [register-sendVerificationEmail] - email:', email, 'guid:', guid, 'verificationToken:', verificationToken, 'origin:', origin, 'path:', path);
 
-  const apiKey = process.env.SENDGRID_API_KEY || '';
+  // const apiKey = process.env.SENDGRID_API_KEY || '';
   const fromEmail = process.env.SENDGRID_FROM_EMAIL || '';
   // console.log('\n*** [register-sendVerificationEmail] - \napiKey:', apiKey, '\nfromEmail:', fromEmail);
-  sgMail.setApiKey(apiKey);
+  sgMail.setApiKey(String(process.env.SENDGRID_API_KEY));
 
   const verificationURL = `${origin}${path}?token=${verificationToken}&id=${guid}`;
   const msg = {
@@ -30,16 +30,26 @@ const sendVerificationEmail = async (email: string, guid: string, verificationTo
   }
 
   console.log('\n*** [register-sendVerificationEmail] - msg:', msg);
-  sgMail
-    .send(msg)
-    .then(() => {
-      return { ok: true };
-    })
-    .catch((error) => {
-      console.error('\n*** [register-sendVerificationEmail] error:', error);
-    });
+  // sgMail
+  //   .send(msg)
+  //   .then(() => {
+  //     return { ok: true };
+  //   })
+  //   .catch((error) => {
+  //     console.error('\n*** [register-sendVerificationEmail] error:', error);
+  //   });
+
+    (async () => {
+      try {
+        const mailResponse = await sgMail.send(msg);
+        console.log('\n*** [register-sendgrid] mailResponse:', mailResponse);
+        return Promise.resolve({ ok: true});
+      } catch (err) {
+        console.error('\n*** [register-sendgrid] err:', err);
+      }
+    })();
   // If we get here something went wrong.
-  return { ok: false };
+  return Promise.resolve({ ok: false });
 }
 
 
@@ -104,7 +114,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       console.log('\n*** [register-handler] \nresult:', result);
       const text = 'Account created. Please check your email for verification link. If you do not receive an email, please check your spam folder. The link will expire in 24 hours.';
       const path = PATH;
-      sendVerificationEmail(email, guid, verificationToken, origin, path);
+      const sgResponse = await sendVerificationEmail(email, guid, verificationToken, origin, path);
+      console.log('\n*** [register-handler] \nsgResponse:', sgResponse);
       res.status(201).json({ redirect: '/', text });
     } else {
       throw new Error('User not created! Rejected by database.')
@@ -116,9 +127,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       console.error(String(err));
     }
     res.status(500).send('Server Error');
-  } finally {
-    console.log('\n*** [register-handler] - finally');
-  }
+  } 
 }
 
 export default handler;
