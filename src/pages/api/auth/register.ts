@@ -40,15 +40,16 @@ const sendVerificationEmail = async (email: string, guid: string, verificationTo
   //     console.error('\n*** [register-sendVerificationEmail] error:', error);
   //   });
 
-    (async () => {
-      try {
-        const mailResponse = await sgMail.send(msg);
-        console.log('\n*** [register-sendgrid] mailResponse:', mailResponse);
-        return Promise.resolve({ ok: true});
-      } catch (err) {
-        console.error('\n*** [register-sendgrid] err:', err);
-      }
-    })();
+  // (async () => {
+  try {
+    const mailResponse = await sgMail.send(msg);
+    console.log('\n*** [register-sendgrid] mailResponse:', mailResponse);
+    return Promise.resolve({ ok: true });
+  } catch (err) {
+    console.error('\n*** [register-sendgrid] err:', err);
+  }
+  console.log('\n*** [register-sendgrid] - after try/catch which shouldn\'t be possible if we don\'t encounter an error.');
+  // })();
   // If we get here something went wrong.
   return Promise.resolve({ ok: false });
 }
@@ -129,7 +130,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       console.error(String(err));
     }
     res.status(500).send('Server Error');
-  } 
+  }
 }
 
 export default handler;
