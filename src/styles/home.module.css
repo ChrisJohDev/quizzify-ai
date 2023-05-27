@@ -1,15 +1,22 @@
-.home_h1{
-  font-size: 6rem;
-  color:blue;
-  font-family: Roboto;
-}
+
 
 .home_p{
-  font-size: 1.5rem;
+   font-size: 1.2rem;
   font-family: Roboto;
-  background: radial-gradient( lightblue 40%, blue);
+  background: transparent;
   padding: 1rem;
-  border: 5px groove blue;
-  border-radius: 50%;
   color: black;
+}
+
+.home_ul{
+  list-style: disc;
+  max-width: 55ch;
+  padding: 0 2rem;
+}
+
+.home_h3 {
+  font-size: 1.5rem;
+  max-width: 55ch;
+  border-top: 1px solid rgba(236, 236, 236, 0.4);
+  border-bottom: 1px solid rgba(236, 236, 236, 0.4);
 }

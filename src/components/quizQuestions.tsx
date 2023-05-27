@@ -19,6 +19,7 @@ const QuizQuestions: React.FC<QuizQuestionsProps> = ({ quiz, subject }) => {
   return (
     <div className={styles.wrapper}>
       <input type="button" onClick={handleCreatePdf} value="Create PDF" />
+      <hr />
       {
         quiz.questions.map((question, index) => {
           const qNumber: number = index + 1;

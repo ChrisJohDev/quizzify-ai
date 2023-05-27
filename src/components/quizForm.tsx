@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Questions } from '@/util/types';
-
 import Loading from './loading';
+import styles from '@/styles/quizForm.module.css';
 
 // eslint-disable-next-line no-unused-vars
 type setQuizFunction = (newValue: Questions) => void;
@@ -23,7 +23,13 @@ interface QuizFormProps {
 const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, subject }) => {
   const [loading, setLoading] = useState(false);
   const isDevelopment = process.env.NODE_ENV === 'development';
-  
+  const selectElem = useRef<HTMLSelectElement>(null);
+
+  useEffect(() => {
+    selectElem.current?.focus();
+  }, [])
+
+
 
   /**
    * Handles the form submission event.
@@ -47,7 +53,7 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, subject }) => 
       },
       body: json
     };
-    setSubject(subject as string);
+    setSubject(subject as string || 'General knowledge');
 
     isDevelopment && console.log('\n*** [handleSubmit] \nendpoint:', endpoint, '\njson:', json);
     try {
@@ -69,26 +75,24 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, subject }) => 
   };
 
   return (
-    <>
+    <>  
       {
         loading
           ?
-            <Loading text={`Loading your quiz about ${subject}...`} />
+          <Loading text={`Loading your quiz about ${subject || 'General knowledge'}...`} />
           :
-          <form className="mx-auto" onSubmit={handleSubmit}>
+          <form className={`mx-auto ${styles.queryForm}`} onSubmit={handleSubmit}>
             {/* // <form className="mx-auto" action="/quizResponse" method="POST"> */}
             <label htmlFor="issue">Number of questions:</label>
-            <select id="issue" name="amount">
+            <select id="issue" name="amount" ref={selectElem} >
               <option value="10">10</option>
               <option value="15">15</option>
               <option value="20">20</option>
               <option value="25">25</option>
             </select>
-            <label htmlFor="input-element">Subject:</label>
-            <input type="text" id="input-element" name="subject" placeholder='Leave blank for general knowledge' /><br />
-            {/* <label for="input-element1">Label Text:</label>
-          <textarea  id="input-element1" name="input-name1" /> <br /> */}
-            <input type="submit" value="Submit" />
+            <label htmlFor="subjectText">Subject:</label>
+            <input type="text" className={`${styles.subjectInput}`} id="subjectText" name="subject" placeholder='Leave blank for general knowledge' /><br />
+            <input type="submit" value="Submit"  />
           </form>
       }
     </>
