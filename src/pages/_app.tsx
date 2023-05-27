@@ -6,25 +6,8 @@ import { Session } from 'next-auth';
 import Head from 'next/head'
 import Layout from '@/components/layout'
 import '@/styles/globals.css'
-import connectDb from '@/util/db/db';
 import { NextApiRequest } from 'next';
 import session from 'express-session';
-
-// export default function App({ 
-//   Component, 
-//   pageProps: {session, ...pageProps} 
-// }: AppProps<{ session: Session }>) {
-//   return (
-//     <SessionProvider session={session}>
-//       <Head>
-//         <title>Quizzify-AI</title>
-//       </Head>
-//       <Layout>
-//         <Component {...pageProps} />
-//       </Layout>
-//     </SessionProvider>
-//   )
-// }
 
 type AppPropsWithSession = AppProps & {
   session: Session;
@@ -32,7 +15,6 @@ type AppPropsWithSession = AppProps & {
 
 class QuizApp extends React.Component<AppPropsWithSession> {
   static async getInitialProps({ Component, ctx }: AppContext) {
-    await connectDb();
     const pageProps = Component.getInitialProps && 
     (await Component.getInitialProps(ctx as NextPageContext));
     const req = ctx.req as NextApiRequest & { session: session.Session };

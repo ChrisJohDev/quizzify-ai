@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer className={`mx-auto flex justify-center mt-auto p-3 ${styles.footer}`}>
       <span className="mr-4"><Logo width={30} src={''} alt={''}/></span>
-      <p>Copyright &copy; {year} - Quizzify is a product by Chris Johannesson</p>
+      <p>Copyright &copy; {year} - <span className="companyName keepColor">Quizzify-AI</span> is a product by Chris Johannesson</p>
     </footer>
   )
 }
