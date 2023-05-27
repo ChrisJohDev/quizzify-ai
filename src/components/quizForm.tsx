@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Questions } from '@/util/types';
 import Loading from './loading';
 import styles from '@/styles/quizForm.module.css';
