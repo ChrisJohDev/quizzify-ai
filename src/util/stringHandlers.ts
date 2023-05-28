@@ -12,7 +12,7 @@ const createQueryString = (query: QueryData) => {
   const noQuestions = (!query?.amount || query.amount === -1) ? 5 : query.amount;
   const subject = (!query?.subject || query.subject === '') ? 'General knowledge' : query.subject;
 
-  isDevelopment && console.log('\n*** [createQueryString] \nquery:', query, '\nnoQuestions:', noQuestions, '\nsubject:', subject);
+  isDevelopment && console.log('\n*** [stringHandlers - createQueryString] \nquery:', query, '\nnoQuestions:', noQuestions, '\nsubject:', subject);
 
   return `Create a quiz with ${noQuestions} questions and answers on the subject of ${subject}, no numbering. Format: [Q: question,  A: answer]`;
 }
@@ -29,7 +29,7 @@ const createMultipleChoiceQueryString = (query: MultiChoiceQueryData) => {
   const subject = (!query?.subject || query.subject === '') ? 'General knowledge' : query.subject;
   const choices = (!query?.choices || query.choices < 3 || query.choices > 5) ? 3 : query.choices;
 
-  isDevelopment && console.log('\n*** [createMultipleChoiceQueryString] \nquery:', query, '\nnoQuestions:', noQuestions, '\nsubject:', subject, '\nchoices:', choices);
+  isDevelopment && console.log('\n*** [stringHandlers - createMultipleChoiceQueryString] \nquery:', query, '\nnoQuestions:', noQuestions, '\nsubject:', subject, '\nchoices:', choices);
 
   return `Create a multi-choice quiz with ${noQuestions} questions each with ${choices} choices on the subject of ${subject}, no numbering. Format: [Q: question,  C: choices [lower case ':'], A: answer]`
 }
@@ -41,12 +41,12 @@ const createMultipleChoiceQueryString = (query: MultiChoiceQueryData) => {
  * @return {*}  {QueryResponse} - The decoded response.
  */
 const decodeResponseData = (response: string) => {
-  isDevelopment && console.log('\n*** [decodeResponseData] \nresponse:', response);
+  isDevelopment && console.log('\n*** [stringHandlers - decodeResponseData] \nresponse:', response);
   const qAndA = response.split('Q:');
 
   const questions: Questions = {questions: [], subject: ''};
 
-  console.log('\n*** [decodeResponseData] \nqAndA:', qAndA);
+  console.log('\n*** [stringHandlers - decodeResponseData] \nqAndA:', qAndA);
 
   qAndA.forEach((question) => {
     if(question.trim().length > 0) {
@@ -56,18 +56,42 @@ const decodeResponseData = (response: string) => {
     }
   });
   
-  isDevelopment && console.log('\n*** [decodeResponseData] \nquestions:', questions);
+  isDevelopment && console.log('\n*** [stringHandlers - decodeResponseData] \nquestions:', questions);
 
   return {questions};
 
 }
 
 const decodeMultiChoiceResponseData = (response: string) => {
-isDevelopment && console.log('\n*** [decodeMultiChoiceResponseData] \nresponse:', response);
+isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \nresponse:', response);
 
-const question: MultiChoiceQuestion = {question: '', choices: [''], answer: ''};
+const qAndA = response.split('Q:');
+const questions: MultiChoiceQuestions = [];
 
-const questions: MultiChoiceQuestions = [question];
+qAndA.forEach((q, index) => {
+  const question: MultiChoiceQuestion = {question: '', choices: [''], answer: ''};
+  isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \nindex:', index, '\nq:', q);
+
+  const qNa = q.split('A:');
+  isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \nqNa:', qNa);
+  const qNc = qNa[0].split('C:');
+  isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \nqNc:', qNc);
+  const choices: Array<string> = [];
+  if (Number(index) > 0) {
+    question.question = qNc[0].trim();
+    const tmp = qNc[1].split(',');
+    tmp.forEach((c) => {
+      const cSplit = c.split(':');
+      choices.push(cSplit[1].trim());
+    });
+    question.choices = choices;
+    question.answer = qNa[1].trim();
+    isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \nindex:', index, '\nquestion:', question);
+    questions.push(question);
+  }
+});
+
+isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \nquestions:', questions);
 
 return {questions};
 }
