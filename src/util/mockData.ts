@@ -1,74 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-export const mockResponse = `1. When did the American Civil War take place?
---
-2. Who was the first president of the United States?
---
-3. What was the name of the first civilization to emerge in Mesopotamia?
---
-4. Who was the leader of Nazi Germany during World War II?
---
-5. What was the name of the first man to walk on the moon?
---
-6. Who was the first female Prime Minister of the United Kingdom?
---
-7. In what year did the United States declare its independence from Great Britain?  
---
-8. Who was the leader of the Soviet Union during the Cuban Missile Crisis?
---
-9. What was the name of the ancient Egyptian writing system?
---
-10. Who was the Roman general who famously crossed the Alps with his army in 218 BC?
---
-
-Answers:
-1. 1861-1865
-2. George Washington
-3. Sumerians
-4. Adolf Hitler
-5. Neil Armstrong
-6. Margaret Thatcher
-7. 1776
-8. Nikita Khrushchev
-9. Hieroglyphics
-10. Hannibal
-`;
-
-const sampleQuery = `Create a quiz with 10 questions and answers separated by '--' on the subject of History, no numbering. Format: [Q: question,  A: Answers]`;
-
-export const mockResponseApiData = `
-Q: Which ancient civilization built the Great Pyramids of Giza?
-A: Ancient Egyptians--
-
-Q: Who was the founder of the Mongol Empire?
-A: Genghis Khan--
-
-Q: What year did World War I begin?
-A: 1914--
-
-Q: Who painted the Mona Lisa?
-A: Leonardo da Vinci--
-
-Q: Which country was the first to launch a satellite into space?
-A: Soviet Union (Russia)--
-
-Q: What year did the United States declare its independence from Great Britain?
-A: 1776--
-
-Q: Who was the leader of the Soviet Union during World War II?
-A: Joseph Stalin--
-
-Q: Which European explorer is credited with discovering the sea route to India?
-A: Vasco da Gama--
-
-Q: What was the name of the ship that carried Charles Darwin on his voyage to the Galapagos Islands?
-A: HMS Beagle--
-
-Q: Who was the first woman to win a Nobel Prize?
-A: Marie Curie--
-`;
-
 const sampleQuery2 = `Create a quiz with 10 questions and answers on the subject of astronomy, no numbering. Format: [Q: question,  A: answer]`;
 
 export const mockResponseApiData2 = `Q: What is the closest planet to the Sun?
@@ -100,3 +32,45 @@ A: Voyager 1
 
 Q: What is the name of the space telescope launched by NASA in 1990, which has provided stunning images of distant galaxies and nebulae?
 A: Hubble Space Telescope`;
+
+const sampleQueryMultiChoice = `Create a multi-choice quiz with 10 questions each with 3 choices on the subject of Philippines, no numbering. Format: [Q: question,  C: choices [lower case ':'], A: answer]`
+
+export const mockResponseApiDataMultiChoice = `Q: Who is the national hero of the Philippines?
+C: a: Jose Rizal, b: Andres Bonifacio, c: Emilio Aguinaldo
+A: a
+
+Q: What is the capital city of the Philippines?
+C: a: Cebu City, b: Manila, c: Davao City
+A: b
+
+Q: What is the national flower of the Philippines?
+C: a: Sampaguita, b: Orchid, c: Sunflower
+A: a
+
+Q: What is the largest island in the Philippines?
+C: a: Luzon, b: Visayas, c: Mindanao
+A: a
+
+Q: Who is the current President of the Philippines as of 2021?
+C: a: Rodrigo Duterte, b: Benigno Aquino III, c: Gloria Macapagal-Arroyo
+A: a
+
+Q: What is the official language of the Philippines?
+C: a: Filipino, b: English, c: Tagalog
+A: a
+
+Q: What is the famous festival held in Cebu City every January?
+C: a: Sinulog Festival, b: Panagbenga Festival, c: Ati-Atihan Festival
+A: a
+
+Q: Which Philippine volcano is known for its perfect cone shape?
+C: a: Mayon Volcano, b: Taal Volcano, c: Mount Pinatubo
+A: a
+
+Q: Who is the first Filipino to win the Miss Universe title?
+C: a: Gloria Diaz, b: Pia Wurtzbach, c: Catriona Gray
+A: a
+
+Q: What is the traditional Filipino martial art of stick fighting called?
+C: a: Arnis, b: Eskrima, c: Kali
+A: a`;

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { createQueryString, decodeResponseData } from "@/util/stringHandlers";
-import { mockResponseApiData2 } from "@/util/mockData";
+import { mockResponseApiData2, mockResponseApiDataMultiChoice } from "@/util/mockData";
 
 // export const config = {
 //   runtime: 'edge'
@@ -14,7 +14,7 @@ import { mockResponseApiData2 } from "@/util/mockData";
 // });
 
 const isDevelopment = process.env.NODE_ENV === 'development';
-const MOCK_RESPONSE = false;
+const MOCK_RESPONSE = true;
 
 // async function getRequestBody(req: NextApiRequest): Promise<QueryData> {
 //   return new Promise((resolve, reject) => {
@@ -41,6 +41,8 @@ const MOCK_RESPONSE = false;
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   console.log('\n*** [createQuiz-handler] -');
   const body = await req.body;
+
+  isDevelopment && console.log('\n*** [createQuiz-handler] \nbody:', body);
 
   const queryString = createQueryString(body);
 

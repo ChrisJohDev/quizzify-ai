@@ -1,4 +1,6 @@
-import { QueryData, MultiChoiceQueryData, Questions } from './types';
+import { QueryData, MultiChoiceQueryData, Questions, MultiChoiceQuestion, MultiChoiceQuestions } from './types';
+
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 /**
  * Creates the query string to be sent to OpenAI API.
@@ -10,7 +12,8 @@ const createQueryString = (query: QueryData) => {
   const noQuestions = (!query?.amount || query.amount === -1) ? 5 : query.amount;
   const subject = (!query?.subject || query.subject === '') ? 'General knowledge' : query.subject;
 
-  // return `Create a quiz with ${query.amount} questions separated by '--' on the subject of ${query.subject}. Provide answers after all questions under the headline of Answers:.`;
+  isDevelopment && console.log('\n*** [createQueryString] \nquery:', query, '\nnoQuestions:', noQuestions, '\nsubject:', subject);
+
   return `Create a quiz with ${noQuestions} questions and answers on the subject of ${subject}, no numbering. Format: [Q: question,  A: answer]`;
 }
 
@@ -26,8 +29,9 @@ const createMultipleChoiceQueryString = (query: MultiChoiceQueryData) => {
   const subject = (!query?.subject || query.subject === '') ? 'General knowledge' : query.subject;
   const choices = (!query?.choices || query.choices < 3 || query.choices > 5) ? 3 : query.choices;
 
-  return `Create a quiz with ${noQuestions} questions separated by '--' on the subject of ${subject} with ${choices} alternative answers. Provide right answers after all questions under the headline of Answers:.`;
-  // const tmp = "Create a quiz with 10 multiple choice questions, 5 choices separated by '&&', right answer first on the subject of History, no numbering, no line breaks.  [Q: question, C: Choices, A: answer]";
+  isDevelopment && console.log('\n*** [createMultipleChoiceQueryString] \nquery:', query, '\nnoQuestions:', noQuestions, '\nsubject:', subject, '\nchoices:', choices);
+
+  return `Create a multi-choice quiz with ${noQuestions} questions each with ${choices} choices on the subject of ${subject}, no numbering. Format: [Q: question,  C: choices [lower case ':'], A: answer]`
 }
 
 /**
@@ -37,7 +41,7 @@ const createMultipleChoiceQueryString = (query: MultiChoiceQueryData) => {
  * @return {*}  {QueryResponse} - The decoded response.
  */
 const decodeResponseData = (response: string) => {
-  console.log('\n*** [decodeResponseData] \nresponse:', response);
+  isDevelopment && console.log('\n*** [decodeResponseData] \nresponse:', response);
   const qAndA = response.split('Q:');
 
   const questions: Questions = {questions: [], subject: ''};
@@ -52,10 +56,20 @@ const decodeResponseData = (response: string) => {
     }
   });
   
-  // console.log('\n*** [decodeResponseData] \nquestions:', questions);
+  isDevelopment && console.log('\n*** [decodeResponseData] \nquestions:', questions);
 
   return {questions};
 
 }
 
-export { createQueryString, createMultipleChoiceQueryString, decodeResponseData };
+const decodeMultiChoiceResponseData = (response: string) => {
+isDevelopment && console.log('\n*** [decodeMultiChoiceResponseData] \nresponse:', response);
+
+const question: MultiChoiceQuestion = {question: '', choices: [''], answer: ''};
+
+const questions: MultiChoiceQuestions = [question];
+
+return {questions};
+}
+
+export { createQueryString, createMultipleChoiceQueryString, decodeResponseData, decodeMultiChoiceResponseData };
