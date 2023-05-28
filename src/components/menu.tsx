@@ -67,7 +67,7 @@ const Menu = () => {
                       </li>
                     </ul>
                   </>
-                  : <Link href="/api/auth/signin" rel="prefetch">Login</Link>
+                  : <Link href="/api/auth/signin" rel="prefetch" className="block py-2 pl-3 pr-4 bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:text-white">Login</Link>
               }
               </div>
             </li>
