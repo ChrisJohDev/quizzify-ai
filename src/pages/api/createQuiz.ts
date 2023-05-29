@@ -65,7 +65,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       ? decodeMultiChoiceResponseData(responseJson.choices[0].message.content)
       : decodeResponseData(responseJson.choices[0].message.content);
 
-      console.log('\n*** [createQuiz-handler] \ndecodedResponse:', decodedResponse);
+      console.log('\n*** [createQuiz-handler] \ndecodedResponse:', String(decodedResponse));
 
       res.status(200).json({ response: decodedResponse });
     } catch (err) {

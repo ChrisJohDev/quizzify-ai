@@ -28,7 +28,7 @@ const getKeyFromEnumLetter = (letter: keyof typeof MultiChoice) => {
 
 const multiItem = (question: MultiChoiceQuestion) => {
   let answer =  question.answer.length === 1
-  ? question.choices[getKeyFromEnumLetter(question.answer as keyof typeof MultiChoice)]
+  ? question.choices[getKeyFromEnumLetter(question.answer.toLowerCase() as keyof typeof MultiChoice)]
   : question.answer;
   console.log('\n*** [QuizQuestionsItem - multiItem] answer:', answer);
 
