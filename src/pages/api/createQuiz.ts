@@ -5,7 +5,7 @@ import { mockResponseApiData2, mockResponseApiDataMultiChoice } from "@/util/moc
 
 
 const isDevelopment = process.env.NODE_ENV === 'development';
-const MOCK_RESPONSE = false;
+const MOCK_RESPONSE = true;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   isDevelopment && console.log('\n*** [createQuiz-handler] -');

@@ -40,24 +40,24 @@ C: a: Jose Rizal, b: Andres Bonifacio, c: Emilio Aguinaldo
 A: a
 
 Q: What is the capital city of the Philippines?
-C: a: Cebu City, b: Manila, c: Davao City
-A: b
+C: A: Cebu City, B: Manila, C: Davao City
+A: B
 
 Q: What is the national flower of the Philippines?
-C: a: Sampaguita, b: Orchid, c: Sunflower
+C: a) Sampaguita, b) Orchid, c) Sunflower
 A: a
 
 Q: What is the largest island in the Philippines?
-C: a: Luzon, b: Visayas, c: Mindanao
-A: a
+C: A) Luzon, B) Visayas, C) Mindanao
+A: A
 
 Q: Who is the current President of the Philippines as of 2021?
-C: a: Rodrigo Duterte, b: Benigno Aquino III, c: Gloria Macapagal-Arroyo
+C: a. Rodrigo Duterte, b. Benigno Aquino III, c. Gloria Macapagal-Arroyo
 A: a
 
 Q: What is the official language of the Philippines?
-C: a: Filipino, b: English, c: Tagalog
-A: a
+C: A. Filipino, B. English, C. Tagalog
+A: A
 
 Q: What is the famous festival held in Cebu City every January?
 C: a: Sinulog Festival, b: Panagbenga Festival, c: Ati-Atihan Festival

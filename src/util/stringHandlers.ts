@@ -62,6 +62,11 @@ const decodeResponseData = (response: string) => {
 
 }
 
+const checkMultipleOccurrences = (str: string, pattern: string) => {
+  const occurrences = str.split(pattern).length - 1;
+  return occurrences > 1;
+}
+
 const decodeMultiChoiceResponseData = (response: string) => {
   isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \nresponse:', response);
 
@@ -71,20 +76,34 @@ const decodeMultiChoiceResponseData = (response: string) => {
   qAndA.forEach((q, index) => {
     const question: MultiChoiceQuestion = { question: '', choices: [''], answer: '' };
     isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \nindex:', index, '\nq:', q);
-
+    let qNa: Array<string> = [];
+    let qNc: Array<string> = [];
     try {
-      const qNa = q.split('A:');
-      const pattern = /^[a-z][):.]/i;
+      if (checkMultipleOccurrences(q, 'A:')) {
+        qNa = splitStringOnSecondOccurrence(q, 'A:');
+      } else {
+        qNa = q.split('A:');
+      }
       isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \nqNa:', qNa);
-      const qNc = qNa[0].split('C:');
+      if(checkMultipleOccurrences(qNa[0], 'C:')) {
+        qNc = removeFirstOccurrence(qNa[0], 'C:');
+      } else {  
+        qNc = qNa[0].split('C:');
+      }
+      
       isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \nqNc:', qNc);
+      const pattern = /^[a-zA-Z][.:)]\s?/g;
       const choices: Array<string> = [];
       if (Number(index) > 0) {
         question.question = qNc[0].trim();
         const tmp = qNc[1].split(',');
         for (let i = 0; i < tmp.length; i++) {
           isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \ni:', i, '\ntmp[i]:', tmp[i]);
-          choices.push(tmp[i].replace(pattern, '').trim().replace(/\b\w/g, match => match.toUpperCase()));
+          const cTrimmed = tmp[i].trim().replace(pattern, '');
+          isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \ncTrimmed:', cTrimmed);
+          const cFinal = cTrimmed.replace(/\b\w/g, match => match.toUpperCase().trim());
+          isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \ncFinal:', cFinal);
+          choices.push(cFinal);
         }
         question.choices = choices;
         question.answer = qNa[1].trim().replace(/\b\w/g, match => match.toUpperCase());
@@ -102,3 +121,20 @@ const decodeMultiChoiceResponseData = (response: string) => {
 }
 
 export { createQueryString, createMultipleChoiceQueryString, decodeResponseData, decodeMultiChoiceResponseData };
+
+
+const removeFirstOccurrence = (q: string, pattern: string): string[] => {
+  const index = q.indexOf(pattern);
+  const firstPart = q.slice(0, index);
+  const secondPart = q.slice(index + pattern.length);
+  console.log('\n*** [stringHandlers - removeFirstOccurrence] \nfirstPart:', firstPart, '\nsecondPart:', secondPart);
+    return [q.slice(0, index), q.slice(index + pattern.length)]; 
+}
+
+const splitStringOnSecondOccurrence = (q: string, pattern: string): string[] => {
+  
+  const index1 = q.indexOf(pattern);
+  const index2 = q.indexOf(pattern, index1 + 1);
+
+  return [q.slice(0, index2), q.slice(index2 + pattern.length)];
+}
