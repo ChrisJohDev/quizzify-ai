@@ -6,7 +6,7 @@ export type QueryData = {
 export type MultiChoiceQueryData = {
   subject: string | never,
   amount: number | never,
-  choices: number | never 
+  numbOfMultiChoice: number | never 
 }
 
 export type QueryResponse = {
@@ -41,7 +41,7 @@ export interface IUser {
   [key: string]: any,
 }
 
-export type MultiChoiceQuestions = Array<MultiChoiceQuestion>;
+export type MultiChoiceQuestions = {questions: Array<MultiChoiceQuestion>, subject: string};
 
 export interface IInputErrors {
   [key: string]: string;

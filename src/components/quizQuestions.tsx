@@ -6,10 +6,11 @@ import createPdf from '@/util/pdf';
 
 interface QuizQuestionsProps {
   subject: string,
-  quiz: Questions
+  quiz: Questions,
+  multiChoice: boolean,
 }
 
-const QuizQuestions: React.FC<QuizQuestionsProps> = ({ quiz, subject }) => {
+const QuizQuestions: React.FC<QuizQuestionsProps> = ({ quiz, subject, multiChoice }) => {
   // console.log('\n*** [quizQuestions.tsx]  quiz: ', quiz);
 
   const handleCreatePdf = () => {
@@ -23,11 +24,12 @@ const QuizQuestions: React.FC<QuizQuestionsProps> = ({ quiz, subject }) => {
       {
         quiz.questions.map((question, index) => {
           const qNumber: number = index + 1;
+          console.log('\n*** [quizQuestions - map] question:', question, '\nqNumber:', qNumber);
           return (
               <div key={index} className={styles.quizQuestion}>
                 {index !== 0 && <hr />}
                 <h2>Question {qNumber}</h2>
-                <QuizQuestionsItem question={question} />
+                <QuizQuestionsItem question={question} multiChoice={multiChoice} />
               </div>
           );
         })

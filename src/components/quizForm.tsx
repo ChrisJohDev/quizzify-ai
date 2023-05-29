@@ -12,14 +12,11 @@ type setQuizFunction = (newValue: Questions) => void;
 type setSubjectFunction = (newValue: string) => void;
 // eslint-disable-next-line no-unused-vars
 type setMultiChoiceFunction = (newValue: boolean) => void;
-// eslint-disable-next-line no-unused-vars
-type setNumbOfMultiChoiceFunction = (newValue: number) => void;
 
 interface QuizFormProps {
   setQuiz: setQuizFunction;
   setSubject: setSubjectFunction;
   setMultiChoice: setMultiChoiceFunction;
-  setNumbOfMultiChoice: setNumbOfMultiChoiceFunction;
   subject: string;
 }
 
@@ -29,7 +26,7 @@ interface QuizFormProps {
  * @param {setQuizFunction} setQuiz - The function for setting the quiz.
  * @return {*} {JSX.Element} - The form for creating a quiz.
  */
-const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice, setNumbOfMultiChoice, subject }) => {
+const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice, subject }) => {
   const [loading, setLoading] = useState(false);
   const [isMultiChoice, setIsMultiChoice] = useState(false);
   const checkElem = useRef<HTMLInputElement>(null);
@@ -51,14 +48,14 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
     setLoading(true);
     const data = new FormData(ev.currentTarget);
 
-    isDevelopment && console.log('\n*** [handleSubmit] data:', data);
+    isDevelopment && console.log('\n*** [quizForm - handleSubmit] data:', data);
 
     const subject = data.get('subject');
     const amount = data.get('amount');
     const multiChoice = (data.get('multiChoice') === 'on') as boolean;
     const numbOfMultiChoice = Number(data.get('numbOfMultiChoice'));
 
-    isDevelopment && console.log('\n*** [handleSubmit] subject:', subject, '\namount:', amount, '\nmultiChoice:', multiChoice, '\nnumbOfMultiChoice:', numbOfMultiChoice);
+    isDevelopment && console.log('\n*** [quizForm - handleSubmit] subject:', subject, '\namount:', amount, '\nmultiChoice:', multiChoice, '\nnumbOfMultiChoice:', numbOfMultiChoice);
 
     const json = JSON.stringify({ subject, amount, multiChoice, numbOfMultiChoice });
     const endpoint = '/api/createQuiz';
@@ -71,23 +68,22 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
     };
     setSubject(subject as string || 'General knowledge');
     setMultiChoice(multiChoice);
-    setNumbOfMultiChoice(numbOfMultiChoice);
 
-    isDevelopment && console.log('\n*** [handleSubmit] sending data -\nendpoint:', endpoint, '\njson:', json);
+    isDevelopment && console.log('\n*** [quizForm - handleSubmit] sending data -\nendpoint:', endpoint, '\njson:', json);
 
     try {
       const response = await fetch(endpoint, options)
       if (!response.ok) {
         throw new Error(response.statusText);
       }
-      isDevelopment && console.log('\n*** [handleSubmit] response:', response);
+      isDevelopment && console.log('\n*** [quizForm - handleSubmit] response:', response);
       const json = await response.json();
-      isDevelopment && console.log('\n*** [handleSubmit] json:', json);
+      isDevelopment && console.log('\n*** [quizForm - handleSubmit] json:', json);
       setQuiz(json.response.questions);
       const data = json.response;
-      isDevelopment && console.log('\n*** [handleSubmit] data:', data);
+      isDevelopment && console.log('\n*** [quizForm - handleSubmit] data:', data);
     } catch (err) {
-      isDevelopment && console.error('\n*** [handleSubmit] error:', err);
+      isDevelopment && console.error('\n*** [quizForm - handleSubmit] error:', err);
     } finally {
       setLoading(false);
     }

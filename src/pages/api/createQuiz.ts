@@ -5,7 +5,7 @@ import { mockResponseApiData2, mockResponseApiDataMultiChoice } from "@/util/moc
 
 
 const isDevelopment = process.env.NODE_ENV === 'development';
-const MOCK_RESPONSE = true;
+const MOCK_RESPONSE = false;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   isDevelopment && console.log('\n*** [createQuiz-handler] -');
@@ -39,7 +39,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(200).json({ response: decodedResponse });
   }
 
-  if (!MOCK_RESPONSE && !isMultiChoice) {
+  if (!MOCK_RESPONSE) {
     try {
       const requestBody = {
         model: 'gpt-3.5-turbo',
@@ -56,18 +56,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         body: JSON.stringify(requestBody),
       });
 
-      console.log('\n*** [createQuiz-handler] \nresponse:', response);
+      // console.log('\n*** [createQuiz-handler] \nresponse:', response);
 
       const responseJson = await response.json();
-      console.log('\n*** [createQuiz-handler] \nresponseJson:', responseJson.choices[0].message.content);
+      console.log('\n*** [createQuiz-handler] \nresponseJson.choices[0].message.content:', responseJson.choices[0].message.content);
 
-      const decodedResponse = decodeResponseData(responseJson.choices[0].message.content);
+      const decodedResponse = isMultiChoice 
+      ? decodeMultiChoiceResponseData(responseJson.choices[0].message.content)
+      : decodeResponseData(responseJson.choices[0].message.content);
 
-      console.log('\n*** [createQuiz-handler] \nrequestBody:', requestBody, '\nresponseJson:', responseJson);
+      console.log('\n*** [createQuiz-handler] \ndecodedResponse:', decodedResponse);
 
       res.status(200).json({ response: decodedResponse });
     } catch (err) {
       console.error('\n*** [createQuiz-handler] err:', err);
+      res.status(500).json({ response: err });
     }
   }
 
