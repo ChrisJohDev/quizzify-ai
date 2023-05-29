@@ -110,7 +110,7 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
                 />
               </label>
               <div className="numberOfQuestions" >
-                <label htmlFor="numbOfMultiChoice">Number of questions:</label>
+                <label htmlFor="numbOfMultiChoice">Number of choices:</label>
                 <select id="numbOfMultiChoice" name="numbOfMultiChoice" disabled={!isMultiChoice}>
                   <option value="3">3</option>
                   <option value="4">4</option>
