@@ -3,7 +3,7 @@
 exports[`Quizzes - snapshot test renders correctly 1`] = `
 <div>
   <div
-    class="container mx-auto flex flex-col flex-fill quizPage"
+    class="container mx-auto flex flex-col flex-fill items-center quizPage"
   >
     <h1
       class="text-center"
@@ -14,56 +14,114 @@ exports[`Quizzes - snapshot test renders correctly 1`] = `
       class="col-md-6 offset-md-3 flex flex-col info"
     >
       <form
-        action="/quizResponse"
-        class="mx-auto"
-        method="POST"
+        class="mx-auto queryForm"
       >
-        <label
-          for="issue"
+        <div
+          class="multiChoice"
         >
-          Number of questions:
-        </label>
-        <select
-          id="issue"
-          name="amount"
+          <label
+            for="multiChoice"
+          >
+            Multiple choice questions:  
+            <input
+              id="multiChoice"
+              name="multiChoice"
+              type="checkbox"
+            />
+          </label>
+          <div
+            class="numberOfQuestions"
+          >
+            <label
+              for="numbOfMultiChoice"
+            >
+              Number of choices:
+            </label>
+            <select
+              disabled=""
+              id="numbOfMultiChoice"
+              name="numbOfMultiChoice"
+            >
+              <option
+                value="3"
+              >
+                3
+              </option>
+              <option
+                value="4"
+              >
+                4
+              </option>
+              <option
+                value="5"
+              >
+                5
+              </option>
+            </select>
+          </div>
+        </div>
+        <div
+          class="numberOfQuestions"
         >
-          <option
-            value="10"
+          <label
+            for="issue"
           >
-            10
-          </option>
-          <option
-            value="15"
+            Number of questions:
+          </label>
+          <select
+            id="issue"
+            name="amount"
           >
-            15
-          </option>
-          <option
-            value="20"
-          >
-            20
-          </option>
-          <option
-            value="25"
-          >
-            25
-          </option>
-        </select>
-        <label
-          for="input-element"
+            <option
+              value="10"
+            >
+              10
+            </option>
+            <option
+              value="15"
+            >
+              15
+            </option>
+            <option
+              value="20"
+            >
+              20
+            </option>
+            <option
+              value="25"
+            >
+              25
+            </option>
+          </select>
+        </div>
+        <div
+          class="subjectInput"
         >
-          Subject:
-        </label>
-        <input
-          id="input-element"
-          name="subject"
-          placeholder="Leave blank for general knowledge"
-          type="text"
-        />
-        <br />
-        <input
-          type="submit"
-          value="Submit"
-        />
+          <label
+            for="subjectText"
+          >
+            Subject:
+          </label>
+          <input
+            class="subjectInput"
+            id="subjectText"
+            name="subject"
+            placeholder="Leave blank for general knowledge"
+            type="text"
+          />
+        </div>
+        <div
+          class="buttons"
+        >
+          <input
+            type="submit"
+            value="Submit"
+          />
+          <input
+            type="reset"
+            value="Reset"
+          />
+        </div>
       </form>
     </div>
   </div>

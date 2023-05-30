@@ -5,6 +5,30 @@ exports[`Pricing - snapshot test renders correctly 1`] = `
   <div
     class="container flex flex-col mx-auto pricingPage"
   >
+    <div
+      class="flex flex-col items-center"
+    >
+      <p>
+        Loading this might be a ver y long text...
+      </p>
+      <div
+        class="flex justify-center w-100 spinner-border text-primary m-4 loader"
+        role="status"
+      >
+        <img
+          alt="Q-AI Logo"
+          class="undefined"
+          data-nimg="1"
+          decoding="async"
+          fetchpriority="high"
+          height="50"
+          src="/_next/image?url=%2FQAI-Logo.png&w=128&q=75"
+          srcset="/_next/image?url=%2FQAI-Logo.png&w=64&q=75 1x, /_next/image?url=%2FQAI-Logo.png&w=128&q=75 2x"
+          style="color: transparent;"
+          width="60"
+        />
+      </div>
+    </div>
     <h1
       class="text-center"
     >

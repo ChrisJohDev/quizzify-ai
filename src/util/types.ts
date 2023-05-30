@@ -46,3 +46,16 @@ export type MultiChoiceQuestions = {questions: Array<MultiChoiceQuestion>, subje
 export interface IInputErrors {
   [key: string]: string;
 }
+// eslint-disable-next-line no-unused-vars
+export enum MultiChoice {
+  // eslint-disable-next-line no-unused-vars
+  a = 0,
+  // eslint-disable-next-line no-unused-vars
+  b = 1,
+  // eslint-disable-next-line no-unused-vars
+  c = 2,
+  // eslint-disable-next-line no-unused-vars
+  d = 3,
+  // eslint-disable-next-line no-unused-vars
+  e = 4
+}

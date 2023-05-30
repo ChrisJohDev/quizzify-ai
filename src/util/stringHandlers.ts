@@ -9,7 +9,7 @@ const isDevelopment = process.env.NODE_ENV === 'development';
  * @return {*} - The query string.
  */
 const createQueryString = (query: QueryData) => {
-  const noQuestions = (!query?.amount || query.amount === -1) ? 5 : query.amount;
+  const noQuestions = (!query?.amount || query.amount < 1) ? 5 : (query.amount > 25) ? 25 : query.amount;
   const subject = (!query?.subject || query.subject === '') ? 'General knowledge' : query.subject;
 
   isDevelopment && console.log('\n*** [stringHandlers - createQueryString] \nquery:', query, '\nnoQuestions:', noQuestions, '\nsubject:', subject);
@@ -25,9 +25,9 @@ const createQueryString = (query: QueryData) => {
  * @return {*} - The query string.
  */
 const createMultipleChoiceQueryString = (query: MultiChoiceQueryData) => {
-  const noQuestions = (!query?.amount || query.amount === -1) ? 5 : query.amount;
+  const noQuestions = (!query?.amount || query.amount < 1) ? 5 : (query.amount > 25) ? 25 : query.amount;
   const subject = (!query?.subject || query.subject === '') ? 'General knowledge' : query.subject;
-  const choices = (!query?.numbOfMultiChoice || query.numbOfMultiChoice < 3 || query.numbOfMultiChoice > 5) ? 3 : query.numbOfMultiChoice;
+  const choices = (!query?.numbOfMultiChoice || query.numbOfMultiChoice < 3 ) ? 3 : (query.numbOfMultiChoice > 5) ? 5 : query.numbOfMultiChoice;
 
   isDevelopment && console.log('\n*** [stringHandlers - createMultipleChoiceQueryString] \nquery:', query, '\nnoQuestions:', noQuestions, '\nsubject:', subject, '\nchoices:', choices);
 
@@ -42,7 +42,7 @@ const createMultipleChoiceQueryString = (query: MultiChoiceQueryData) => {
  */
 const decodeResponseData = (response: string) => {
   isDevelopment && console.log('\n*** [stringHandlers - decodeResponseData] \nresponse:', response);
-  const qAndA = response.split('Q:');
+  const qAndA = response.split(/[qQ]:/g);
 
   const questions: Questions = { questions: [], subject: '' };
 
@@ -50,7 +50,7 @@ const decodeResponseData = (response: string) => {
 
   qAndA.forEach((question) => {
     if (question.trim().length > 0) {
-      const tmp = question.split('A:');
+      const tmp = question.split(/[aA]:/g);
       // if (index < 3) console.log('\n*** [decodeResponseData] \ntmp:', tmp, '\ntmp[0]:', tmp[0], '\ntmp[1]:', tmp[1]);
       questions.questions.push({ question: tmp[0].trim(), answer: tmp[1].trim() });
     }

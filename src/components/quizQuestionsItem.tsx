@@ -1,25 +1,12 @@
 import React from "react";
 import { MultiChoiceQuestion, Question } from "@/util/types";
+import { MultiChoice } from "@/util/types";
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 interface QuizQuestionsItemProps {
   question: Question | MultiChoiceQuestion;
   multiChoice: boolean;
-}
-
-// eslint-disable-next-line no-unused-vars
-enum MultiChoice {
-  // eslint-disable-next-line no-unused-vars
-  a = 0,
-  // eslint-disable-next-line no-unused-vars
-  b = 1,
-  // eslint-disable-next-line no-unused-vars
-  c = 2,
-  // eslint-disable-next-line no-unused-vars
-  d = 3,
-  // eslint-disable-next-line no-unused-vars
-  e = 4
 }
 
 const getKeyFromEnumLetter = (letter: keyof typeof MultiChoice) => {
