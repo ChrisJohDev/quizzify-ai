@@ -3,17 +3,22 @@ import { Questions } from '@/util/types';
 import QuizQuestionsItem from './quizQuestionsItem';
 import styles from '@/styles/quizQuestions.module.css';
 import createPdf from '@/util/pdf';
+import createMultiChoicePdf from '@/util/multiChoicePdf';
 
 interface QuizQuestionsProps {
   subject: string,
-  quiz: Questions
+  quiz: Questions,
+  multiChoice: boolean,
 }
 
-const QuizQuestions: React.FC<QuizQuestionsProps> = ({ quiz, subject }) => {
-  // console.log('\n*** [quizQuestions.tsx]  quiz: ', quiz);
+const QuizQuestions: React.FC<QuizQuestionsProps> = ({ quiz, subject, multiChoice }) => {
 
-  const handleCreatePdf = () => {
-    createPdf(quiz.questions, 'quiz', subject);
+
+  const handleCreatePdf = (ev: { preventDefault: () => void; }) => {
+    ev.preventDefault();
+    console.log('\n*** [quizQuestions] - quiz.questions: ', quiz.questions);
+    // alert('quizQuestions - \nquiz: ' + JSON.stringify(quiz.questions) + '\nsubject: ' + subject);
+    multiChoice ? createMultiChoicePdf(quiz.questions, 'quiz', subject) : createPdf(quiz.questions, 'quiz', subject);
   }
 
   return (
@@ -23,12 +28,13 @@ const QuizQuestions: React.FC<QuizQuestionsProps> = ({ quiz, subject }) => {
       {
         quiz.questions.map((question, index) => {
           const qNumber: number = index + 1;
+          console.log('\n*** [quizQuestions - map] question:', question, '\nqNumber:', qNumber);
           return (
-              <div key={index} className={styles.quizQuestion}>
-                {index !== 0 && <hr />}
-                <h2>Question {qNumber}</h2>
-                <QuizQuestionsItem question={question} />
-              </div>
+            <div key={index} className={styles.quizQuestion}>
+              {index !== 0 && <hr />}
+              <h2>Question {qNumber}</h2>
+              <QuizQuestionsItem question={question} multiChoice={multiChoice} />
+            </div>
           );
         })
       }

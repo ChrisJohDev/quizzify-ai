@@ -6,7 +6,7 @@ export type QueryData = {
 export type MultiChoiceQueryData = {
   subject: string | never,
   amount: number | never,
-  choices: number | never 
+  numbOfMultiChoice: number | never 
 }
 
 export type QueryResponse = {
@@ -41,8 +41,21 @@ export interface IUser {
   [key: string]: any,
 }
 
-export type MultiChoiceQuestions = Array<MultiChoiceQuestion>;
+export type MultiChoiceQuestions = {questions: Array<MultiChoiceQuestion>, subject: string};
 
 export interface IInputErrors {
   [key: string]: string;
+}
+// eslint-disable-next-line no-unused-vars
+export enum MultiChoice {
+  // eslint-disable-next-line no-unused-vars
+  a = 0,
+  // eslint-disable-next-line no-unused-vars
+  b = 1,
+  // eslint-disable-next-line no-unused-vars
+  c = 2,
+  // eslint-disable-next-line no-unused-vars
+  d = 3,
+  // eslint-disable-next-line no-unused-vars
+  e = 4
 }
