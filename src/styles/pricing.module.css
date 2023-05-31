@@ -4,7 +4,7 @@
 
 .pricingPage h1 {
   font-size: 3rem;
-  color: blue;
+  color: #0050ffff;
   font-family: Roboto;
   margin-bottom: 2rem;
 }
@@ -22,4 +22,26 @@
 
 .pricingPage td {
   padding: 1rem;
+}
+
+.tmp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.tmp h1 {
+  font-size: 3rem;
+  color: #0050ffff;
+  font-family: Roboto;
+  margin-bottom: 2rem;
+}
+
+.tmp p {
+  font-size: 1.5rem;
+  color: black;
+  font-family: Roboto;
+  margin-bottom: 2rem;
 }

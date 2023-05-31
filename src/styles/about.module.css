@@ -1,10 +1,18 @@
 .aboutPage {
-  background-color: rgb(197, 219, 238);
+  background-color: rgba(236, 236, 236, 0.4);
   padding: 2rem 3rem;
-  box-shadow: 0 0 10px 15px rgba(10, 2, 252, 0.5);
+  /* box-shadow: 0 0 10px 15px #5555551f; */
   border-radius: 10px;
   margin-top: 2rem;
   color: black;
+  max-width: max-content;
+}
+
+.aboutPage h2 {
+  font-size: 2rem;
+  font-family: Roboto;
+  margin: 2rem 0 1rem 0;
+  color: blue;
 }
 
 .headline {
@@ -19,4 +27,19 @@
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
     "Helvetica Neue", sans-serif;
   margin-bottom: 1rem;
+  max-width: 55ch;
+}
+
+.aboutPage ol {
+  margin-left: 2rem;
+  list-style: decimal;
+  list-style-position: outside;
+}
+
+.aboutPage li {
+  padding: 0 0.5rem;
+}
+
+.aboutPage li p {
+  max-width: 45ch;
 }

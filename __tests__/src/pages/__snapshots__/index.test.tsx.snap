@@ -3,36 +3,95 @@
 exports[`Index - snapshot test renders correctly 1`] = `
 <div>
   <div
-    class="container max-w-screen-lg md:mx-auto flex flex-col home-page"
+    class="container max-w-screen-lg md:mx-auto flex flex-col items-center home-page"
   >
-    <img
-      alt="Q-AI Logo"
-      class="mx-auto mt-8 mb-8 img"
-      data-nimg="1"
-      decoding="async"
-      fetchpriority="high"
-      height="30"
-      src="/quizzify-name.svg"
-      style="color: transparent;"
-      width="500"
-    />
-    <p
-      class="text-center text-lg home_p"
+    <h1
+      class="companyName homePageLogoText"
     >
-      Quizzify-AI the number one stop for custom quizzes!
+      Quizzify-AI
+    </h1>
+    <h3
+      class="text-center home_p home_h3"
+    >
+      Welcome to 
+      <span
+        class="companyName keepColor"
+      >
+        Quizzify-AI
+      </span>
+       - Your One-Stop Solution for Effortless Quiz Creation and Enjoyment!
+    </h3>
+    <p
+      class="home_p"
+    >
+      At Quizzify-AI, we are revolutionizing the way quizzes are made and played. We’re on a mission to make quizzing a more enjoyable and accessible activity for everyone. With our AI-powered quiz platform, creating engaging quizzes has never been easier!
     </p>
-    <img
-      alt="Q-AI Logo"
-      class="mainLogo mx-auto mt-8"
-      data-nimg="1"
-      decoding="async"
-      fetchpriority="high"
-      height="50"
-      src="/_next/image?url=%2FQAI-Logo.png&w=1080&q=75"
-      srcset="/_next/image?url=%2FQAI-Logo.png&w=640&q=75 1x, /_next/image?url=%2FQAI-Logo.png&w=1080&q=75 2x"
-      style="color: transparent;"
-      width="500"
-    />
+    <p
+      class="home_p"
+    >
+      With Quizzify-AI, you can:
+    </p>
+    <ul
+      class="home_p home_ul"
+    >
+      <li>
+        <p>
+          <strong>
+            Create Engaging Quizzes Effortlessly:
+          </strong>
+           Our AI-powered engine simplifies the quiz creation process, giving you access to a vast database of questions across a variety of categories.
+        </p>
+      </li>
+    </ul>
+    <p
+      class="home_p"
+    >
+      As the 
+      <span
+        class="companyName"
+      >
+        Quizzify-AI
+      </span>
+       platform evolves you will be able to:
+    </p>
+    <ul
+      class="home_p home_ul"
+    >
+      <li>
+        <p>
+          <strong>
+            Enjoy Quizzes Online:
+          </strong>
+           Participate in exciting online quizzes tailored to your interests. Enjoy a user-friendly interface, personalized leaderboards, and a broad selection of categories.
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>
+            Customize Your Quizzes:
+          </strong>
+           With our platform, not only can you create quizzes, but you can also customize them. Add your own questions and categories to make the quiz truly yours!
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>
+            Share Your Quizzes Widely: 
+          </strong>
+          <span
+            class="companyName"
+          >
+            Quizzify-AI’s
+          </span>
+           quizzes are public domain. Share your creativity with other Quiz Masters and reach a wider audience.
+        </p>
+      </li>
+    </ul>
+    <p
+      class="home_p"
+    >
+      Join us on our journey to bring quizzing into the digital age!
+    </p>
   </div>
 </div>
 `;

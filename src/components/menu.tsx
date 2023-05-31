@@ -1,6 +1,5 @@
 import Script from 'next/script'
 import Logo from './logo'
-import LogoName from './logoName'
 import Link from 'next/link';
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
@@ -21,9 +20,13 @@ const Menu = () => {
   return (
     <nav className="bg-transparent border-gray-200 dark:bg-transparent">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <div className="flex items-center" >
+        <div className="flex items-center homeClickable" onClick={(ev) => {
+          ev.preventDefault();
+          window.location.href = '/';
+        }}>
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white ml-8"><Logo width={60} height={60} src={''} alt={''} /></span>
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white ml-8"><LogoName className={''} src={''} alt={''} /></span>
+          {/* <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white ml-8"><LogoName className={''} src={''} alt={''} /></span> */}
+          <span className="self-center text-2xl ml-8 companyName">Quizzify-AI</span>
         </div>
         <button data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false" onClick={() => handleClick()}>
           <span className="sr-only">Open main menu</span>
@@ -41,7 +44,7 @@ const Menu = () => {
               <Link href="/quizzes" className="block py-2 pl-3 pr-4 text-gray-900 bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:text-white">Quizzes</Link>
             </li>
             <li>
-              <Link href="#" className="block py-2 pl-3 pr-4 text-gray-900 bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:text-white">Pricing</Link>
+              <Link href="/pricing" className="block py-2 pl-3 pr-4 text-gray-900 bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:text-white">Pricing</Link>
             </li>
             <li>
               <Link href="/contact" className="block py-2 pl-3 pr-4 text-gray-900 bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:text-white">Contact</Link>
@@ -64,7 +67,7 @@ const Menu = () => {
                       </li>
                     </ul>
                   </>
-                  : <Link href="/api/auth/signin" rel="prefetch">Login</Link>
+                  : <Link href="/api/auth/signin" rel="prefetch" className="block py-2 pl-3 pr-4 bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:hover:text-white">Login</Link>
               }
               </div>
             </li>

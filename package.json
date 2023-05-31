@@ -9,6 +9,8 @@
     "start": "next start",
     "test:persist": "jest --watch",
     "test": "jest",
+    "test:stringHandlers": "jest stringHandlers.test.ts",
+    "test:components": "jest /__tests__/src/components/",
     "lint": "next lint",
     "lint:fix": "next lint --fix"
   },
