@@ -94,7 +94,7 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
 
   
 
-  const handleReset = (ev: React.FormEvent<HTMLFormElement>): void => {
+  const handleReset = (ev: React.MouseEvent<HTMLInputElement, MouseEvent>): void => {
     ev.preventDefault();
     checkElem.current && (checkElem.current.checked = false);
     setIsMultiChoice(false);
