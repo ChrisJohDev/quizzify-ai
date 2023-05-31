@@ -30,6 +30,9 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
   const [loading, setLoading] = useState(false);
   const [isMultiChoice, setIsMultiChoice] = useState(false);
   const checkElem = useRef<HTMLInputElement>(null);
+  const subjectField = useRef<HTMLInputElement>(null);
+  const selectAmount = useRef<HTMLSelectElement>(null);
+  const selectNumbChoices = useRef<HTMLSelectElement>(null);
 
   useEffect(() => {
     checkElem.current?.focus();
@@ -91,6 +94,16 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
 
   
 
+  const handleReset = (ev: React.MouseEvent<HTMLInputElement, MouseEvent>): void => {
+    ev.preventDefault();
+    checkElem.current && (checkElem.current.checked = false);
+    setIsMultiChoice(false);
+    subjectField.current && (subjectField.current.value = '');
+    selectAmount.current && (selectAmount.current.value = '10');
+    selectNumbChoices.current && (selectNumbChoices.current.value = '3');
+    checkElem.current && (checkElem.current.focus());
+  }
+
   return (
     <>
       {
@@ -111,7 +124,7 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
               </label>
               <div className="numberOfQuestions" >
                 <label htmlFor="numbOfMultiChoice">Number of choices:</label>
-                <select id="numbOfMultiChoice" name="numbOfMultiChoice" disabled={!isMultiChoice}>
+                <select id="numbOfMultiChoice" name="numbOfMultiChoice" disabled={!isMultiChoice} ref={selectNumbChoices}>
                   <option value="3">3</option>
                   <option value="4">4</option>
                   <option value="5">5</option>
@@ -120,7 +133,7 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
             </div>
             <div className="numberOfQuestions">
               <label htmlFor="issue">Number of questions:</label>
-              <select id="issue" name="amount">
+              <select id="issue" name="amount" ref={selectAmount}>
                 <option value="10">10</option>
                 <option value="15">15</option>
                 <option value="20">20</option>
@@ -129,11 +142,18 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
             </div>
             <div className="subjectInput">
               <label htmlFor="subjectText">Subject:</label>
-              <input type="text" className={`${styles.subjectInput}`} id="subjectText" name="subject" placeholder='Leave blank for general knowledge' />
+              <input 
+              type="text" 
+              className={`${styles.subjectInput}`} 
+              id="subjectText" 
+              name="subject" 
+              ref={subjectField}
+              placeholder='Leave blank for general knowledge' 
+              />
             </div>
-            <div className="buttons">
+            <div className={`${styles.buttons}`}>
               <input type="submit" value="Submit" />
-              <input type="reset" value="Reset" />
+              <input type="reset" value="Reset" onClick={handleReset} />
             </div>
           </form>
       }

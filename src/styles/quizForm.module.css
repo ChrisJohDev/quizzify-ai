@@ -6,6 +6,9 @@
   border-radius: 10px;
 }
 
+.queryForm input[type=checkbox]:focus {
+  outline: 3px solid rgba(67, 62, 62, 0.804);
+}
 /* Submit button */
 .queryForm input[type=submit], .quizPage input[type=submit]:focus {
   width: auto;
@@ -21,6 +24,26 @@
   background-color: rgb(40, 40, 255);
   color: yellow;
   border: 2px outset rgb(40, 40, 255);
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Reset button */
+.buttons input[type=reset], .buttons input[type=reset]:focus {
+  width: auto;
+  background-color: red;
+  color: white;
+  border: 2px outset red;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin-top: 1rem;
+}
+
+.buttons input[type=reset]:hover {
+  background-color: rgb(255, 40, 40);
+  color: rgb(255, 255, 0);
+  border: 2px outset rgb(255, 40, 40);
   border-radius: 5px;
   padding: 0.5rem;
   margin-top: 1rem;
@@ -49,4 +72,11 @@
 
 .queryForm select:focus{
 outline: 3px solid rgba(67, 62, 62, 0.804);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
