@@ -16,7 +16,7 @@ Q: What is the name of the galaxy that contains our solar system?
 A: Milky Way
 
 Q: What is the phenomenon where a massive star collapses under its own gravity, resulting in a powerful explosion?
-A: Supernova
+A: Supernova, adding more text so that we can check how the answers break on the right side of the pdf document too.
 
 Q: What is the name of the brightest star in the night sky?
 A: Sirius

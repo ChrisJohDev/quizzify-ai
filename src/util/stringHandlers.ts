@@ -31,7 +31,7 @@ const createMultipleChoiceQueryString = (query: MultiChoiceQueryData) => {
 
   isDevelopment && console.log('\n*** [stringHandlers - createMultipleChoiceQueryString] \nquery:', query, '\nnoQuestions:', noQuestions, '\nsubject:', subject, '\nchoices:', choices);
 
-  return `Create a multi-choice quiz with ${noQuestions} questions each with ${choices} choices on the subject of ${subject}, no numbering. Format: [Q: question,  C: choices [lower case separator:','], A: answer]`
+  return `Create a multi-choice quiz with ${noQuestions} questions each with ${choices} choices on the subject of ${subject}, no numbering. Format: [Q: question,  C: choices [separator:'<||>'], A: answer]`
 }
 
 /**
@@ -51,7 +51,6 @@ const decodeResponseData = (response: string) => {
   qAndA.forEach((question) => {
     if (question.trim().length > 0) {
       const tmp = question.split(/[aA]:/g);
-      // if (index < 3) console.log('\n*** [decodeResponseData] \ntmp:', tmp, '\ntmp[0]:', tmp[0], '\ntmp[1]:', tmp[1]);
       questions.questions.push({ question: tmp[0].trim(), answer: tmp[1].trim() });
     }
   });
@@ -70,7 +69,7 @@ const checkMultipleOccurrences = (str: string, pattern: string) => {
 const decodeMultiChoiceResponseData = (response: string) => {
   isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \nresponse:', response);
 
-  const qAndA = response.split('Q:');
+  const qAndA = response.split(/Q:/g);
   const questions: MultiChoiceQuestions = { questions: [], subject: '' };
 
   qAndA.forEach((q, index) => {
@@ -92,21 +91,23 @@ const decodeMultiChoiceResponseData = (response: string) => {
       }
       
       isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \nqNc:', qNc);
-      const pattern = /^[a-zA-Z][.:)]\s?/g;
+      const pattern = /^(?!e\.g\.|i\.e\.|[a-eA-E][.:)]\s)[a-eA-E][.:)]\s?/g;
       const choices: Array<string> = [];
       if (Number(index) > 0) {
         question.question = qNc[0].trim();
-        const tmp = qNc[1].split(',');
+        const tmp = qNc[1].split('<||>');
         for (let i = 0; i < tmp.length; i++) {
           isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \ni:', i, '\ntmp[i]:', tmp[i]);
           const cTrimmed = tmp[i].trim().replace(pattern, '');
           isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \ncTrimmed:', cTrimmed);
-          const cFinal = cTrimmed.replace(/\b\w/g, match => match.toUpperCase().trim());
+          // const cFinal = cTrimmed.replace(/\b\w/g, match => match.toUpperCase().trim()); // capitalize first letter of choice. NOT needed anymore.
+          const cFinal = cTrimmed;
           isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \ncFinal:', cFinal);
           choices.push(cFinal);
         }
         question.choices = choices;
-        question.answer = qNa[1].trim().replace(/\b\w/g, match => match.toUpperCase());
+        // question.answer = qNa[1].trim().replace(/\b\w/g, match => match.toUpperCase()); // capitalize first letter of answer. NOT needed anymore.
+        question.answer = qNa[1].trim();
         isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \nindex:', index, '\nquestion:', question);
         questions.questions.push(question);
       }

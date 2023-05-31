@@ -9,14 +9,16 @@ interface QuizQuestionsItemProps {
   multiChoice: boolean;
 }
 
-const getKeyFromEnumLetter = (letter: keyof typeof MultiChoice) => {
-  return MultiChoice[letter];
-}
+// const getKeyFromEnumLetter = (letter: keyof typeof MultiChoice) => {
+//   return MultiChoice[letter];
+// }
 
 const multiItem = (question: MultiChoiceQuestion) => {
-  let answer =  question.answer.length === 1
-  ? question.choices[getKeyFromEnumLetter(question.answer.toLowerCase() as keyof typeof MultiChoice)]
-  : question.answer;
+  const answer =  question.answer;
+  let answerIndex = 0;
+  // question.answer.length === 1
+  // ? question.choices[getKeyFromEnumLetter(question.answer.toLowerCase() as keyof typeof MultiChoice)]
+  // : question.answer;
   console.log('\n*** [QuizQuestionsItem - multiItem] answer:', answer);
 
 
@@ -26,7 +28,7 @@ const multiItem = (question: MultiChoiceQuestion) => {
         {
         question.choices.map((choice, index) => {
           if(answer === choice){
-            answer = MultiChoice[index] + ') ' + choice;
+            answerIndex = index;
           }
           return(
             <li key={index}>{MultiChoice[index]}) {choice}</li>
@@ -34,7 +36,7 @@ const multiItem = (question: MultiChoiceQuestion) => {
         })
       }
       </ul>
-      <p>Answer: {answer}</p>
+      <p>Answer: {MultiChoice[answerIndex]}) {answer}</p>
     </div>
   )
 }
