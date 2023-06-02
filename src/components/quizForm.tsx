@@ -54,9 +54,9 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
     isDevelopment && console.log('\n*** [quizForm - handleSubmit] data:', data);
 
     const subject = data.get('subject');
-    const amount = data.get('amount');
     const multiChoice = (data.get('multiChoice') === 'on') as boolean;
     const numbOfMultiChoice = Number(data.get('numbOfMultiChoice'));
+    const amount = !multiChoice ? data.get('amount'): 10;
 
     isDevelopment && console.log('\n*** [quizForm - handleSubmit] subject:', subject, '\namount:', amount, '\nmultiChoice:', multiChoice, '\nnumbOfMultiChoice:', numbOfMultiChoice);
 
@@ -119,7 +119,11 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
                 id="multiChoice" 
                 name="multiChoice" 
                 ref={checkElem}
-                onChange={(ev) => setIsMultiChoice(ev.target.checked)}
+                onChange={(ev) => {
+                  setIsMultiChoice(ev.target.checked)
+                  // Temporary fix while we fix the problem with time outs
+                  selectAmount.current && (selectAmount.current.value = '10');  
+                }}
                 />
               </label>
               <div className="numberOfQuestions" >
@@ -133,7 +137,7 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
             </div>
             <div className="numberOfQuestions">
               <label htmlFor="issue">Number of questions:</label>
-              <select id="issue" name="amount" ref={selectAmount}>
+              <select id="issue" name="amount" disabled={isMultiChoice} ref={selectAmount}>
                 <option value="10">10</option>
                 <option value="15">15</option>
                 <option value="20">20</option>
