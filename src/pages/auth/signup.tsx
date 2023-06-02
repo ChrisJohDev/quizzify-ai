@@ -61,29 +61,29 @@ const SignUp = () => {
         <div className={`${styles.nameSection}`}>
           <div className={`${styles.formGroup}`}>
             <label htmlFor="fname">* First Name:</label>
-            <input type="text" id="fname" name="firstName" />
+            <input type="text" id="fname" required name="firstName" />
           </div>
           <div className={`${styles.formGroup}`}>
             <label htmlFor="lname">* Last name:</label>
-            <input type="text" id="lname" name="lastName" />
+            <input type="text" id="lname" required name="lastName" />
           </div>
         </div>
         <div className={`${styles.dataSection}`}>
           <div className={`${styles.formGroup}`}>
-            <label htmlFor="username">Username (display name, optional):</label>
-            <input type="text" id="username" name="username" />
+            <label htmlFor="username">Username (min 3 characters start with a letter):</label>
+            <input type="text" id="username" name="username" minLength={3} required />
           </div>
           <div className={`${styles.formGroup}`}>
             <label htmlFor="email">* Email:</label>
-            <input type="email" id="email" name="email" />
+            <input type="email" id="email" name="email" required />
           </div>
           <div className={`${styles.formGroup}`}>
             <label htmlFor="pword">* Password:</label>
-            <input type="password" id="pword" name="pword" />
+            <input type="password" id="pword" name="pword" required />
           </div>
           <div className={`${styles.formGroup}`}>
             <label htmlFor="confirm_pword">* Confirm Password:</label>
-            <input type="password" id="confirm_pword" name="confirm_pword" />
+            <input type="password" id="confirm_pword" name="confirm_pword" required />
           </div>
 
         </div>
