@@ -56,7 +56,7 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
     const subject = data.get('subject');
     const multiChoice = (data.get('multiChoice') === 'on') as boolean;
     const numbOfMultiChoice = Number(data.get('numbOfMultiChoice'));
-    const amount = !multiChoice ? data.get('amount'): 10;
+    const amount = !multiChoice ? data.get('amount'): 10; // Limits the number of questions to 10 if multiChoice is true
 
     isDevelopment && console.log('\n*** [quizForm - handleSubmit] subject:', subject, '\namount:', amount, '\nmultiChoice:', multiChoice, '\nnumbOfMultiChoice:', numbOfMultiChoice);
 

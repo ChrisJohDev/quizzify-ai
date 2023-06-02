@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 import { userSchema } from '@/util/model/user';
 import mongoose from 'mongoose';
+import connectDB from '@/util/db/db';
 
 const isDevelopment = true;
 
@@ -18,6 +19,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   const { token, id } = context.query;
   isDevelopment && console.log('\n*** [verify-email-getServerSideProps] token:', token, '\n*** [verify-email-getServerSideProps] id:', id);
   try {
+    await connectDB();
     const UserLocal = mongoose.models.User || mongoose.model('User', userSchema);
     const user = await UserLocal.findOne({ verificationToken: token });
     isDevelopment && console.log('\n*** [verify-email-getServerSideProps] user:', user);
