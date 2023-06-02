@@ -1,7 +1,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
-import FacebookProvider from "next-auth/providers/facebook";
+// import GoogleProvider from "next-auth/providers/google";
+// import FacebookProvider from "next-auth/providers/facebook";
 import mongoose from "mongoose";
 import {userSchema } from "@/util/model/user";
 import bcrypt from "bcrypt";
