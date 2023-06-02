@@ -54,9 +54,9 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
     isDevelopment && console.log('\n*** [quizForm - handleSubmit] data:', data);
 
     const subject = data.get('subject');
-    const amount = data.get('amount');
     const multiChoice = (data.get('multiChoice') === 'on') as boolean;
     const numbOfMultiChoice = Number(data.get('numbOfMultiChoice'));
+    const amount = !multiChoice ? data.get('amount'): 10;
 
     isDevelopment && console.log('\n*** [quizForm - handleSubmit] subject:', subject, '\namount:', amount, '\nmultiChoice:', multiChoice, '\nnumbOfMultiChoice:', numbOfMultiChoice);
 
