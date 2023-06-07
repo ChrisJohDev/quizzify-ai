@@ -41,7 +41,7 @@ const mockIndata4 = {
 }
 
 
-describe('\n*** QuizQuestionsItem multi-choice***', () => {
+describe('\n*** ID:QAI:base-TC017 - QuizQuestionsItem multi-choice ***', () => {
   it('testing response on mockIndata1', () => {
     render(<QuizQuestionItem question={mockIndata1} multiChoice={multiChoice} />);
 
@@ -101,7 +101,7 @@ describe('\n*** QuizQuestionsItem multi-choice***', () => {
   });
 });
 
-describe('\n*** QuizQuestionsItem single-choice***', () => {
+describe('\n*** ID:QAI:base-TC018 - QuizQuestionsItem single-choice ***', () => {
   it('testing response on mockIndata1', () => {
     render(<QuizQuestionItem question={mockIndata1} multiChoice={!multiChoice} />);
 

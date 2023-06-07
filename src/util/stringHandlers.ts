@@ -46,7 +46,7 @@ const decodeResponseData = (response: string) => {
 
   const questions: Questions = { questions: [], subject: '' };
 
-  console.log('\n*** [stringHandlers - decodeResponseData] \nqAndA:', qAndA);
+  isDevelopment && console.log('\n*** [stringHandlers - decodeResponseData] \nqAndA:', qAndA);
 
   qAndA.forEach((question) => {
     if (question.trim().length > 0) {

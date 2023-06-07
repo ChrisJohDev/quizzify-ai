@@ -1,3 +1,5 @@
+import { ImageProps } from "next/image"
+
 export type QueryData = {
   subject: string | never,
   amount: number | never
@@ -58,4 +60,13 @@ export enum MultiChoice {
   d = 3,
   // eslint-disable-next-line no-unused-vars
   e = 4
+}
+
+/**
+ * LogoProps type declaration.
+ */
+export type LogoProps = ImageProps & {
+  className?: string;
+  width?: number;
+  height?: number;
 }

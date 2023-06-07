@@ -2,7 +2,7 @@ import {render, screen }from '@testing-library/react';
 import Contact from '@/pages/contact';
 import '@testing-library/jest-dom'
 
-describe('Contact - snapshot test', () => {
+describe('ID: QAI:base-TC016 - Contact Page', () => {
   it('renders correctly', () => {
     const { container } = render(<Contact />);
     expect(container).toMatchSnapshot();
