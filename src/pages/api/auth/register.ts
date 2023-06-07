@@ -1,3 +1,11 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Register API endpoint.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 // import { connectDB } from '@/util/db/db';
@@ -13,6 +21,17 @@ const isDevelopment = true;
 // Sending verification email through Sendgrid API
 const PATH = '/auth/verify-email';
 
+
+/**
+ * Send verification email to user.
+ *
+ * @param {string} email
+ * @param {string} guid
+ * @param {string} verificationToken
+ * @param {string} origin
+ * @param {string} path
+ * @return {*} 
+ */
 const sendVerificationEmail = async (email: string, guid: string, verificationToken: string, origin: string, path: string) => {
   isDevelopment && console.log('\n*** [register-sendVerificationEmail] - email:', email, 'guid:', guid, 'verificationToken:', verificationToken, 'origin:', origin, 'path:', path);
 
@@ -30,7 +49,7 @@ const sendVerificationEmail = async (email: string, guid: string, verificationTo
     html: `<p>You need to verify your email address to complete registration. Please click on the following link, or paste this into your browser to complete the process:</p><div><button><a href="${verificationURL}">Verify Email</a></button></div><p>This link will expire in 24 hours.</p>`
   }
 
-  console.log('\n*** [register-sendVerificationEmail] - msg:', msg);
+  isDevelopment && console.log('\n*** [register-sendVerificationEmail] - msg:', msg);
   // sgMail
   //   .send(msg)
   //   .then(() => {
@@ -43,7 +62,7 @@ const sendVerificationEmail = async (email: string, guid: string, verificationTo
   // (async () => {
   try {
     const mailResponse = await sgMail.send(msg);
-    console.log('\n*** [register-sendgrid] mailResponse:', mailResponse);
+    isDevelopment && console.log('\n*** [register-sendgrid] mailResponse:', mailResponse);
     return Promise.resolve({ ok: true });
   } catch (err) {
     console.error('\n*** [register-sendgrid] err:', err);
@@ -56,9 +75,14 @@ const sendVerificationEmail = async (email: string, guid: string, verificationTo
 
 
 
-
+/**
+ * Register handler.
+ *
+ * @param {NextApiRequest} req
+ * @param {NextApiResponse} res
+ */
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log('\n*** [register-handler] -');
+  isDevelopment && console.log('\n*** [register-handler] -');
 
   try {
     await connectDB();
@@ -114,11 +138,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const result = await user.save();
 
     if (result) {
-      console.log('\n*** [register-handler] \nresult:', result);
+      isDevelopment && console.log('\n*** [register-handler] \nresult:', result);
       const text = 'Account created. Please check your email for verification link. If you do not receive an email, please check your spam folder. The link will expire in 24 hours.';
       const path = PATH;
       const sgResponse = await sendVerificationEmail(email, guid, verificationToken, origin, path);
-      console.log('\n*** [register-handler] \nsgResponse:', sgResponse);
+      isDevelopment && console.log('\n*** [register-handler] \nsgResponse:', sgResponse);
       res.status(201).json({ redirect: '/', text });
     } else {
       throw new Error('User not created! Rejected by database.')

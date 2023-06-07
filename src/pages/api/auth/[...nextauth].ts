@@ -1,3 +1,14 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Authorization API
+ * 
+ * Original code from url: https://next-auth.js.org/deployment
+ * 
+ * Modified by:
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 // import GoogleProvider from "next-auth/providers/google";
@@ -29,17 +40,17 @@ const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize (credentials): Promise<IUser | null> {
-        console.log("\n*** [auth] credentials:", credentials);
+        // console.log("\n*** [auth] credentials:", credentials);
         try {
-          console.log("\n*** [...nextauth][auth] authorize -");
+          // console.log("\n*** [...nextauth][auth] authorize -");
           await connectDB();
-          console.log("\n*** [...nextauth][auth] credentials:", credentials);
-          console.log("\n*** [...nextauth][auth] mongoose.models.User:", mongoose.models.User);
+          // console.log("\n*** [...nextauth][auth] credentials:", credentials);
+          // console.log("\n*** [...nextauth][auth] mongoose.models.User:", mongoose.models.User);
           const UserLocal: Model<Document & IUser> =
             mongoose.models.User || mongoose.model("User", userSchema);
-          console.log("\n*** [...nextauth][auth] UserLocal:", String(UserLocal));
+          // console.log("\n*** [...nextauth][auth] UserLocal:", String(UserLocal));
           const email = credentials?.email;
-          console.log("\n*** [...nextauth][auth] email:", email);
+          // console.log("\n*** [...nextauth][auth] email:", email);
           const user = await UserLocal.findOne({ email }).select("+hashedPassword");
           
           console.log("\n*** [...nextauth][auth] user:", user);
@@ -69,7 +80,7 @@ const authOptions: NextAuthOptions = {
             role: user.role || 'user'
           };
           
-          console.log("\n*** [...nextauth][auth] pubUser:", pubUser);
+          // console.log("\n*** [...nextauth][auth] pubUser:", pubUser);
 
           return pubUser;
 
