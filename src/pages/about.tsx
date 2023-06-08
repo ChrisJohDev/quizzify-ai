@@ -1,6 +1,21 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * About page.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 import styles from '@/styles/about.module.css'
+import React from 'react';
 
-export default function About() {
+/**
+ * About page.
+ *
+ * @export
+ * @return {React.ReactElement} 
+ */
+export default function About(): React.ReactElement {
   return (
     <div className={`flex flex-col ${styles.aboutPage}`}>
       <h1 className={`text-center ${styles.headline}`}><span className="companyName keepColor">Quizzify-AI</span> the Story</h1>

@@ -1,4 +1,11 @@
-
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Styles for pages/auth/signin.tsx the login page.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 .wrapper {
   background-color: #0d1117;
   padding: 4rem;

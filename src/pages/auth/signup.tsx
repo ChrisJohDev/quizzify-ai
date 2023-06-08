@@ -1,3 +1,11 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Signup/Register page.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 import React from 'react';
 import styles from '@/styles/signup.module.css'
 import {useState}from 'react';
@@ -7,7 +15,12 @@ type Message = {
   body: string;
 }
 
-const SignUp = () => {
+/**
+ * Signup/Register page.
+ *
+ * @return {React.ReactElement} 
+ */
+const SignUp = (): React.ReactElement => {
   const [message, setMessage] = useState<Message>({head: '', body: ''});
 
   const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {

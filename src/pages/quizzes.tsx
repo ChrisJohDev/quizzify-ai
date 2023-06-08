@@ -1,3 +1,11 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Quizzes page. Main page for creating quizzes.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 import React from 'react';
 import styles from '@/styles/quizzes.module.css'
 import QuizForm from '@/components/quizForm'
@@ -7,7 +15,12 @@ import QuizQuestions from '@/components/quizQuestions';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
-const Quizzes: React.FC = () => {
+/**
+ * Quizzes page. Main page for creating quizzes.
+ *
+ * @return {React.ReactElement} 
+ */
+const Quizzes: React.FC = (): React.ReactElement => {
   const [quiz, setQuiz] = useState<Questions>({ questions: [], subject: '' });
   const [subject, setSubject] = useState<string>('');
   const [multiChoice, setMultiChoice] = useState<boolean>(false);

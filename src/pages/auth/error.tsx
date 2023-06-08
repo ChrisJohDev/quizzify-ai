@@ -1,6 +1,21 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Error page.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 import { IInputErrors } from "@/util/types";  
+import { ReactElement } from "react";
 
-const Error = ({ errors }: { errors: IInputErrors }) => {
+/**
+ * Error page.
+ *
+ * @param {{ errors: IInputErrors }} { errors }
+ * @return {ReactElement} 
+ */
+const Error = ({ errors }: { errors: IInputErrors }): ReactElement => {
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <h1 className="text-2xl font-bold text-red-500">

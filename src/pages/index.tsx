@@ -1,9 +1,22 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Home page.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 import React from 'react';
 // import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import styles from '@/styles/home.module.css'
 
-const Home: React.FC = () => {
+/**
+ * Home page.
+ *
+ * @return {React.ReactElement} 
+ */
+const Home: React.FC = (): React.ReactElement => {
   // const {data: session, status } = useSession();
 
   // console.log('\n*** [Home] session:', session, '\n*** [Home] status:', status);

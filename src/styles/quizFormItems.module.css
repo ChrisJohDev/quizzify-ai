@@ -1,3 +1,11 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Styles for quizFormItems.tsx
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 .qAndA {
   box-shadow: 0 0 12px 10px rgba(10, 2, 255, 0.5);
   border-radius: 12px;

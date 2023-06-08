@@ -1,10 +1,11 @@
 /**
- * Mongoose model Users.
+ * Project Name: Quizzify-AI
+ * 
+ * Mongoose schema for the user model. 
  *
- * @author Chris Johannesson
- * @version 0.0.1
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
  */
-
 import mongoose from 'mongoose'
 
 /**

@@ -1,4 +1,11 @@
-/* Form */
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Styles for quizForm.tsx
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 .queryForm {
   background-color: rgba(236, 236, 236, 0.4);
   padding: 2rem;

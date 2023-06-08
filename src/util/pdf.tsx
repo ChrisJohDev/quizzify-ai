@@ -1,6 +1,21 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Creates a pdf file with the questions and answers of a quiz without multiple choice questions.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 import { jsPDF } from "jspdf";
 import { Question } from '@/util/types';
 
+/**
+ * Creates a pdf file for questions without multiple choice.
+ *
+ * @param {Question[]} json
+ * @param {string} fileName
+ * @param {string} subject
+ */
 const createPdf = (json: Question[], fileName: string, subject: string) => {
   const questions = json.map((question) => question.question);
   const answers = json.map((question) => question.answer);

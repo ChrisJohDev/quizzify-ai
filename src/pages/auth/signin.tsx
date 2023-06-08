@@ -1,3 +1,12 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Signin/Login page.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
+import React from 'react';
 import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { getCsrfToken, getProviders, signIn } from "next-auth/react"
 import { getServerSession } from "next-auth/next"
@@ -6,7 +15,14 @@ import styles from '@/styles/signin.module.css'
 import Link from 'next/link'
 import { useRouter } from 'next/router';
 
-export default function SignIn({ providers, csrfToken }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+/**
+ *
+ *
+ * @export
+ * @param {InferGetServerSidePropsType<typeof getServerSideProps>} { providers, csrfToken }
+ * @return {React.ReactElement} 
+ */
+export default function SignIn({ providers, csrfToken }: InferGetServerSidePropsType<typeof getServerSideProps>): React.ReactElement {
   console.log('\n*** [signin] providers:', providers);
   console.log('\n*** [signin] signIn:', signIn)
   const router = useRouter();
