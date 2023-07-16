@@ -1,3 +1,11 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Update user data API endpoint.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 import connectDB from "@/util/db/db"
 import { userSchema } from "@/util/model/user";
 import mongoose from "mongoose";

@@ -1,8 +1,23 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Creates a pdf file with the questions and answers of a quiz with multiple choice questions.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 import { jsPDF } from "jspdf";
 import { MultiChoiceQuestion, Question, MultiChoice } from '@/util/types';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
+/**
+ * Creates a pdf file for multiple choice questions.
+ *
+ * @param {(Question[] | MultiChoiceQuestion[])} qNa
+ * @param {string} fileName
+ * @param {string} subject
+ */
 const createMultiChoicePdf = (qNa: Question[] | MultiChoiceQuestion[], fileName: string, subject: string) => {
   const questions = qNa.map((question) => question.question);
   const choices = qNa.map((question) => 'choices' in question ? question.choices : []);

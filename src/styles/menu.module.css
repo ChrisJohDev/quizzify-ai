@@ -1,4 +1,11 @@
-
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Styles for the menu.tsx component.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 .dropdownMenu {
   position: absolute;
   min-width: 90px;

@@ -1,7 +1,15 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Verify-email landing page.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 import { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult } from 'next/types';
 import { ParsedUrlQuery } from 'querystring';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { ReactElement, useEffect } from 'react';
 import { userSchema } from '@/util/model/user';
 import mongoose from 'mongoose';
 import connectDB from '@/util/db/db';
@@ -39,7 +47,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   return { props: { ok: false } };
 }
 
-const VerifyEmails = ({ ok }: Props) => {
+/**
+ * Verify-email landing page.
+ *
+ * @param {Props} { ok }
+ * @return {ReactElement} 
+ */
+const VerifyEmails = ({ ok }: Props): ReactElement => {
   console.log('\n*** [verify-email-handler] - ok:', ok);
   useEffect(() => {
     if (ok) {

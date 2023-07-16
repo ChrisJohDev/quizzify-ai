@@ -1,4 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Quiz form component.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
+import React, { useState, useEffect, useRef, ReactElement } from 'react';
 import { Questions } from '@/util/types';
 import Loading from './loading';
 import styles from '@/styles/quizForm.module.css';
@@ -24,9 +32,9 @@ interface QuizFormProps {
  * The form for creating a quiz.
  *
  * @param {setQuizFunction} setQuiz - The function for setting the quiz.
- * @return {*} {JSX.Element} - The form for creating a quiz.
+ * @return {ReactElement} - The form for creating a quiz.
  */
-const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice, subject }) => {
+const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice, subject }: QuizFormProps): ReactElement => {
   const [loading, setLoading] = useState(false);
   const [isMultiChoice, setIsMultiChoice] = useState(false);
   const checkElem = useRef<HTMLInputElement>(null);
@@ -38,12 +46,11 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
     checkElem.current?.focus();
   }, [])
 
-
-
   /**
-   * Handles the form submission event.
+   * Handles the form submission event. Inner function.
    *
    * @param {React.FormEvent<HTMLFormElement>} ev - The form submission event.
+   * @return {void}
    */
   const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -92,8 +99,12 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
     }
   };
 
-  
-
+  /**
+   * Handles the reset button click event. Inner function.
+   *
+   * @param {React.MouseEvent<HTMLInputElement, MouseEvent>} ev
+   * @return {void}
+   */
   const handleReset = (ev: React.MouseEvent<HTMLInputElement, MouseEvent>): void => {
     ev.preventDefault();
     checkElem.current && (checkElem.current.checked = false);
@@ -156,7 +167,7 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
               />
             </div>
             <div className={`${styles.buttons}`}>
-              <input type="submit" value="Submit" />
+              <input type="submit" value="Generate Quiz" />
               <input type="reset" value="Reset" onClick={handleReset} />
             </div>
           </form>

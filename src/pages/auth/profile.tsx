@@ -1,9 +1,22 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Profile page.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 import React, { useState} from 'react';
 import { useSession } from 'next-auth/react';
 import { IUser } from '@/util/types';
 import styles from '@/styles/profile.module.css';
 
-const Profile: React.FC = () => {
+/**
+ * Profile page.
+ *
+ * @return {React.ReactElement} 
+ */
+const Profile: React.FC = (): React.ReactElement => {
   const { data: session } = useSession<boolean>();
   const user: IUser | undefined = session?.user as IUser;
   console.log('\n*** [profile] user:', user);
@@ -17,6 +30,10 @@ const Profile: React.FC = () => {
   const [usernameOriginal,] = useState<string>(user?.password);
   const [updateResponse, setUpdateResponse] = useState<string>('');
 
+  /**
+   * Reset the form.
+   *
+   */
   const resetHandler = (): void => {
     setFirstName(firstNameOriginal);
     setLastName(lastNameOriginal);
@@ -27,6 +44,11 @@ const Profile: React.FC = () => {
     (elem && (elem.setAttribute('style','min-height: 2rem; padding: 0.2rem 0.5rem; border-radius: 0.2rem;' )));
   }
 
+  /**
+   * Submit the form.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} event
+   */
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const resUser: IUser = {

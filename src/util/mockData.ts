@@ -1,3 +1,11 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Mock data used for testing and development.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 

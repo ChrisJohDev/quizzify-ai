@@ -1,7 +1,7 @@
 import {createQueryString, createMultipleChoiceQueryString, decodeResponseData, decodeMultiChoiceResponseData} from '../../../src/util/stringHandlers';
 import { MultiChoiceQueryData, QueryData } from '../../../src/util/types';
 
-describe('\n*** stringHandler - createQueryString() ***', () => {
+describe('\n*** ID: QAI:base-TC008 - stringHandler - createQueryString() ***', () => {
   it('testing subject = Australian aborigines history', () => {
     const returnString = 'Create a quiz with 5 questions and answers on the subject of Australian aborigines history, no numbering. Format: [Q: question,  A: answer]';
     const query: QueryData = { subject: 'Australian aborigines history', amount: 5 };
@@ -63,7 +63,7 @@ describe('\n*** stringHandler - createQueryString() ***', () => {
 });
 
 /* *** createMultipleChoiceQueryString *** */
-describe('\n*** stringHandler - createMultipleChoiceQueryString ***', () => {
+describe('\n*** ID: QAI:base-TC009 - stringHandler - createMultipleChoiceQueryString ***', () => {
   it('testing subject = Australian aborigines history', () => {
     const returnString = "Create a multi-choice quiz with 5 questions each with 3 choices on the subject of Australian aborigines history, no numbering. Format: [Q: question,  C: choices [separator:'<||>'], A: answer]";
     const query: MultiChoiceQueryData = { subject: 'Australian aborigines history', amount: 5, numbOfMultiChoice: 3 };
@@ -173,7 +173,7 @@ describe('\n*** stringHandler - createMultipleChoiceQueryString ***', () => {
 
 
 /* *** decodeResponseData *** */
-describe('\n*** stringHandler - decodeResponseData ***', () => {
+describe('\n*** ID: QAI:base-TC010 - stringHandler - decodeResponseData ***', () => {
   it('testing response with 5 questions', () => {
     const response = `Q: What is the capital of Australia? A: Canberra
 Q: What is the capital of New Zealand? A: Wellington
@@ -207,7 +207,7 @@ Q: What is the capital of Canada? A: Ottawa`;
 });
 
 /* *** decodeMultiChoiceResponseData *** */
-describe('\n*** stringHandler - decodeMultiChoiceResponseData ***', () => {
+describe('\n*** ID: QAI:base-TC011 stringHandler - decodeMultiChoiceResponseData ***', () => {
   it('testing response with 5 questions', () => {
     const response = `Q: What is the capital of Australia? C: Canberra<||> Sydney<||> Melbourne A: Canberra
 Q: What is the capital of New Zealand? C: Wellington<||> Auckland<||> Christchurch A: Wellington

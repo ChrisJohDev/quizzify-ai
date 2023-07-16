@@ -1,3 +1,11 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Contains functions for handling of strings server side.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 import { QueryData, MultiChoiceQueryData, Questions, MultiChoiceQuestion, MultiChoiceQuestions } from './types';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
@@ -46,7 +54,7 @@ const decodeResponseData = (response: string) => {
 
   const questions: Questions = { questions: [], subject: '' };
 
-  console.log('\n*** [stringHandlers - decodeResponseData] \nqAndA:', qAndA);
+  isDevelopment && console.log('\n*** [stringHandlers - decodeResponseData] \nqAndA:', qAndA);
 
   qAndA.forEach((question) => {
     if (question.trim().length > 0) {

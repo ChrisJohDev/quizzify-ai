@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Index - snapshot test renders correctly 1`] = `
+exports[`ID: QAI:base-TC012 - Home Page renders correctly 1`] = `
 <div>
   <div
     class="container max-w-screen-lg md:mx-auto flex flex-col items-center home-page"

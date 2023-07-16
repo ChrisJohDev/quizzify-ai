@@ -1,3 +1,11 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Create the quiz API endpoint.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 import { NextApiRequest, NextApiResponse } from "next";
 import { createQueryString, decodeResponseData, createMultipleChoiceQueryString, decodeMultiChoiceResponseData } from "@/util/stringHandlers";
 import { mockResponseApiData2, mockResponseApiDataMultiChoice } from "@/util/mockData";
@@ -7,6 +15,12 @@ import { mockResponseApiData2, mockResponseApiDataMultiChoice } from "@/util/moc
 const isDevelopment = process.env.NODE_ENV === 'development';
 const MOCK_RESPONSE = false;
 
+/**
+ * Handler for the /api/createQuiz route.
+ *
+ * @param {NextApiRequest} req
+ * @param {NextApiResponse} res
+ */
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   isDevelopment && console.log('\n*** [createQuiz-handler] -');
   const body = await req.body;
@@ -23,7 +37,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const decodedResponse = decodeResponseData(response);
 
-    console.log('\n*** [createQuiz-handler] \nresponse:', response, '\ndecodedResponse:', decodedResponse);
+    isDevelopment && console.log('\n*** [createQuiz-handler] \nresponse:', response, '\ndecodedResponse:', decodedResponse);
 
     // console.log('\n*** [createQuiz-handler] \nres:', res)
     res.status(200).json({ response: decodedResponse });
@@ -59,13 +73,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       // console.log('\n*** [createQuiz-handler] \nresponse:', response);
 
       const responseJson = await response.json();
-      console.log('\n*** [createQuiz-handler] \nresponseJson.choices[0].message.content:', responseJson.choices[0].message.content);
+      isDevelopment && console.log('\n*** [createQuiz-handler] \nresponseJson.choices[0].message.content:', responseJson.choices[0].message.content);
 
       const decodedResponse = isMultiChoice 
       ? decodeMultiChoiceResponseData(responseJson.choices[0].message.content)
       : decodeResponseData(responseJson.choices[0].message.content);
 
-      console.log('\n*** [createQuiz-handler] \ndecodedResponse:', String(decodedResponse));
+      isDevelopment && console.log('\n*** [createQuiz-handler] \ndecodedResponse:', String(decodedResponse));
 
       res.status(200).json({ response: decodedResponse });
     } catch (err) {

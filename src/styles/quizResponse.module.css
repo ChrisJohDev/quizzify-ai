@@ -1,3 +1,12 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * OBSOLETE! This file is no longer used.
+ * Styles for quizResponse.tsx
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 .wrapper {
     display: flex;
     flex-direction: column;

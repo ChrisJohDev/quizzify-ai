@@ -1,9 +1,24 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Pricing page.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
+import React from 'react';
 import styles from '@/styles/pricing.module.css'
 import Loading from '@/components/loading';
 
 const notImplemented = true;
 
-export default function Pricing() {
+/**
+ * Pricing page.
+ *
+ * @export
+ * @return {React.ReactElement} 
+ */
+export default function Pricing(): React.ReactElement {
   return (
     <div className={`container flex flex-col mx-auto ${styles.pricingPage}`}>
       {

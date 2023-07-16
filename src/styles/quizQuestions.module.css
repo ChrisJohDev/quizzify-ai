@@ -1,3 +1,11 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Styles for quizQuestions.tsx
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 .wrapper {
   width: clamp(200px, 80%, 600px);
   display: flex;

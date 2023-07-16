@@ -1,19 +1,42 @@
-import React from 'react';
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Quiz questions component.
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
+import React, { ReactElement } from 'react';
 import { Questions } from '@/util/types';
 import QuizQuestionsItem from './quizQuestionsItem';
 import styles from '@/styles/quizQuestions.module.css';
 import createPdf from '@/util/pdf';
 import createMultiChoicePdf from '@/util/multiChoicePdf';
 
+/**
+ * QuizQuestionsProps interface.
+ *
+ * @interface QuizQuestionsProps
+ */
 interface QuizQuestionsProps {
   subject: string,
   quiz: Questions,
   multiChoice: boolean,
 }
 
-const QuizQuestions: React.FC<QuizQuestionsProps> = ({ quiz, subject, multiChoice }) => {
+/**
+ * Quiz questions component.
+ *
+ * @param {QuizQuestionsProps} { quiz, subject, multiChoice }
+ * @return {ReactElement} 
+ */
+const QuizQuestions: React.FC<QuizQuestionsProps> = ({ quiz, subject, multiChoice }: QuizQuestionsProps): ReactElement => {
 
-
+  /**
+   * Handles the create PDF event.
+   *
+   * @param {{ preventDefault: () => void; }} ev
+   */
   const handleCreatePdf = (ev: { preventDefault: () => void; }) => {
     ev.preventDefault();
     console.log('\n*** [quizQuestions] - quiz.questions: ', quiz.questions);

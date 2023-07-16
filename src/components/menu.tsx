@@ -1,14 +1,25 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Main menu component
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
 import Script from 'next/script'
 import Logo from './logo'
 import Link from 'next/link';
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { BsFillPersonFill } from "react-icons/bs";
 import styles from '@/styles/menu.module.css';
 
-
-
-const Menu = () => {
+/**
+ *  Main menu component
+ *
+ * @return {ReactElement} 
+ */
+const Menu = (): ReactElement => {
   const [active, setActive] = useState(false);
   const [showDropdownMenu, setShowDropdownMenu] = useState(false);
   const handleClick = () => {

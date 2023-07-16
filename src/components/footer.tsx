@@ -1,7 +1,22 @@
+/**
+ * Project Name: Quizzify-AI
+ * 
+ * Footer component
+ *
+ * @author Chris Johannesson <chris@chrisjohannesson.com>
+ * @version 1.0.0 - release
+ */
+
+import { ReactElement } from "react";
 import Logo from './logo'
 import styles from '@/styles/footer.module.css'
 
-const Footer = () => {
+/**
+ * Footer component
+ *
+ * @return {ReactElement}   Visual component
+ */
+const Footer = (): ReactElement => {
   const year = new Date().getFullYear()
 
   return (

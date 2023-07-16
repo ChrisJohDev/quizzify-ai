@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`About - snapshot test renders correctly 1`] = `
+exports[`ID: QAI:base-TC013 - About Page renders correctly 1`] = `
 <div>
   <div
     class="flex flex-col aboutPage"

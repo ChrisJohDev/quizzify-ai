@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Contact - snapshot test renders correctly 1`] = `
+exports[`ID: QAI:base-TC016 - Contact Page renders correctly 1`] = `
 <div>
   <div
     class="container flex flex-col mx-auto contactPage"

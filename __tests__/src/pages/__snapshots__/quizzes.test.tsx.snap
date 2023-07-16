@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Quizzes - snapshot test renders correctly 1`] = `
+exports[`ID: QAI:base-TC014 - Quizzes Page renders correctly 1`] = `
 <div>
   <div
     class="container mx-auto flex flex-col flex-fill items-center quizPage"
@@ -115,7 +115,7 @@ exports[`Quizzes - snapshot test renders correctly 1`] = `
         >
           <input
             type="submit"
-            value="Submit"
+            value="Generate Quiz"
           />
           <input
             type="reset"
