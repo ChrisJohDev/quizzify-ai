@@ -1,14 +1,14 @@
 /**
  * Project Name: Quizzify-AI
- * 
+ *
  * Signup/Register page.
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
  * @version 1.0.0 - release
  */
 import React from 'react';
-import styles from '@/styles/signup.module.css'
-import {useState}from 'react';
+import styles from '@/styles/signup.module.css';
+import { useState } from 'react';
 
 type Message = {
   head: string;
@@ -18,11 +18,15 @@ type Message = {
 /**
  * Signup/Register page.
  *
- * @return {React.ReactElement} 
+ * @returns {React.ReactElement}
  */
 const SignUp = (): React.ReactElement => {
-  const [message, setMessage] = useState<Message>({head: '', body: ''});
+  const [message, setMessage] = useState<Message>({ head: '', body: '' });
 
+  /**
+   *
+   * @param ev
+   */
   const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     const data = new FormData(ev.currentTarget);
@@ -52,17 +56,17 @@ const SignUp = (): React.ReactElement => {
         throw new Error(response.statusText);
       }
       const data = await response.json();
-      if(data){
-        setMessage({head:'Your registration was successful', body: 'An email with a verification link has been sent to the email address you supplied. Please, click on the link to verify your email address.'});
+      if (data) {
+        setMessage({ head: 'Your registration was successful', body: 'An email with a verification link has been sent to the email address you supplied. Please, click on the link to verify your email address.' });
         // window.location.href = data.redirect;
       }
     } catch (err) {
-      setMessage({head:'Your registration failed', body: 'Please, check your entries and try again.'});
+      setMessage({ head: 'Your registration failed', body: 'Please, check your entries and try again.' });
       console.error('\n*** [handleSubmit] error:', err);
     } finally {
-      document.querySelector("#message")?.classList.remove("hidden");
+      document.querySelector('#message')?.classList.remove('hidden');
     }
-  }
+  };
   return (
     <div className={`${styles.wrapper} class="container max-w-screen-lg mx-auto flex flex-col`}>
       <h1>Registration Form</h1>
@@ -107,7 +111,7 @@ const SignUp = (): React.ReactElement => {
 
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default SignUp;

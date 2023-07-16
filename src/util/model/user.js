@@ -1,23 +1,29 @@
 /**
  * Project Name: Quizzify-AI
- * 
- * Mongoose schema for the user model. 
+ *
+ * Mongoose schema for the user model.
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
  * @version 1.0.0 - release
  */
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
 /**
  * The user schema.
  *
  * @type {mongoose.Schema}
+ * @param {string} guid - The guid.
  * @param {string} username - The username.
  * @param {string} firstName - The first name.
  * @param {string} lastName - The last name.
  * @param {string} email - The email.
  * @param {string} salt - The salt.
  * @param {string} hashedPassword - The hashed password.
+ * @param {boolean} isVerified - True if the user is verified, otherwise false.
+ * @param {string} verificationToken - The verification token.
+ * @param {number} verificationTokenExpires - The verification token expiration.
+ * @param {string} resetPasswordToken - The reset password token.
+ * @param {string} role - The role of the user enum('user', 'admin').
  */
 
 const userSchema = new mongoose.Schema({
@@ -38,7 +44,7 @@ const userSchema = new mongoose.Schema({
        * @returns {boolean} - True if the value is valid, otherwise false.
        */
       validator: function (v) {
-        return /^[A-Za-z][A-Za-z0-9_-]{2,255}$/.test(v)
+        return /^[A-Za-z][A-Za-z0-9_-]{2,255}$/.test(v);
       }
     },
     minLength: 3,
@@ -69,7 +75,7 @@ const userSchema = new mongoose.Schema({
        * @returns {boolean} - True if the value is valid, otherwise false.
        */
       validator: function (v) {
-        return /^[a-zA-Z0-9][^\s@]+@([^\s@]+\.)+[a-zA-Z]{2,}$/.test(v)
+        return /^[a-zA-Z0-9][^\s@]+@([^\s@]+\.)+[a-zA-Z]{2,}$/.test(v);
       },
       /**
        * The error message to display if the validation fails.
@@ -110,6 +116,12 @@ const userSchema = new mongoose.Schema({
   resetPasswordToken: {
     required: false,
     type: String
+  },
+  role: {
+    required: true,
+    type: String,
+    enum: ['user', 'admin'],
+    default: 'user'
   }
 }, {
   timestamps: true,
@@ -122,17 +134,17 @@ const userSchema = new mongoose.Schema({
      * @param {object} ret - The plain object representation which has been converted.
      */
     transform: (doc, ret) => {
-      delete ret._id
-      delete ret.__v
+      delete ret._id;
+      delete ret.__v;
     }
   }
-})
+});
 
 let User;
 
-try{
+try {
   User = mongoose.model('User');
-} catch(e) {
+} catch (e) {
   User = mongoose.model('User', userSchema);
 }
 

@@ -1,6 +1,6 @@
 /**
  * Project Name: Quizzify-AI
- * 
+ *
  * Quiz form component.
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
@@ -32,7 +32,7 @@ interface QuizFormProps {
  * The form for creating a quiz.
  *
  * @param {setQuizFunction} setQuiz - The function for setting the quiz.
- * @return {ReactElement} - The form for creating a quiz.
+ * @returns {ReactElement} - The form for creating a quiz.
  */
 const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice, subject }: QuizFormProps): ReactElement => {
   const [loading, setLoading] = useState(false);
@@ -44,13 +44,13 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
 
   useEffect(() => {
     checkElem.current?.focus();
-  }, [])
+  }, []);
 
   /**
    * Handles the form submission event. Inner function.
    *
    * @param {React.FormEvent<HTMLFormElement>} ev - The form submission event.
-   * @return {void}
+   * @returns {void}
    */
   const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -63,7 +63,7 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
     const subject = data.get('subject');
     const multiChoice = (data.get('multiChoice') === 'on') as boolean;
     const numbOfMultiChoice = Number(data.get('numbOfMultiChoice'));
-    const amount = !multiChoice ? data.get('amount'): 10; // Limits the number of questions to 10 if multiChoice is true
+    const amount = !multiChoice ? data.get('amount') : 10; // Limits the number of questions to 10 if multiChoice is true
 
     isDevelopment && console.log('\n*** [quizForm - handleSubmit] subject:', subject, '\namount:', amount, '\nmultiChoice:', multiChoice, '\nnumbOfMultiChoice:', numbOfMultiChoice);
 
@@ -82,7 +82,7 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
     isDevelopment && console.log('\n*** [quizForm - handleSubmit] sending data -\nendpoint:', endpoint, '\njson:', json);
 
     try {
-      const response = await fetch(endpoint, options)
+      const response = await fetch(endpoint, options);
       if (!response.ok) {
         throw new Error(response.statusText);
       }
@@ -102,8 +102,8 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
   /**
    * Handles the reset button click event. Inner function.
    *
-   * @param {React.MouseEvent<HTMLInputElement, MouseEvent>} ev
-   * @return {void}
+   * @param {React.MouseEvent<HTMLInputElement, MouseEvent>} ev - The reset button click event.
+   * @returns {void} - Resets the form.
    */
   const handleReset = (ev: React.MouseEvent<HTMLInputElement, MouseEvent>): void => {
     ev.preventDefault();
@@ -113,28 +113,26 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
     selectAmount.current && (selectAmount.current.value = '10');
     selectNumbChoices.current && (selectNumbChoices.current.value = '3');
     checkElem.current && (checkElem.current.focus());
-  }
+  };
 
   return (
     <>
       {
         loading
-          ?
-          <Loading text={`Loading your quiz about ${subject || 'General knowledge'}...`} />
-          :
-          <form className={`mx-auto ${styles.queryForm}`} onSubmit={handleSubmit}>
+          ? <Loading text={`Loading your quiz about ${subject || 'General knowledge'}...`} />
+          : <form className={`mx-auto ${styles.queryForm}`} onSubmit={handleSubmit}>
             <div className="multiChoice">
               <label htmlFor="multiChoice">Multiple choice questions:&nbsp;&nbsp;
-                <input 
-                type="checkbox" 
-                id="multiChoice" 
-                name="multiChoice" 
-                ref={checkElem}
-                onChange={(ev) => {
-                  setIsMultiChoice(ev.target.checked)
-                  // Temporary fix while we fix the problem with time outs
-                  selectAmount.current && (selectAmount.current.value = '10');  
-                }}
+                <input
+                  type="checkbox"
+                  id="multiChoice"
+                  name="multiChoice"
+                  ref={checkElem}
+                  onChange={(ev) => {
+                    setIsMultiChoice(ev.target.checked);
+                    // Temporary fix while we fix the problem with time outs
+                    selectAmount.current && (selectAmount.current.value = '10');
+                  }}
                 />
               </label>
               <div className="numberOfQuestions" >
@@ -157,13 +155,13 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
             </div>
             <div className="subjectInput">
               <label htmlFor="subjectText">Subject:</label>
-              <input 
-              type="text" 
-              className={`${styles.subjectInput}`} 
-              id="subjectText" 
-              name="subject" 
-              ref={subjectField}
-              placeholder='Leave blank for general knowledge' 
+              <input
+                type="text"
+                className={`${styles.subjectInput}`}
+                id="subjectText"
+                name="subject"
+                ref={subjectField}
+                placeholder='Leave blank for general knowledge'
               />
             </div>
             <div className={`${styles.buttons}`}>
@@ -173,7 +171,7 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
           </form>
       }
     </>
-  )
-}
+  );
+};
 
 export default QuizForm;

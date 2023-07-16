@@ -1,22 +1,21 @@
 /**
  * Project Name: Quizzify-AI
- * 
+ *
  * Contact page.
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
  * @version 1.0.0 - release
  */
-import styles from '../styles/contact.module.css'
+import styles from '../styles/contact.module.css';
 import React from 'react';
 // import ContactForm from '@/components/contactForm';
 
 /**
+ * Contact page.
  *
- *
- * @export
- * @return {React.ReactElement} 
+ * @returns {React.ReactElement} - The contact page.
  */
-export default function Contact(): React.ReactElement {
+export default function Contact (): React.ReactElement {
   return (
     <div className={`container flex flex-col mx-auto ${styles.contactPage}`}>
       <h1 className="text-center">Contact Us</h1>

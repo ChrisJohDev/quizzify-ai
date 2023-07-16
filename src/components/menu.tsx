@@ -1,27 +1,32 @@
 /**
  * Project Name: Quizzify-AI
- * 
+ *
  * Main menu component
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
  * @version 1.0.0 - release
  */
-import Script from 'next/script'
-import Logo from './logo'
+import Script from 'next/script';
+import Logo from './logo';
 import Link from 'next/link';
 import { ReactElement, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { BsFillPersonFill } from "react-icons/bs";
+import { BsFillPersonFill } from 'react-icons/bs';
 import styles from '@/styles/menu.module.css';
 
 /**
- *  Main menu component
+ * Main menu component.
  *
- * @return {ReactElement} 
+ * @returns {ReactElement} - The main menu component.
  */
 const Menu = (): ReactElement => {
   const [active, setActive] = useState(false);
   const [showDropdownMenu, setShowDropdownMenu] = useState(false);
+  /**
+   * Handle click event.
+   *
+   * @returns {void} - Nothing
+   */
   const handleClick = () => {
     setActive(!active);
   };
@@ -63,13 +68,12 @@ const Menu = (): ReactElement => {
             <li className="nav-item dropdown">
               <div className="md:ml-6 text-[#d6ecff]">{
                 session
-                  ?
-                  <>
+                  ? <>
                     <Link className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                       data-mdb-toggle="dropdown" aria-expanded="false" onClick={() => setShowDropdownMenu(!showDropdownMenu)}>
                       <BsFillPersonFill className="inline-block" size={30} />
                     </Link>
-                    <ul className={`${styles.dropdownMenu}`} style={{display: showDropdownMenu ? 'block' : 'none'}} aria-labelledby="navbarDropdownMenuLink">
+                    <ul className={`${styles.dropdownMenu}`} style={{ display: showDropdownMenu ? 'block' : 'none' }} aria-labelledby="navbarDropdownMenuLink">
                       <li>
                         <Link className="dropdown-item" href="/auth/profile" onClick={() => setShowDropdownMenu(!showDropdownMenu)}>Profile</Link>
                       </li>
@@ -87,7 +91,7 @@ const Menu = (): ReactElement => {
       </div>
       <Script src="https://cdn.tailwindcss.com"></Script>
     </nav>
-  )
-}
+  );
+};
 
 export default Menu;

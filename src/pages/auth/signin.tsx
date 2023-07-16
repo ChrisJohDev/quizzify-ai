@@ -1,18 +1,18 @@
 /**
  * Project Name: Quizzify-AI
- * 
+ *
  * Signin/Login page.
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
  * @version 1.0.0 - release
  */
 import React from 'react';
-import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import { getCsrfToken, getProviders, signIn } from "next-auth/react"
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "../api/auth/[...nextauth]";
-import styles from '@/styles/signin.module.css'
-import Link from 'next/link'
+import type { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import { getCsrfToken, getProviders, signIn } from 'next-auth/react';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '../api/auth/[...nextauth]';
+import styles from '@/styles/signin.module.css';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 /**
@@ -20,14 +20,14 @@ import { useRouter } from 'next/router';
  *
  * @export
  * @param {InferGetServerSidePropsType<typeof getServerSideProps>} { providers, csrfToken }
- * @return {React.ReactElement} 
+ * @returns {React.ReactElement}
  */
-export default function SignIn({ providers, csrfToken }: InferGetServerSidePropsType<typeof getServerSideProps>): React.ReactElement {
+export default function SignIn ({ providers, csrfToken }: InferGetServerSidePropsType<typeof getServerSideProps>): React.ReactElement {
   console.log('\n*** [signin] providers:', providers);
-  console.log('\n*** [signin] signIn:', signIn)
+  console.log('\n*** [signin] signIn:', signIn);
   const router = useRouter();
   const { query } = router;
-  const isError = query.error ? true : false;
+  const isError = !!query.error;
   console.log('\n*** [signin] query:', query);
 
   return (
@@ -61,8 +61,7 @@ export default function SignIn({ providers, csrfToken }: InferGetServerSideProps
               </form>
               <hr />
             </div>
-            :
-            <div>
+            : <div>
               <button onClick={() => signIn(provider.id)}>
                 Sign in with {provider.name}
               </button>
@@ -74,10 +73,14 @@ export default function SignIn({ providers, csrfToken }: InferGetServerSideProps
         <p>Don&rsquo;t have an account? Sign up <Link href="/auth/signup">here</Link>!</p>
       </div>
     </div>
-  )
+  );
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+/**
+ *
+ * @param context
+ */
+export async function getServerSideProps (context: GetServerSidePropsContext) {
   const session = await getServerSession(context.req, context.res, authOptions);
   const csrfToken = await getCsrfToken(context);
 
@@ -85,12 +88,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   // Note: Make sure not to redirect to the same page
   // To avoid an infinite loop!
   if (session) {
-    return { redirect: { destination: "/" } };
+    return { redirect: { destination: '/' } };
   }
 
   const providers = await getProviders();
 
   return {
-    props: { providers: providers ?? [], csrfToken },
-  }
+    props: { providers: providers ?? [], csrfToken }
+  };
 }

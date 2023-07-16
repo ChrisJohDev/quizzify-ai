@@ -1,13 +1,13 @@
 /**
  * Project Name: Quizzify-AI
- * 
+ *
  * Pricing page.
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
  * @version 1.0.0 - release
  */
 import React from 'react';
-import styles from '@/styles/pricing.module.css'
+import styles from '@/styles/pricing.module.css';
 import Loading from '@/components/loading';
 
 const notImplemented = true;
@@ -15,10 +15,9 @@ const notImplemented = true;
 /**
  * Pricing page.
  *
- * @export
- * @return {React.ReactElement} 
+ * @returns {React.ReactElement} - The pricing page.
  */
-export default function Pricing(): React.ReactElement {
+export default function Pricing (): React.ReactElement {
   return (
     <div className={`container flex flex-col mx-auto ${styles.pricingPage}`}>
       {
@@ -32,9 +31,8 @@ export default function Pricing(): React.ReactElement {
               Thank you for your patience and understanding.
             </p>
           </div>
-          :
-          <>
-            <Loading text={"Loading this might be a ver y long text..."} /><h1 className="text-center">Pricing Page</h1><div className={`mx-auto ${styles.tableWrapper}`}>
+          : <>
+            <Loading text={'Loading this might be a ver y long text...'} /><h1 className="text-center">Pricing Page</h1><div className={`mx-auto ${styles.tableWrapper}`}>
               <table>
                 <thead>
                   <tr>
@@ -59,5 +57,5 @@ export default function Pricing(): React.ReactElement {
 
     </div>
 
-  )
+  );
 }

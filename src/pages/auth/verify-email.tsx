@@ -1,6 +1,6 @@
 /**
  * Project Name: Quizzify-AI
- * 
+ *
  * Verify-email landing page.
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
@@ -20,6 +20,10 @@ interface Props {
   ok: boolean
 }
 
+/**
+ *
+ * @param context
+ */
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context: GetServerSidePropsContext<ParsedUrlQuery>
 ): Promise<GetServerSidePropsResult<Props>> => {
@@ -35,7 +39,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
       isDevelopment && console.log('\n*** [verify-email-getServerSideProps] user:', user.guid, '\n*** [verify-email-getServerSideProps] id:', id);
       user.verified = true;
       user.verificationToken = '';
-      const response = await UserLocal.findOneAndUpdate({ guid: user.guid}, { isVerified: true, verificationToken: '' }, {new: true});
+      const response = await UserLocal.findOneAndUpdate({ guid: user.guid }, { isVerified: true, verificationToken: '' }, { new: true });
       isDevelopment && console.log('\n*** [verify-email-getServerSideProps] response.isVerified:', response.isVerified);
       if (response.isVerified) {
         return { props: { ok: true } };
@@ -45,13 +49,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
     console.error('\n*** [verify-email-getServerSideProps] error:', err);
   }
   return { props: { ok: false } };
-}
+};
 
 /**
  * Verify-email landing page.
  *
  * @param {Props} { ok }
- * @return {ReactElement} 
+ * @returns {ReactElement}
  */
 const VerifyEmails = ({ ok }: Props): ReactElement => {
   console.log('\n*** [verify-email-handler] - ok:', ok);
@@ -78,4 +82,3 @@ const VerifyEmails = ({ ok }: Props): ReactElement => {
 };
 
 export default VerifyEmails;
-

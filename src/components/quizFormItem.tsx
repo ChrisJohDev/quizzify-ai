@@ -1,13 +1,13 @@
 /**
  * Project Name: Quizzify-AI
- * 
+ *
  * Quiz form item component.
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
  * @version 1.0.0 - release
  */
 
-import { ReactElement } from "react";
+import { ReactElement } from 'react';
 
 /**
  * QuizFormItemProps interface.
@@ -21,8 +21,8 @@ interface QuizFormItemProps {
 /**
  * Quiz form item component.
  *
- * @param {QuizFormItemProps} props
- * @return {ReactElement} 
+ * @param {QuizFormItemProps} props - The props for the component.
+ * @returns {ReactElement} - The quiz form item component.
  */
 const QuizFormItem = (props: QuizFormItemProps): ReactElement => {
   const { question } = props;

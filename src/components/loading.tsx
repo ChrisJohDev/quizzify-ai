@@ -1,13 +1,13 @@
 /**
  * Project Name: Quizzify-AI
- * 
+ *
  * Loading component
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
  * @version 1.0.0 - release
  */
-import { ReactElement } from "react";
-import Logo from "./logo";
+import { ReactElement } from 'react';
+import Logo from './logo';
 import styles from '@/styles/loading.module.css';
 
 /**
@@ -20,10 +20,10 @@ interface LoadingProps {
 }
 
 /**
- * Loading component
+ * Loading component.
  *
- * @param {LoadingProps} { text }
- * @return {ReactElement} 
+ * @param {LoadingProps} text - The text to display.
+ * @returns {ReactElement} - The loading component.
  */
 const Loading = ({ text }: LoadingProps): ReactElement => {
   return (
@@ -34,6 +34,6 @@ const Loading = ({ text }: LoadingProps): ReactElement => {
       </div>
     </div>
   );
-}
+};
 
 export default Loading;

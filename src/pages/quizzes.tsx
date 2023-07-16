@@ -1,15 +1,15 @@
 /**
  * Project Name: Quizzify-AI
- * 
+ *
  * Quizzes page. Main page for creating quizzes.
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
  * @version 1.0.0 - release
  */
 import React from 'react';
-import styles from '@/styles/quizzes.module.css'
-import QuizForm from '@/components/quizForm'
-import { useState, useEffect } from 'react'
+import styles from '@/styles/quizzes.module.css';
+import QuizForm from '@/components/quizForm';
+import { useState, useEffect } from 'react';
 import { Questions } from '@/util/types';
 import QuizQuestions from '@/components/quizQuestions';
 
@@ -18,7 +18,7 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 /**
  * Quizzes page. Main page for creating quizzes.
  *
- * @return {React.ReactElement} 
+ * @returns {React.ReactElement}
  */
 const Quizzes: React.FC = (): React.ReactElement => {
   const [quiz, setQuiz] = useState<Questions>({ questions: [], subject: '' });
@@ -49,8 +49,7 @@ const Quizzes: React.FC = (): React.ReactElement => {
           </>
       }
     </div>
-  )
-}
+  );
+};
 
 export default Quizzes;
-
