@@ -24,10 +24,10 @@ const Profile: React.FC = (): React.ReactElement => {
   const [lastName, setLastName] = useState<string | undefined>(user?.lastName);
   const [email, setEmail] = useState<string | undefined>(user?.email);
   const [username, setUsername] = useState<string | undefined>(user?.username);
-  const [firstNameOriginal] = useState<string>(user?.firstName);
-  const [lastNameOriginal] = useState<string>(user?.lastName);
-  const [emailOriginal] = useState<string>(user?.email);
-  const [usernameOriginal] = useState<string>(user?.username);
+  const [firstNameOriginal, setFirstNameOriginal] = useState<string>(user?.firstName);
+  const [lastNameOriginal, setLastNameOriginal] = useState<string>(user?.lastName);
+  const [emailOriginal, setEmailOriginal] = useState<string>(user?.email);
+  const [usernameOriginal, setUsernameOriginal] = useState<string>(user?.username);
   const [updateResponse, setUpdateResponse] = useState<string>('');
 
   /**
@@ -42,6 +42,22 @@ const Profile: React.FC = (): React.ReactElement => {
     setUpdateResponse('');
     const elem: HTMLElement | null = document.querySelector('#profileMessage');
     (elem && (elem.setAttribute('style', 'min-height: 2rem; padding: 0.2rem 0.5rem; border-radius: 0.2rem;')));
+  };
+
+  /**
+   * Update the user.
+   *
+   * @param {IUser} newUser - The new user.
+   */
+  const updateUser = async (newUser: IUser) => {
+    user.firstName !== newUser.firstName && (user.firstName = newUser.firstName);
+    user.lastName !== newUser.lastName && (user.lastName = newUser.lastName);
+    user.email !== newUser.email && (user.email = newUser.email);
+    user.username !== newUser.username && (user.username = newUser.username);
+    setFirstNameOriginal(user.firstName);
+    setLastNameOriginal(user.lastName);
+    setEmailOriginal(user.email);
+    setUsernameOriginal(user.username);
   };
 
   /**
@@ -80,7 +96,8 @@ const Profile: React.FC = (): React.ReactElement => {
 
       if (res.status > 199 && res.status < 300) {
         (elem && (elem.style.color = 'green'));
-
+        console.log('\n*** [profile] \nres:', res, '\nuser:', user);
+        await updateUser(resUser as IUser);
         setUpdateResponse('Profile updated successfully.');
       } else {
         (elem && (elem.style.color = 'red'));

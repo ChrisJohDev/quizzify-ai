@@ -43,9 +43,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     isDevelopment && console.log('\n*** [update-user] - checkUser:', checkUser);
 
-    // THe email check here is only temporary so email can't be changed until
-    // we implement the email verification process.
-    if (user.guid !== checkUser.guid || !checkUser.isVerified || user.email !== checkUser.email) {
+    // We don't check the email since the user should be able to change it.
+    // We do need to have something else in place so that a new email has to be verified
+    // before it can be used for login.
+    if (user.guid !== checkUser.guid || !checkUser.isVerified) {
       throw new Error('User not authorized.');
     }
 
