@@ -1,6 +1,6 @@
 /**
  * Project Name: Quizzify-AI
- * 
+ *
  * Register API endpoint.
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
@@ -21,16 +21,15 @@ const isDevelopment = true;
 // Sending verification email through Sendgrid API
 const PATH = '/auth/verify-email';
 
-
 /**
  * Send verification email to user.
  *
- * @param {string} email
- * @param {string} guid
- * @param {string} verificationToken
- * @param {string} origin
- * @param {string} path
- * @return {*} 
+ * @param {string} email - user email address
+ * @param {string} guid - user guid
+ * @param {string} verificationToken - verification token
+ * @param {string} origin - origin
+ * @param {string} path - path
+ * @returns {*} - nothing
  */
 const sendVerificationEmail = async (email: string, guid: string, verificationToken: string, origin: string, path: string) => {
   isDevelopment && console.log('\n*** [register-sendVerificationEmail] - email:', email, 'guid:', guid, 'verificationToken:', verificationToken, 'origin:', origin, 'path:', path);
@@ -47,7 +46,7 @@ const sendVerificationEmail = async (email: string, guid: string, verificationTo
     subject: 'Please verify your email address - Quizzify-AI.org ',
     text: `You need to verify your email address to complete registration. Please click on the following link, or paste this into your browser to complete the process:\n\n${verificationURL}\n\nThis link will expire in 24 hours.\n`,
     html: `<p>You need to verify your email address to complete registration. Please click on the following link, or paste this into your browser to complete the process:</p><div><button><a href="${verificationURL}">Verify Email</a></button></div><p>This link will expire in 24 hours.</p>`
-  }
+  };
 
   isDevelopment && console.log('\n*** [register-sendVerificationEmail] - msg:', msg);
   // sgMail
@@ -71,27 +70,26 @@ const sendVerificationEmail = async (email: string, guid: string, verificationTo
   // })();
   // If we get here something went wrong.
   return Promise.resolve({ ok: false });
-}
-
-
+};
 
 /**
  * Register handler.
  *
- * @param {NextApiRequest} req
- * @param {NextApiResponse} res
+ * @param {NextApiRequest} req - request
+ * @param {NextApiResponse} res - response
  */
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   isDevelopment && console.log('\n*** [register-handler] -');
 
   try {
     await connectDB();
+    // eslint-disable-next-line camelcase
     const { username, firstName, lastName, email, pword, confirm_pword } = req.body;
     const origin = req.headers.origin ? req.headers.origin : 'http://localhost:3000';
 
     // isDevelopment && console.log('\n*** [register-handler] \nusername:', username, '\nfirstName:', firstName, '\nlastName:', lastName, '\nemail:', email, '\npword:', pword, '\nconfirm_pword:', confirm_pword);
 
-
+    // eslint-disable-next-line camelcase
     if (pword !== confirm_pword) {
       throw new Error('Passwords do not match.');
     }
@@ -145,7 +143,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       isDevelopment && console.log('\n*** [register-handler] \nsgResponse:', sgResponse);
       res.status(201).json({ redirect: '/', text });
     } else {
-      throw new Error('User not created! Rejected by database.')
+      throw new Error('User not created! Rejected by database.');
     }
   } catch (err: unknown) {
     if (err instanceof Error) {
@@ -155,6 +153,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
     res.status(500).send('Server Error');
   }
-}
+};
 
 export default handler;

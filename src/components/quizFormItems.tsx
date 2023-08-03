@@ -1,6 +1,6 @@
 /**
  * Project Name: Quizzify-AI
- * 
+ *
  * Quiz form items component.
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
@@ -16,18 +16,17 @@ import { ReactElement } from 'react';
  *
  * @interface Props
  */
-interface Props  {
+interface Props {
   queryResponse: QueryResponse
 }
 
 /**
  * Quiz form items component.
  *
- * @param {Props} { queryResponse }
- * @return {ReactElement} 
+ * @param {Props} queryResponse - The props for the component.
+ * @returns {ReactElement} - The quiz form items component.
  */
 const Questions = ({ queryResponse }: Props): ReactElement => {
-
   const data = queryResponse;
   // console.log('\n*** [Questions] in-data:', data);
   return (

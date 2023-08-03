@@ -1,12 +1,12 @@
 /**
  * Project Name: Quizzify-AI
- * 
+ *
  * Profile page.
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
  * @version 1.0.0 - release
  */
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { IUser } from '@/util/types';
 import styles from '@/styles/profile.module.css';
@@ -14,7 +14,7 @@ import styles from '@/styles/profile.module.css';
 /**
  * Profile page.
  *
- * @return {React.ReactElement} 
+ * @returns {React.ReactElement} - The profile page.
  */
 const Profile: React.FC = (): React.ReactElement => {
   const { data: session } = useSession<boolean>();
@@ -24,10 +24,10 @@ const Profile: React.FC = (): React.ReactElement => {
   const [lastName, setLastName] = useState<string | undefined>(user?.lastName);
   const [email, setEmail] = useState<string | undefined>(user?.email);
   const [username, setUsername] = useState<string | undefined>(user?.username);
-  const [firstNameOriginal,] = useState<string>(user?.password);
-  const [lastNameOriginal,] = useState<string>(user?.password);
-  const [emailOriginal,] = useState<string>(user?.password);
-  const [usernameOriginal,] = useState<string>(user?.password);
+  const [firstNameOriginal, setFirstNameOriginal] = useState<string>(user?.firstName);
+  const [lastNameOriginal, setLastNameOriginal] = useState<string>(user?.lastName);
+  const [emailOriginal, setEmailOriginal] = useState<string>(user?.email);
+  const [usernameOriginal, setUsernameOriginal] = useState<string>(user?.username);
   const [updateResponse, setUpdateResponse] = useState<string>('');
 
   /**
@@ -41,23 +41,44 @@ const Profile: React.FC = (): React.ReactElement => {
     setUsername(usernameOriginal);
     setUpdateResponse('');
     const elem: HTMLElement | null = document.querySelector('#profileMessage');
-    (elem && (elem.setAttribute('style','min-height: 2rem; padding: 0.2rem 0.5rem; border-radius: 0.2rem;' )));
-  }
+    (elem && (elem.setAttribute('style', 'min-height: 2rem; padding: 0.2rem 0.5rem; border-radius: 0.2rem;')));
+  };
+
+  /**
+   * Update the user.
+   *
+   * @param {IUser} newUser - The new user.
+   */
+  const updateUser = async (newUser: IUser) => {
+    user.firstName !== newUser.firstName && (user.firstName = newUser.firstName);
+    user.lastName !== newUser.lastName && (user.lastName = newUser.lastName);
+    user.email !== newUser.email && (user.email = newUser.email);
+    user.username !== newUser.username && (user.username = newUser.username);
+    setFirstNameOriginal(user.firstName);
+    setLastNameOriginal(user.lastName);
+    setEmailOriginal(user.email);
+    setUsernameOriginal(user.username);
+  };
 
   /**
    * Submit the form.
    *
-   * @param {React.FormEvent<HTMLFormElement>} event
+   * @param {React.FormEvent<HTMLFormElement>} ev - The form submission event.
    */
-  const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const resUser: IUser = {
+  const submitHandler = async (ev: React.FormEvent<HTMLFormElement>) => {
+    ev.preventDefault();
+
+    console.log('\n*** [profile] firstName:', firstName, '\nlastName:', lastName, '\nemail:', email, '\nusername:', username, '\nupdateResponse:', updateResponse);
+    const resUser = {
       id: user?.id as string,
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
+      firstName,
+      lastName,
+      email,
       guid: user?.guid as string,
+      username
     };
+
+    console.log('\n*** [profile] resUser:', resUser);
 
     try {
       const res = await fetch('/api/auth/update-user', {
@@ -75,18 +96,17 @@ const Profile: React.FC = (): React.ReactElement => {
 
       if (res.status > 199 && res.status < 300) {
         (elem && (elem.style.color = 'green'));
-        
+        console.log('\n*** [profile] \nres:', res, '\nuser:', user);
+        await updateUser(resUser as IUser);
         setUpdateResponse('Profile updated successfully.');
-      }
-      else {
+      } else {
         (elem && (elem.style.color = 'red'));
         setUpdateResponse('Profile update failed.');
       }
     } catch (err) {
       console.error('\n*** [profile] error:');
     }
-    
-  }
+  };
 
   return (
     <div style={{ color: 'black' }} className={`${styles.wrapper}`}>

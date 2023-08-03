@@ -1,21 +1,20 @@
 /**
  * Project Name: Quizzify-AI
- * 
+ *
  * About page.
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
  * @version 1.0.0 - release
  */
-import styles from '@/styles/about.module.css'
+import styles from '@/styles/about.module.css';
 import React from 'react';
 
 /**
  * About page.
  *
- * @export
- * @return {React.ReactElement} 
+ * @returns {React.ReactElement} - The about page.
  */
-export default function About(): React.ReactElement {
+export default function About (): React.ReactElement {
   return (
     <div className={`flex flex-col ${styles.aboutPage}`}>
       <h1 className={`text-center ${styles.headline}`}><span className="companyName keepColor">Quizzify-AI</span> the Story</h1>
@@ -38,42 +37,42 @@ export default function About(): React.ReactElement {
       <ol>
         <li>
           <p className={styles.paragraph}>
-          <strong>Enhanced Personalization:</strong> In the future, <span className="companyName keepColor">Quizzify-AI</span> plans to incorporate a greater degree of personalization in its platform. This will include adaptive quizzes that adjust difficulty based on player performance and personalized recommendations based on user quiz preferences.
+            <strong>Enhanced Personalization:</strong> In the future, <span className="companyName keepColor">Quizzify-AI</span> plans to incorporate a greater degree of personalization in its platform. This will include adaptive quizzes that adjust difficulty based on player performance and personalized recommendations based on user quiz preferences.
           </p>
         </li>
         <li>
           <p className={styles.paragraph}>
-          <strong>Expanded Content Library:</strong> <span className="companyName keepColor">Quizzify-AI</span> will continue to grow its vast database of questions, aiming to cover more diverse topics, languages, and difficulty levels.
-          </p>
-        </li>
-        <li> 
-          <p className={styles.paragraph}>
-          <strong>Business Solutions:</strong> Recognizing the potential of quizzes as a business tool, <span className="companyName keepColor">Quizzify-AI</span> intends to offer specialized solutions for businesses to engage their customers or train their employees.
+            <strong>Expanded Content Library:</strong> <span className="companyName keepColor">Quizzify-AI</span> will continue to grow its vast database of questions, aiming to cover more diverse topics, languages, and difficulty levels.
           </p>
         </li>
         <li>
           <p className={styles.paragraph}>
-          <strong>Mobile Application:</strong> To make quizzing even more accessible, <span className="companyName keepColor">Quizzify-AI</span> will develop a mobile application that provides the same robust functionality as the web platform.
+            <strong>Business Solutions:</strong> Recognizing the potential of quizzes as a business tool, <span className="companyName keepColor">Quizzify-AI</span> intends to offer specialized solutions for businesses to engage their customers or train their employees.
           </p>
         </li>
         <li>
           <p className={styles.paragraph}>
-          <strong>Partnerships:</strong> <span className="companyName keepColor">Quizzify-AI</span> will seek partnerships with educational institutions, businesses, and entertainment entities to bring quality quizzes to a broader audience.
+            <strong>Mobile Application:</strong> To make quizzing even more accessible, <span className="companyName keepColor">Quizzify-AI</span> will develop a mobile application that provides the same robust functionality as the web platform.
           </p>
         </li>
         <li>
           <p className={styles.paragraph}>
-          <strong>Community-Building:</strong> <span className="companyName keepColor">Quizzify-AI</span> will focus on strengthening its user community, with features like user-created quizzes, community forums, and social media integrations.
+            <strong>Partnerships:</strong> <span className="companyName keepColor">Quizzify-AI</span> will seek partnerships with educational institutions, businesses, and entertainment entities to bring quality quizzes to a broader audience.
           </p>
         </li>
         <li>
           <p className={styles.paragraph}>
-          <strong>Advanced Analytics:</strong> <span className="companyName keepColor">Quizzify-AI</span> will introduce advanced analytics for Quiz Masters to understand the performance of their quizzes, participant engagement, and much more.
+            <strong>Community-Building:</strong> <span className="companyName keepColor">Quizzify-AI</span> will focus on strengthening its user community, with features like user-created quizzes, community forums, and social media integrations.
+          </p>
+        </li>
+        <li>
+          <p className={styles.paragraph}>
+            <strong>Advanced Analytics:</strong> <span className="companyName keepColor">Quizzify-AI</span> will introduce advanced analytics for Quiz Masters to understand the performance of their quizzes, participant engagement, and much more.
           </p>
         </li>
       </ol>
       <p className={styles.paragraph}>
-      <span className="companyName keepColor">Quizzify-AI</span>&rsquo;s journey from a simple idea to a leading online quizzing platform is a testament to its dedication to innovation and its commitment to its users. With these ambitious plans, <span className="companyName keepColor">Quizzify-AI</span> looks forward to further revolutionizing the world of quizzing, making it more exciting and accessible for everyone.
+        <span className="companyName keepColor">Quizzify-AI</span>&rsquo;s journey from a simple idea to a leading online quizzing platform is a testament to its dedication to innovation and its commitment to its users. With these ambitious plans, <span className="companyName keepColor">Quizzify-AI</span> looks forward to further revolutionizing the world of quizzing, making it more exciting and accessible for everyone.
       </p>
     </div>
   );

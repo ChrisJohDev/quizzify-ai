@@ -1,6 +1,6 @@
 /**
  * Project Name: Quizzify-AI
- * 
+ *
  * Home page.
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
@@ -9,12 +9,12 @@
 import React from 'react';
 // import { useSession } from 'next-auth/react';
 import Head from 'next/head';
-import styles from '@/styles/home.module.css'
+import styles from '@/styles/home.module.css';
 
 /**
  * Home page.
  *
- * @return {React.ReactElement} 
+ * @returns {React.ReactElement} - The home page.
  */
 const Home: React.FC = (): React.ReactElement => {
   // const {data: session, status } = useSession();
@@ -41,9 +41,9 @@ const Home: React.FC = (): React.ReactElement => {
               <strong>Create Engaging Quizzes Effortlessly:</strong> Our AI-powered engine simplifies the quiz creation process, giving you access to a vast database of questions across a variety of categories.
             </p>
           </li>
-          </ul>
-          <p className={`${styles.home_p}`}>As the <span className="companyName">Quizzify-AI</span> platform evolves you will be able to:</p>
-          <ul className={`${styles.home_p} ${styles.home_ul}`}>
+        </ul>
+        <p className={`${styles.home_p}`}>As the <span className="companyName">Quizzify-AI</span> platform evolves you will be able to:</p>
+        <ul className={`${styles.home_p} ${styles.home_ul}`}>
           <li>
             <p>
               <strong>Enjoy Quizzes Online:</strong> Participate in exciting online quizzes tailored to your interests. Enjoy a user-friendly interface, personalized leaderboards, and a broad selection of categories.
@@ -65,7 +65,7 @@ const Home: React.FC = (): React.ReactElement => {
         </p>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default Home;

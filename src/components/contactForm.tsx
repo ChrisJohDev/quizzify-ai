@@ -1,18 +1,18 @@
 /**
  * Project Name: Quizzify-AI
- * 
- * Contact form component
+ *
+ * Contact form component.
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
  * @version 0.0.1 - alpha
  */
 
-import { ReactElement } from "react";
+import { ReactElement } from 'react';
 
 /**
- * Contact form component
+ * Contact form component.
  *
- * @return {ReactElement} Visual component
+ * @returns {ReactElement} Visual component
  */
 const ContactForm = (): ReactElement => {
   return (
@@ -30,6 +30,6 @@ const ContactForm = (): ReactElement => {
       <input type="submit" value="Submit" />
     </form>
   );
-}
+};
 
 export default ContactForm;

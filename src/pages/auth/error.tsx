@@ -1,19 +1,19 @@
 /**
  * Project Name: Quizzify-AI
- * 
+ *
  * Error page.
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
  * @version 1.0.0 - release
  */
-import { IInputErrors } from "@/util/types";  
-import { ReactElement } from "react";
+import { IInputErrors } from '@/util/types';
+import { ReactElement } from 'react';
 
 /**
  * Error page.
  *
- * @param {{ errors: IInputErrors }} { errors }
- * @return {ReactElement} 
+ * @param {IInputErrors } errors - The errors.
+ * @returns {ReactElement} - The error page.
  */
 const Error = ({ errors }: { errors: IInputErrors }): ReactElement => {
   return (

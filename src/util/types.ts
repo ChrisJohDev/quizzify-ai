@@ -1,12 +1,13 @@
 /**
  * Project Name: Quizzify-AI
- * 
+ *
  * Contains types used throughout the application.
- * 
+ *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
  * @version 1.0.0 - release
  */
-import { ImageProps } from "next/image"
+import { ImageProps } from 'next/image';
+import { Document } from 'mongoose';
 
 export type QueryData = {
   subject: string | never,
@@ -16,7 +17,7 @@ export type QueryData = {
 export type MultiChoiceQueryData = {
   subject: string | never,
   amount: number | never,
-  numbOfMultiChoice: number | never 
+  numbOfMultiChoice: number | never
 }
 
 export type QueryResponse = {
@@ -38,17 +39,6 @@ export type MultiChoiceQuestion = {
   question: string,
   choices: Array<string>,
   answer: string,
-}
-
-export interface IUser {
-  id: string,
-  username?: string,
-  email?: string,
-  guid: string,
-  firstName?: string,
-  lastName?: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any,
 }
 
 export type MultiChoiceQuestions = {questions: Array<MultiChoiceQuestion>, subject: string};
@@ -77,4 +67,21 @@ export type LogoProps = ImageProps & {
   className?: string;
   width?: number;
   height?: number;
+}
+
+export interface IUser extends Document {
+  id: string;
+  guid: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  salt: string;
+  hashedPassword: string; // hashed password
+  isVerified: boolean; // true if the user is verified, otherwise false
+  verificationToken: string; // the verification token
+  verificationTokenExpires: number; // the verification token expiration
+  resetPasswordToken: string; // the reset password token
+  role: string; // can be 'user' or 'admin'
+  image?: string; // the user's image if applicable
 }

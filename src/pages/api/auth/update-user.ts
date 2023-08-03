@@ -1,30 +1,30 @@
 /**
  * Project Name: Quizzify-AI
- * 
+ *
  * Update user data API endpoint.
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
  * @version 1.0.0 - release
  */
-import connectDB from "@/util/db/db"
-import { userSchema } from "@/util/model/user";
-import mongoose from "mongoose";
-import { NextApiRequest, NextApiResponse } from "next";
+import connectDB from '@/util/db/db';
+import { userSchema } from '@/util/model/user';
+import mongoose from 'mongoose';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 // We need to implement a check if the email is changed.
-// If so then we need to set the emailVerified to false, 
+// If so then we need to set the emailVerified to false,
 // create a new emailVerificationToken and store in teh database and send a new verification email.
 
 /**
  * Handler for the /api/auth/update-user route.
  *
- * @param {NextApiRequest} req
- * @param {NextApiResponse} res
+ * @param {NextApiRequest} req - The request object.
+ * @param {NextApiResponse} res - The response object.
+ * @returns {Promise<void>} - Nothing.
  */
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-
   try {
     isDevelopment && console.log('\n*** [update-user] -');
     await connectDB();
@@ -43,9 +43,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     isDevelopment && console.log('\n*** [update-user] - checkUser:', checkUser);
 
-    // THe email check here is only temporary so email can't be changed until 
-    // we implement the email verification process.
-    if(user.guid !== checkUser.guid || !checkUser.isVerified || user.email !== checkUser.email){
+    // We don't check the email since the user should be able to change it.
+    // We do need to have something else in place so that a new email has to be verified
+    // before it can be used for login.
+    if (user.guid !== checkUser.guid || !checkUser.isVerified) {
       throw new Error('User not authorized.');
     }
 
@@ -67,15 +68,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     isDevelopment && console.log('\n*** [update-user] - updateResult:', updateResult);
 
-  
     res.status(204);
     res.end();
-
   } catch (err) {
     console.error('\n*** [update-user] - err:', err);
     res.status(500).json({ msg: 'Server error.' });
   }
-
-}
+};
 
 export default handler;

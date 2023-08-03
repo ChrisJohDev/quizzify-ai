@@ -1,6 +1,6 @@
 /**
  * Project Name: Quizzify-AI
- * 
+ *
  * Mock data used for testing and development.
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
@@ -9,7 +9,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-const sampleQuery2 = `Create a quiz with 10 questions and answers on the subject of astronomy, no numbering. Format: [Q: question,  A: answer]`;
+const sampleQuery2 = 'Create a quiz with 10 questions and answers on the subject of astronomy, no numbering. Format: [Q: question,  A: answer]';
 
 export const mockResponseApiData2 = `Q: What is the closest planet to the Sun?
 A: Mercury
@@ -41,7 +41,7 @@ A: Voyager 1
 Q: What is the name of the space telescope launched by NASA in 1990, which has provided stunning images of distant galaxies and nebulae?
 A: Hubble Space Telescope`;
 
-const sampleQueryMultiChoice = `Create a multi-choice quiz with 10 questions each with 3 choices on the subject of Philippines, no numbering. Format: [Q: question,  C: choices [lower case ':'], A: answer]`
+const sampleQueryMultiChoice = 'Create a multi-choice quiz with 10 questions each with 3 choices on the subject of Philippines, no numbering. Format: [Q: question,  C: choices [lower case \':\'], A: answer]';
 
 export const mockResponseApiDataMultiChoice = `Q: Who is the national hero of the Philippines?
 C: a: Jose Rizal, b: Andres Bonifacio, c: Emilio Aguinaldo

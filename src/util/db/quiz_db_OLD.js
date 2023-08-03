@@ -10,7 +10,7 @@ import mongoose from 'mongoose';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
-const url = process.env.ATLAS_AUTH_CONNECTION || 'mongodb://localhost:27017';
+const url = process.env.ATLAS_QUIZ_CONNECTION || 'mongodb://localhost:27017';
 const connection = {};
 
 /**
@@ -20,10 +20,10 @@ const connection = {};
  *
  * @returns {*} - Returns nothing.
  */
-async function connectDB () {
-  isDevelopment && console.log('\n *** [db.js] connectDB url:', url, '\nNODE_ENV:', process.env.NODE_ENV, '\nATLAS_AUTH_CONNECTION:', process.env.ATLAS_AUTH_CONNECTION);
+async function connectQuizDB () {
+  isDevelopment && console.log('\n *** [quiz_db.js] connectDB url:', url, '\nNODE_ENV:', process.env.NODE_ENV, '\nATLAS_QUIZ_CONNECTION:', process.env.ATLAS_QUIZ_CONNECTION);
   if (connection.isConnected) {
-    console.log('\n*** [db.js] Using existing database connection');
+    console.log('\n*** [quiz_db.js] Using existing database connection');
     // Use existing database connection
     return;
   }
@@ -41,4 +41,4 @@ async function connectDB () {
   }
 }
 
-export default connectDB;
+export default connectQuizDB;
