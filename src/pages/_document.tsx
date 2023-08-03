@@ -9,15 +9,15 @@
  * @author Chris Johannesson <chris@chrisjohannesson.com>
  * @version 1.0.0 - release
  */
+import React from 'react';
 import { Html, Head, Main, NextScript } from 'next/document';
 
 /**
  * NextJS basic file.
  *
- * @export
- * @returns {*}
+ * @returns {React.ReactElement} - The document.
  */
-export default function Document () {
+export default function Document (): React.ReactElement {
   return (
     <Html lang="en">
       <Head>

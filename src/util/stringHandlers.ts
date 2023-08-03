@@ -29,7 +29,6 @@ const createQueryString = (query: QueryData) => {
  * Creates the query string to be sent to OpenAI API. This is for multiple choice questions.
  *
  * @param {QueryData} query - The query data.
- * @param {number} alternatives - The number of alternatives.
  * @returns {*} - The query string.
  */
 const createMultipleChoiceQueryString = (query: MultiChoiceQueryData) => {
@@ -69,9 +68,11 @@ const decodeResponseData = (response: string) => {
 };
 
 /**
+ * Decodes the response from OpenAI API. This is for multiple choice questions.
  *
- * @param str
- * @param pattern
+ * @param {string} str - The string to check.
+ * @param {string} pattern - The pattern to check for.
+ * @returns {*}  {QueryResponse} - The decoded response.
  */
 const checkMultipleOccurrences = (str: string, pattern: string) => {
   const occurrences = str.split(pattern).length - 1;
@@ -79,8 +80,10 @@ const checkMultipleOccurrences = (str: string, pattern: string) => {
 };
 
 /**
+ * Decodes the response from OpenAI API. This is for multiple choice questions.
  *
- * @param response
+ * @param {string} response - The response from OpenAI API.
+ * @returns {*}  {QueryResponse} - The decoded response.
  */
 const decodeMultiChoiceResponseData = (response: string) => {
   isDevelopment && console.log('\n*** [stringHandlers - decodeMultiChoiceResponseData] \nresponse:', response);
@@ -140,9 +143,11 @@ const decodeMultiChoiceResponseData = (response: string) => {
 export { createQueryString, createMultipleChoiceQueryString, decodeResponseData, decodeMultiChoiceResponseData };
 
 /**
+ * Removes the first occurrence of a pattern from a string.
  *
- * @param q
- * @param pattern
+ * @param {string} q - The string to check.
+ * @param {string} pattern - The pattern to check for.
+ * @returns {*}  {string[]} - The string array.
  */
 const removeFirstOccurrence = (q: string, pattern: string): string[] => {
   const index = q.indexOf(pattern);
@@ -153,9 +158,11 @@ const removeFirstOccurrence = (q: string, pattern: string): string[] => {
 };
 
 /**
+ * Splits a string on the second occurrence of a pattern.
  *
- * @param q
- * @param pattern
+ * @param {string} q - The string to check.
+ * @param {string} pattern - The pattern to check for.
+ * @returns {*}  {string[]} - The string array.
  */
 const splitStringOnSecondOccurrence = (q: string, pattern: string): string[] => {
   const index1 = q.indexOf(pattern);

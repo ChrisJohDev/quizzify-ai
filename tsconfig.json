@@ -19,5 +19,5 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types.d.ts", "src/pages/api/auth/register.ts", "src/pages/api/auth/[...nextauth].ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "unused-code"]
 }

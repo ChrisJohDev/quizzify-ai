@@ -14,9 +14,9 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 /**
  * Creates a pdf file for multiple choice questions.
  *
- * @param {(Question[] | MultiChoiceQuestion[])} qNa
- * @param {string} fileName
- * @param {string} subject
+ * @param {(Question[] | MultiChoiceQuestion[])} qNa - The questions and answers.
+ * @param {string} fileName - The name of the file.
+ * @param {string} subject - The subject of the quiz.
  */
 const createMultiChoicePdf = (qNa: Question[] | MultiChoiceQuestion[], fileName: string, subject: string) => {
   const questions = qNa.map((question) => question.question);
@@ -38,6 +38,7 @@ const createMultiChoicePdf = (qNa: Question[] | MultiChoiceQuestion[], fileName:
   subject = subject === '' ? 'General knowledge' : subject;
 
   const file = fileName === '' ? 'quiz.pdf' : fileName + '.pdf';
+  // eslint-disable-next-line new-cap
   const doc = new jsPDF();
 
   let lineAdjust = marginHeight;

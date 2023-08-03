@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /**
  * Project Name: Quizzify-AI
  *
@@ -6,9 +7,8 @@
  * @author Chris Johannesson <chris@chrisjohannesson.com>
  * @version 1.0.0 - release
  */
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '@/styles/signup.module.css';
-import { useState } from 'react';
 
 type Message = {
   head: string;
@@ -18,14 +18,15 @@ type Message = {
 /**
  * Signup/Register page.
  *
- * @returns {React.ReactElement}
+ * @returns {React.ReactElement} - The signup page.
  */
 const SignUp = (): React.ReactElement => {
   const [message, setMessage] = useState<Message>({ head: '', body: '' });
 
   /**
+   * Handle form submission.
    *
-   * @param ev
+   * @param {React.FormEvent<HTMLFormElement>} ev - The form submission event.
    */
   const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();

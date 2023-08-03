@@ -16,11 +16,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 /**
+ * Signin page.
  *
- *
- * @export
- * @param {InferGetServerSidePropsType<typeof getServerSideProps>} { providers, csrfToken }
- * @returns {React.ReactElement}
+ * @param {object} props - The props.
+ * @param {ReturnType<typeof getServerSideProps>['props']} props.providers - The providers.
+ * @param {ReturnType<typeof getServerSideProps>['props']} props.csrfToken - The CSRF token.
+ * @returns {React.ReactElement} - The signin page.
  */
 export default function SignIn ({ providers, csrfToken }: InferGetServerSidePropsType<typeof getServerSideProps>): React.ReactElement {
   console.log('\n*** [signin] providers:', providers);
@@ -77,8 +78,10 @@ export default function SignIn ({ providers, csrfToken }: InferGetServerSideProp
 }
 
 /**
+ * Get the providers and CSRF token.
  *
- * @param context
+ * @param {GetServerSidePropsContext} context - The context.
+ * @returns {Promise<object>} - The providers and CSRF token.
  */
 export async function getServerSideProps (context: GetServerSidePropsContext) {
   const session = await getServerSession(context.req, context.res, authOptions);

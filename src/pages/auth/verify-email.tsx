@@ -21,8 +21,10 @@ interface Props {
 }
 
 /**
+ * Get server-side props.
  *
- * @param context
+ * @param {GetServerSidePropsContext<ParsedUrlQuery>} context - The context.
+ * @returns {Promise<GetServerSidePropsResult<Props>>} - The props.
  */
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context: GetServerSidePropsContext<ParsedUrlQuery>
@@ -54,8 +56,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 /**
  * Verify-email landing page.
  *
- * @param {Props} { ok }
- * @returns {ReactElement}
+ * @param {Props} ok - The props.
+ * @returns {ReactElement} - The verify-email landing page.
  */
 const VerifyEmails = ({ ok }: Props): ReactElement => {
   console.log('\n*** [verify-email-handler] - ok:', ok);

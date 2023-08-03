@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/require-param-type */
 /**
  * Project Name: Quizzify-AI
  *
@@ -14,11 +15,10 @@ import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 // import GoogleProvider from "next-auth/providers/google";
 // import FacebookProvider from "next-auth/providers/facebook";
-import mongoose from 'mongoose';
 import { userSchema } from '@/util/model/user';
 import bcrypt from 'bcrypt';
 import { IUser } from '@/util/types';
-import { Model, Document } from 'mongoose';
+import mongoose, { Model, Document } from 'mongoose';
 import connectDB from '@/util/db/db';
 
 const authOptions: NextAuthOptions = {
@@ -41,10 +41,37 @@ const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' }
       },
       /**
+       * Authorize callback.
        *
-       * @param credentials
+       * @param {} credentials - the credentials
+       * @returns {Promise<IUser | null>} - the user if authorized, otherwise null
        */
       async authorize (credentials): Promise<IUser | null> {
+        /**
+         * Converts a mongoose document to an IUser.
+         *
+         * @param {any} doc - the mongoose document
+         * @returns {IUser} - the IUser
+         * @private
+         */
+        const toIUser = (doc: Document & IUser): IUser => {
+          return {
+            id: doc.id,
+            guid: doc.guid,
+            username: doc.username,
+            firstName: doc.firstName,
+            lastName: doc.lastName,
+            email: doc.email,
+            salt: doc.salt,
+            hashedPassword: doc.hashedPassword,
+            isVerified: doc.isVerified,
+            verificationToken: doc.verificationToken,
+            verificationTokenExpires: doc.verificationTokenExpires,
+            resetPasswordToken: doc.resetPasswordToken,
+            role: doc.role,
+            image: doc.image || ''
+          } as IUser;
+        };
         // console.log("\n*** [auth] credentials:", credentials);
         try {
           // console.log("\n*** [...nextauth][auth] authorize -");
@@ -74,16 +101,7 @@ const authOptions: NextAuthOptions = {
             throw new Error('Invalid credentials');
           }
 
-          const pubUser: IUser = {
-            id: user.id,
-            username: user.username,
-            email: user.email,
-            guid: user.guid,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            image: user.image || '',
-            role: user.role || 'user'
-          };
+          const pubUser: IUser = toIUser(user);
 
           // console.log("\n*** [...nextauth][auth] pubUser:", pubUser);
 
@@ -109,20 +127,24 @@ const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     /**
+     * Checks if a user is valid.
      *
-     * @param root0
-     * @param root0.token
-     * @param root0.user
+     * @param root0 - the root
+     * @param root0.user - the user
+     * @param root0.token - the token
+     * @returns {Promise<boolean>} - true if valid, otherwise false
      */
     jwt: async ({ token, user }) => {
       user && (token.user = user as IUser);
       return token;
     },
     /**
+     * Checks if a session is valid.
      *
-     * @param root0
-     * @param root0.session
-     * @param root0.token
+     * @param root0 - the root
+     * @param root0.session - the session
+     * @param root0.token - the token
+     * @returns {Promise<{}>} - the session
      */
     session: async ({ session, token }) => {
       const user = token.user as IUser;
@@ -131,10 +153,12 @@ const authOptions: NextAuthOptions = {
       return session;
     },
     /**
+     * Checks if a user is valid.
      *
-     * @param root0
-     * @param root0.url
-     * @param root0.baseUrl
+     * @param root0 - the root
+     * @param root0.url - the url
+     * @param root0.baseUrl - the base url
+     * @returns {Promise<string>} - the redirect url
      */
     async redirect ({ url, baseUrl }) {
       console.log('\n*** [...nextauth][callbacks-redirect] url:', url);
@@ -142,13 +166,15 @@ const authOptions: NextAuthOptions = {
       return Promise.resolve('/');
     },
     /**
+     * Checks if a user is valid.
      *
-     * @param root0
-     * @param root0.user
-     * @param root0.account
-     * @param root0.profile
-     * @param root0.email
-     * @param root0.credentials
+     * @param root0 - the root
+     * @param root0.user - the user
+     * @param root0.account - the account
+     * @param root0.profile - the profile
+     * @param root0.email - the email
+     * @param root0.credentials - the credentials
+     * @returns {Promise<boolean>} - true if valid, otherwise false
      */
     async signIn ({ user, account, profile, email, credentials }) {
       console.log('\n*** [...nextauth][callbacks-signin] user:', user);

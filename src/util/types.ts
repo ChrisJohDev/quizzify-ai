@@ -83,4 +83,5 @@ export interface IUser extends Document {
   verificationTokenExpires: number; // the verification token expiration
   resetPasswordToken: string; // the reset password token
   role: string; // can be 'user' or 'admin'
+  image?: string; // the user's image if applicable
 }

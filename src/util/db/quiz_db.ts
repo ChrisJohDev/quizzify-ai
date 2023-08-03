@@ -17,14 +17,14 @@ class DBConnection {
   private isConnected: boolean;
 
   /**
-   *
+   * Creates an instance of DBConnection.
    */
   constructor () {
     this.isConnected = false;
   }
 
   /**
-   *
+   * Connects to the database.
    */
   async connect (): Promise<void> {
     if (this.isConnected) {
@@ -42,7 +42,9 @@ class DBConnection {
   }
 
   /**
+   * Disconnects from the database.
    *
+   * @returns {Promise<void>} - a promise.
    */
   getConnectionStatus (): boolean {
     return this.isConnected;
