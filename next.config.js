@@ -10,7 +10,7 @@ const nextConfig = {
    * @returns {import('webpack').Configuration} - The webpack configuration.
    */
   webpack: (config) => {
-    console.log('Webpack config:', config);
+    // console.log('Webpack config:', config);
     // Exclude the unused-code folder
     config.module.rules.push({
       test: /unused-code/,

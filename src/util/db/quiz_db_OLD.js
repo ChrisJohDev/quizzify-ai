@@ -2,6 +2,7 @@
  * Project Name: Quizzify-AI
  *
  * Database connection.
+ * OBSOLETE! Use quiz_db.ts instead.
  *
  * @author Chris Johannesson <chris@chrisjohannesson.com>
  * @version 1.0.0 - release

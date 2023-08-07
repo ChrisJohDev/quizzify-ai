@@ -19,7 +19,7 @@ import styles from '@/styles/profile.module.css';
 const Profile: React.FC = (): React.ReactElement => {
   const { data: session } = useSession<boolean>();
   const user: IUser | undefined = session?.user as IUser;
-  console.log('\n*** [profile] user:', user);
+  // console.log('\n*** [profile] user:', user);
   const [firstName, setFirstName] = useState<string | undefined>(user?.firstName);
   const [lastName, setLastName] = useState<string | undefined>(user?.lastName);
   const [email, setEmail] = useState<string | undefined>(user?.email);
@@ -89,14 +89,14 @@ const Profile: React.FC = (): React.ReactElement => {
         body: JSON.stringify(resUser)
       });
 
-      console.log('\n*** [profile] res:', res);
+      // console.log('\n*** [profile] res:', res);
       const elem: HTMLElement | null = document.querySelector('#profileMessage');
       (elem && (elem.style.backgroundColor = 'gainsboro'));
       (elem && (elem.style.boxShadow = '0 0 1rem rgb(0 0 0 / 25%)'));
 
       if (res.status > 199 && res.status < 300) {
         (elem && (elem.style.color = 'green'));
-        console.log('\n*** [profile] \nres:', res, '\nuser:', user);
+        // console.log('\n*** [profile] \nres:', res, '\nuser:', user);
         await updateUser(resUser as IUser);
         setUpdateResponse('Profile updated successfully.');
       } else {

@@ -60,7 +60,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
  * @returns {ReactElement} - The verify-email landing page.
  */
 const VerifyEmails = ({ ok }: Props): ReactElement => {
-  console.log('\n*** [verify-email-handler] - ok:', ok);
+  // console.log('\n*** [verify-email-handler] - ok:', ok);
   useEffect(() => {
     if (ok) {
       setTimeout(() => {
