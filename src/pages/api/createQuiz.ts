@@ -37,7 +37,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     isDevelopment && console.log('\n*** [createQuiz-handler] \nresponse:', response, '\ndecodedResponse:', decodedResponse);
 
-    // console.log('\n*** [createQuiz-handler] \nres:', res)
     res.status(200).json({ response: decodedResponse });
   }
   if (MOCK_RESPONSE && isMultiChoice) {
@@ -66,8 +65,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         },
         body: JSON.stringify(requestBody)
       });
-
-      // console.log('\n*** [createQuiz-handler] \nresponse:', response);
 
       const responseJson = await response.json();
       isDevelopment && console.log('\n*** [createQuiz-handler] \nresponseJson.choices[0].message.content:', responseJson.choices[0].message.content);

@@ -10,7 +10,6 @@ import React, { useState, useEffect, useRef, ReactElement } from 'react';
 import { Questions } from '@/util/types';
 import Loading from './loading';
 import styles from '@/styles/quizForm.module.css';
-// import { set } from 'mongoose';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
@@ -50,9 +49,9 @@ const QuizForm: React.FC<QuizFormProps> = ({ setQuiz, setSubject, setMultiChoice
    * Handles the form submission event. Inner function.
    *
    * @param {React.FormEvent<HTMLFormElement>} ev - The form submission event.
-   * @returns {void}
+   * @returns {Promise<void>} - The quiz.
    */
-  const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>): Promise<void> => {
     ev.preventDefault();
 
     setLoading(true);

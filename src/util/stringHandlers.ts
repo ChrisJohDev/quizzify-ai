@@ -151,9 +151,9 @@ export { createQueryString, createMultipleChoiceQueryString, decodeResponseData,
  */
 const removeFirstOccurrence = (q: string, pattern: string): string[] => {
   const index = q.indexOf(pattern);
-  const firstPart = q.slice(0, index);
-  const secondPart = q.slice(index + pattern.length);
-  console.log('\n*** [stringHandlers - removeFirstOccurrence] \nfirstPart:', firstPart, '\nsecondPart:', secondPart);
+  // const firstPart = q.slice(0, index);
+  // const secondPart = q.slice(index + pattern.length);
+  // console.log('\n*** [stringHandlers - removeFirstOccurrence] \nfirstPart:', firstPart, '\nsecondPart:', secondPart);
   return [q.slice(0, index), q.slice(index + pattern.length)];
 };
 

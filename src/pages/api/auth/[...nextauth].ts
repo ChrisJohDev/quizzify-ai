@@ -96,7 +96,7 @@ const authOptions: NextAuthOptions = {
             credentials!.password,
             user.hashedPassword
           );
-          console.log('\n*** [auth] match:', match, '\nuser:', user);
+          // console.log('\n*** [auth] match:', match, '\nuser:', user);
           if (!match) {
             throw new Error('Invalid credentials');
           }
@@ -127,19 +127,21 @@ const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     /**
-     * Checks if a user is valid.
+     * Checks if the user is valid.
+     * If user is valid, the user property of token is set.
      *
      * @param root0 - the root
      * @param root0.user - the user
      * @param root0.token - the token
-     * @returns {Promise<boolean>} - true if valid, otherwise false
+     * @returns {Promise<{}>} - the token
      */
     jwt: async ({ token, user }) => {
       user && (token.user = user as IUser);
       return token;
     },
     /**
-     * Checks if a session is valid.
+     * Checks if the session is valid.
+     * If session is valid, the user property of session is set.
      *
      * @param root0 - the root
      * @param root0.session - the session
@@ -148,22 +150,23 @@ const authOptions: NextAuthOptions = {
      */
     session: async ({ session, token }) => {
       const user = token.user as IUser;
-      session && (session.user = user as IUser);
+      session && (session.user = user);
 
       return session;
     },
     /**
-     * Checks if a user is valid.
+     * Redirects to home page.
      *
      * @param root0 - the root
      * @param root0.url - the url
      * @param root0.baseUrl - the base url
      * @returns {Promise<string>} - the redirect url
      */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async redirect ({ url, baseUrl }) {
-      console.log('\n*** [...nextauth][callbacks-redirect] url:', url);
-      console.log('\n*** [...nextauth][callbacks-redirect] baseUrl:', baseUrl);
-      return Promise.resolve('/');
+      // console.log('\n*** [...nextauth][callbacks-redirect] url:', url);
+      // console.log('\n*** [...nextauth][callbacks-redirect] baseUrl:', baseUrl);
+      return Promise.resolve('/'); // redirect to home page
     },
     /**
      * Checks if a user is valid.
@@ -176,13 +179,14 @@ const authOptions: NextAuthOptions = {
      * @param root0.credentials - the credentials
      * @returns {Promise<boolean>} - true if valid, otherwise false
      */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async signIn ({ user, account, profile, email, credentials }) {
-      console.log('\n*** [...nextauth][callbacks-signin] user:', user);
-      console.log('\n*** [...nextauth][callbacks-signin] account:', account);
-      console.log('\n*** [...nextauth][callbacks-signin] profile:', profile);
-      console.log('\n*** [...nextauth][callbacks-signin] email:', email);
-      console.log('\n*** [...nextauth][callbacks-signin] credentials:', credentials);
-      return true;
+      // console.log('\n*** [...nextauth][callbacks-signin] user:', user);
+      // console.log('\n*** [...nextauth][callbacks-signin] account:', account);
+      // console.log('\n*** [...nextauth][callbacks-signin] profile:', profile);
+      // console.log('\n*** [...nextauth][callbacks-signin] email:', email);
+      // console.log('\n*** [...nextauth][callbacks-signin] credentials:', credentials);
+      return Promise.resolve(true);
     }
   }
 };

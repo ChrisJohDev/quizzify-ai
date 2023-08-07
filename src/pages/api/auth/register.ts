@@ -66,7 +66,7 @@ const sendVerificationEmail = async (email: string, guid: string, verificationTo
   } catch (err) {
     console.error('\n*** [register-sendgrid] err:', err);
   }
-  console.log('\n*** [register-sendgrid] - after try/catch which shouldn\'t be possible if we don\'t encounter an error.');
+  isDevelopment && console.log('\n*** [register-sendgrid] - after try/catch which shouldn\'t be possible if we don\'t encounter an error.');
   // })();
   // If we get here something went wrong.
   return Promise.resolve({ ok: false });

@@ -24,12 +24,12 @@ import { useRouter } from 'next/router';
  * @returns {React.ReactElement} - The signin page.
  */
 export default function SignIn ({ providers, csrfToken }: InferGetServerSidePropsType<typeof getServerSideProps>): React.ReactElement {
-  console.log('\n*** [signin] providers:', providers);
-  console.log('\n*** [signin] signIn:', signIn);
+  // console.log('\n*** [signin] providers:', providers);
+  // console.log('\n*** [signin] signIn:', signIn);
   const router = useRouter();
   const { query } = router;
   const isError = !!query.error;
-  console.log('\n*** [signin] query:', query);
+  // console.log('\n*** [signin] query:', query);
 
   return (
     <div className={`${styles.wrapper}`}>
